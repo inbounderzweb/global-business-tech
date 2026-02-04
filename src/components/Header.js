@@ -15,11 +15,11 @@ function Header() {
     <div>
       <div className="grid grid-cols-1 xl:grid-cols-2 w-full xl:w-[90%] mx-auto items-center">
         {/* Logo + Mobile Menu */}
-        <div className="flex justify-between xl:justify-start px-2 bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">
+        <div className="flex justify-between xl:justify-start bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">
           <Image
             src={logo}
             alt="gbt-logo"
-            className="p-2 w-[150px] md:w-[220px]"
+            className="p-2 w-[180px] md:w-[220px]"
             priority
           />
             
@@ -27,12 +27,12 @@ function Header() {
             {/* ✅ Show Search + Call from lg and above */}
         <div className="flex-col items-end gap-2">
           <div className="flex items-center gap-4">
-            <div className="relative w-[150px] sm:w-[356]">
+            <div className="relative w-[140px] sm:w-[356] -ml-2">
               <input
                 type="search"
                 placeholder="Search"
                 className="
-                  w-full h-[30px]
+                  w-full h-[30px] 
                   bg-[#EEF3F8]
                   rounded-lg
                   pl-2 sm:pl-4 sm:pr-12 pr-6
@@ -63,7 +63,7 @@ function Header() {
           <Image
             src={menu}
             alt="mobile-menu"
-            className="flex float-end xl:hidden mr-[5px]"
+            className="flex float-end xl:hidden w-6 mr-[12px]"
           />
         </div>
 

@@ -19,9 +19,7 @@ function Header() {
           <Image
             src={logo}
             alt="gbt-logo"
-            className="p-2"
-            width={200}
-            height={100}
+            className="p-2 w-[150px] md:w-[220px]"
             priority
           />
             
@@ -29,7 +27,7 @@ function Header() {
             {/* ✅ Show Search + Call from lg and above */}
         <div className="flex-col items-end gap-2">
           <div className="flex items-center gap-4">
-            <div className="relative w-[160px] sm:w-[356]">
+            <div className="relative w-[150px] sm:w-[356]">
               <input
                 type="search"
                 placeholder="Search"
@@ -46,7 +44,7 @@ function Header() {
                   appearance-none
                 "
               />
-              <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2C5C8F]">
+              <div className="absolute right-1 top-1/2 -translate-y-1/2 text-[#2C5C8F]">
                 <Image src={searchico} alt="search-icon" className="w-4 sm:w-6" />
               </div>
             </div>

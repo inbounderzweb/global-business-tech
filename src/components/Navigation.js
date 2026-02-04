@@ -114,9 +114,9 @@ function Navigation() {
                   >
                     <div className="relative w-[800px] -ml-52 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       {/* caret stays near button */}
-                      <div className="absolute -top-2 left-20 h-4 w-4 rotate-45 bg-white/95" />
+                      <div className="absolute -top-2 left-56 h-4 w-4 rotate-45 bg-white/95" />
 
-                      <div className="grid grid-cols-2 gap-x-12 px-10 py-8">
+                      <div className="grid grid-cols-2 gap-x-6 px-5 py-4">
                         {/* Left column */}
                         <div>
                           {["Poly", "Yamaha", "Logitech", "Knoftel"].map(
@@ -202,7 +202,7 @@ function Navigation() {
                     <div className="relative w-[800px] -ml-80 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       <div className="absolute -top-2 left-20 h-4 w-4 rotate-45 bg-white/95" />
 
-                      <div className="grid grid-cols-2 gap-x-12 px-10 py-8">
+                      <div className="grid grid-cols-2 gap-x-6 px-5 py-4">
                         <div>
                           {[
                             "Video Conferencing",

@@ -63,7 +63,7 @@ function Header() {
           <Image
             src={menu}
             alt="mobile-menu"
-            className="flex justify-end text-right float-end xl:hidden"
+            className="flex float-end xl:hidden mr-[5px]"
           />
         </div>
 

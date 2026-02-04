@@ -56,7 +56,7 @@ function Navigation() {
     window.matchMedia("(hover: hover)").matches;
 
   return (
-    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full xl:w-[80%] float-end hidden xl:block">
+    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full xl:w-[90%] float-end hidden xl:block px-2">
       <div className="flex items-center gap-6 mx-auto justify-end w-[90%]">
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
@@ -64,7 +64,7 @@ function Navigation() {
             if (item.type === "link") {
               return (
                 <li key={index} className="list-none px-2">
-                  <a href="#" className="hover:text-blue-600">
+                  <a href="#" className="text-[#565656] font-normal">
                     {item.label}
                   </a>
                 </li>
@@ -92,13 +92,13 @@ function Navigation() {
                       setOpen((v) => !v);
                       setSolutionsOpen(false);
                     }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 text-[#565656]"
                     aria-haspopup="menu"
                     aria-expanded={open}
                   >
                     {item.label}
                     <span
-                      className={`transition-transform duration-300 ease-in-out ${
+                      className={`transition-transform duration-300 ease-in-out text-[#565656] w-3 ${
                         open ? "scale-y-[-1]" : "scale-y-100"
                       }`}
                     >
@@ -107,16 +107,17 @@ function Navigation() {
                   </button>
 
                   {/* ✅ Dropdown aligned like your screenshot (grows to right) */}
-                  <div
-                    className={`absolute left-0 top-full z-50 pt-4 ${
-                      open ? "block" : "hidden"
-                    }`}
-                  >
-                    <div className="relative w-[800px] -ml-52 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
+                 <div
+  className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+    ${open ? "opacity-100 translate-y-0 visible pointer-events-auto"
+          : "opacity-0 -translate-y-2 invisible pointer-events-none"}
+  `}
+>
+                    <div className="relative w-[600px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       {/* caret stays near button */}
-                      <div className="absolute -top-2 left-56 h-4 w-4 rotate-45 bg-white/95" />
+                      <div className="absolute -top-2 left-21 h-4 w-4 rotate-45 bg-white/95" />
 
-                      <div className="grid grid-cols-2 gap-x-6 px-5 py-4">
+                      <div className="grid grid-cols-2 gap-x-6 px-6 py-4">
                         {/* Left column */}
                         <div>
                           {["Poly", "Yamaha", "Logitech", "Knoftel"].map(
@@ -124,10 +125,10 @@ function Navigation() {
                               <a
                                 key={subItem}
                                 href="#"
-                                className="flex items-center justify-between py-4 text-[22px] text-slate-700 border-b border-slate-200/80 hover:text-slate-900"
+                                className="flex items-center justify-between py-1 px-1 text-[14px] text-[#565656] border-b border-slate-200/80 rounded-sm hover:bg-[#356DA4] hover:text-white"
                               >
                                 <span>{subItem}</span>
-                                <span className="text-blue-600 text-2xl">
+                                <span className="text-[#356DA4] hover:text-white text-xl">
                                   →
                                 </span>
                               </a>
@@ -141,15 +142,15 @@ function Navigation() {
                             <a
                               key={subItem}
                               href="#"
-                              className="flex items-center justify-between py-4 text-[22px] text-slate-700 border-b border-slate-200/80 hover:text-slate-900"
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
                             >
                               <span>{subItem}</span>
-                              <span className="text-blue-600 text-2xl">
+                              <span className="text-[#356DA4] text-xl">
                                 →
                               </span>
                             </a>
                           ))}
-                          <div className="py-4 border-b border-transparent" />
+                          <div className="py-1 border-b border-transparent" />
                         </div>
                       </div>
                     </div>
@@ -179,13 +180,13 @@ function Navigation() {
                       setSolutionsOpen((v) => !v);
                       setOpen(false);
                     }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 text-[#565656]"
                     aria-haspopup="menu"
                     aria-expanded={solutionsOpen}
                   >
                     {item.label}
                     <span
-                      className={`transition-transform duration-300 ease-in-out ${
+                      className={`transition-transform duration-300 ease-in-out text-[#565656] w-3 ${
                         solutionsOpen ? "scale-y-[-1]" : "scale-y-100"
                       }`}
                     >
@@ -194,15 +195,16 @@ function Navigation() {
                   </button>
 
                   {/* ✅ Same alignment logic as Products */}
-                  <div
-                    className={`absolute left-0 top-full z-50 pt-4 ${
-                      solutionsOpen ? "block" : "hidden"
-                    }`}
-                  >
-                    <div className="relative w-[800px] -ml-80 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
-                      <div className="absolute -top-2 left-20 h-4 w-4 rotate-45 bg-white/95" />
+                <div
+  className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+    ${solutionsOpen ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                   : "opacity-0 -translate-y-2 invisible pointer-events-none"}
+  `}
+>
+                    <div className="relative w-[600px] -ml-36 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
+                      <div className="absolute -top-2 left-58 h-4 w-4 rotate-45 bg-white/95" />
 
-                      <div className="grid grid-cols-2 gap-x-6 px-5 py-4">
+                      <div className="grid grid-cols-2 gap-x-6 px-5 py-2">
                         <div>
                           {[
                             "Video Conferencing",
@@ -213,10 +215,10 @@ function Navigation() {
                             <a
                               key={subItem}
                               href="#"
-                              className="flex items-center justify-between py-4 text-[22px] text-slate-700 border-b border-slate-200/80 hover:text-slate-900"
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
                             >
                               <span>{subItem}</span>
-                              <span className="text-blue-600 text-2xl">
+                              <span className="text-[#356DA4] text-2xl">
                                 →
                               </span>
                             </a>
@@ -232,15 +234,15 @@ function Navigation() {
                             <a
                               key={subItem}
                               href="#"
-                              className="flex items-center justify-between py-4 text-[22px] text-slate-700 border-b border-slate-200/80 hover:text-slate-900"
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
                             >
                               <span>{subItem}</span>
-                              <span className="text-blue-600 text-2xl">
+                              <span className="text-[#356DA4] text-2xl">
                                 →
                               </span>
                             </a>
                           ))}
-                          <div className="py-4 border-b border-transparent" />
+                          <div className="py-2 border-b border-transparent" />
                         </div>
                       </div>
                     </div>

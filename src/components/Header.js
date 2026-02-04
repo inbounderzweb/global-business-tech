@@ -15,7 +15,7 @@ function Header() {
     <div>
       <div className="grid grid-cols-1 xl:grid-cols-2 w-full xl:w-[90%] mx-auto items-center">
         {/* Logo + Mobile Menu */}
-        <div className="flex justify-between xl:justify-start xl:mt-8 px-2 bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">
+        <div className="flex justify-between xl:justify-start px-2 bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">
           <Image
             src={logo}
             alt="gbt-logo"
@@ -36,7 +36,7 @@ function Header() {
                   bg-[#EEF3F8]
                   rounded-lg
                   pl-2 sm:pl-4 sm:pr-12 pr-6
-                  text-[16px] text-[#2C5C8F]
+                  text-[14px] text-[#2C5C8F]
                   placeholder:text-[#7FA1C4]
                   placeholder:text-[14px] sm:text-[18px]
                   border-none outline-none cursor-pointer
@@ -49,9 +49,9 @@ function Header() {
               </div>
             </div>
 
-            <div className="items-center gap-1 cursor-pointer hidden md:flex ">
+            <div className="items-center gap-1 cursor-pointer hidden lg:flex ">
               <Image src={callico} alt="call-icon" />
-              <p className="text-[#3A3A3A] font-[manrope] font-semibold text-[12px] lg:text-[16px] p-2">
+              <p className="text-[#565656] text-[16px] p-2">
                 +91 890 4341299
               </p>
             </div>
@@ -94,7 +94,7 @@ function Header() {
 
             <div className="flex items-center gap-2 cursor-pointer">
               <Image src={callico} alt="call-icon" />
-              <p className="text-[#3A3A3A] font-[manrope] font-semibold text-[16px]">
+              <p className="text-[#565656] text-[16px]">
                 +91 890 4341299
               </p>
             </div>

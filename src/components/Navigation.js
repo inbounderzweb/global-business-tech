@@ -56,8 +56,8 @@ function Navigation() {
     window.matchMedia("(hover: hover)").matches;
 
   return (
-    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full xl:w-[80%] float-end hidden lg:block">
-      <div className="flex items-center gap-6 mx-auto justify-end w-[75%]">
+    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full xl:w-[80%] float-end hidden xl:block">
+      <div className="flex items-center gap-6 mx-auto justify-end w-[90%]">
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
             // -------- NORMAL LINK --------

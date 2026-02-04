@@ -82,7 +82,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
         <div className="flex items-center justify-center gap-6 mt-2 lg:mt-4">
           <button
             onClick={prev}
-            className="text-[#565656] text-2xl hover:text-black transition"
+            className="text-[#2C5C8F] text-2xl transition"
             aria-label="Previous slide"
           >
             ←
@@ -105,7 +105,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
 
           <button
             onClick={next}
-            className="text-[#565656] text-2xl hover:text-black transition"
+            className="text-[#2C5C8F] text-2xl transition"
             aria-label="Next slide"
           >
             →
@@ -117,7 +117,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
       {/* ========================= */}
       {/* Mobile Banner */}
       {/* ========================= */}
-      <div className="w-full xl:w-[90%] mx-auto mt-3 px-2 block lg:hidden">
+      <div className="w-full xl:w-[90%] mx-auto mt-3 px-4 block lg:hidden">
         <div className="relative w-full h-[600px] rounded-[20px] overflow-hidden shadow-xl">
           {SLIDES.map((s, idx) => (
             <div
@@ -165,10 +165,10 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center gap-6 mt-2 lg:mt-4">
+        <div className="flex items-center justify-center gap-6 mt-1 lg:mt-4">
           <button
             onClick={prev}
-            className="text-[#565656] text-2xl hover:text-black transition"
+            className="text-[#2C5C8F] text-xl transition"
             aria-label="Previous slide"
           >
             ←
@@ -191,7 +191,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
 
           <button
             onClick={next}
-            className="text-[#565656] text-2xl hover:text-black transition"
+            className="text-[#2C5C8F] text-xl transition"
             aria-label="Next slide"
           >
             →

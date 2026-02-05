@@ -5,7 +5,7 @@
 
 import React from "react";
 import Image from "next/image";
-import abtimg from '../assets/aboutimg.jpg'
+import abtimg from '../../assets/aboutimg.jpg'
 
 // ✅ Replace this with your real image import later
 // import aboutImg from "../assets/about/about.png";

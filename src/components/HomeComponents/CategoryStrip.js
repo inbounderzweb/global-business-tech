@@ -3,12 +3,12 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 
-import audioicon from "../assets/icons/audioconf.svg";
-import videoconf from "../assets/icons/videoconf.svg";
-import headset from "../assets/icons/headset.svg";
-import laptop from "../assets/icons/laptop.svg";
-import server from "../assets/icons/server.svg";
-import viewmore from "../assets/icons/more.svg";
+import audioicon from "../../assets/icons/audioconf.svg";
+import videoconf from "../../assets/icons/videoconf.svg";
+import headset from "../../assets/icons/headset.svg";
+import laptop from "../../assets/icons/laptop.svg";
+import server from "../../assets/icons/server.svg";
+import viewmore from "../../assets/icons/more.svg";
 
 function CategoryStrip() {
   const scrollerRef = useRef(null);

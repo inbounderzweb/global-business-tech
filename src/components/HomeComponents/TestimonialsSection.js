@@ -3,9 +3,9 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 
-import t1 from "../assets/testimonial/1.png";
-import t2 from "../assets/testimonial/2.png";
-import t3 from "../assets/testimonial/3.png";
+import t1 from "../../assets/testimonial/1.png";
+import t2 from "../../assets/testimonial/2.png";
+import t3 from "../../assets/testimonial/3.png";
 
 export default function TestimonialsSection() {
   const scrollerRef = useRef(null);

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import downarrow from "../assets/icons/Vector.svg";
 
 function Navigation() {
@@ -11,14 +12,41 @@ function Navigation() {
   const dropdownRef = useRef(null);
   const solutionsDropdownRef = useRef(null);
 
-  // ✅ NAV ITEMS ARRAY
+  // ✅ NAV ITEMS ARRAY (now with href)
   const NAV_ITEMS = [
-    { label: "Home", type: "link" },
-    { label: "About Us", type: "link" },
+    { label: "Home", type: "link", href: "/" },
+    { label: "About Us", type: "link", href: "/about" }, // ✅ added
     { label: "Products", type: "products" },
     { label: "Solutions", type: "solutions" },
-    { label: "Blog", type: "link" },
-    { label: "Contact Us", type: "link" },
+    { label: "Blog", type: "link", href: "/blog" },
+    { label: "Contact Us", type: "link", href: "/contact" },
+  ];
+
+  // ✅ dropdown links (add your real routes)
+  const PRODUCT_ITEMS_LEFT = [
+    { label: "Poly", href: "/products/poly" },
+    { label: "Yamaha", href: "/products/yamaha" },
+    { label: "Logitech", href: "/products/logitech" },
+    { label: "Knoftel", href: "/products/knoftel" },
+  ];
+
+  const PRODUCT_ITEMS_RIGHT = [
+    { label: "Cisco", href: "/products/cisco" },
+    { label: "Accutone", href: "/products/accutone" },
+    { label: "Logic", href: "/products/logic" },
+  ];
+
+  const SOLUTIONS_LEFT = [
+    { label: "Video Conferencing", href: "/solutions/video-conferencing" },
+    { label: "Headsets", href: "/solutions/headsets" },
+    { label: "Speakerphones", href: "/solutions/speakerphones" },
+    { label: "Cameras", href: "/solutions/cameras" },
+  ];
+
+  const SOLUTIONS_RIGHT = [
+    { label: "Meeting Rooms", href: "/solutions/meeting-rooms" },
+    { label: "Work From Home", href: "/solutions/work-from-home" },
+    { label: "Training Rooms", href: "/solutions/training-rooms" },
   ];
 
   useEffect(() => {
@@ -56,7 +84,7 @@ function Navigation() {
     window.matchMedia("(hover: hover)").matches;
 
   return (
-    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full  float-end hidden xl:block px-2">
+    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full float-end hidden xl:block px-2">
       <div className="flex items-center gap-6 mx-auto justify-end w-[90%]">
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
@@ -64,9 +92,9 @@ function Navigation() {
             if (item.type === "link") {
               return (
                 <li key={index} className="list-none px-2">
-                  <a href="#" className="text-[#565656] font-normal">
+                  <Link href={item.href} className="text-[#565656] font-normal">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               );
             }
@@ -106,49 +134,48 @@ function Navigation() {
                     </span>
                   </button>
 
-                  {/* ✅ Dropdown aligned like your screenshot (grows to right) */}
-                 <div
-  className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
-    ${open ? "opacity-100 translate-y-0 visible pointer-events-auto"
-          : "opacity-0 -translate-y-2 invisible pointer-events-none"}
-  `}
->
+                  <div
+                    className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+                      ${
+                        open
+                          ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                          : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                      }
+                    `}
+                  >
                     <div className="relative w-[600px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
-                      {/* caret stays near button */}
                       <div className="absolute -top-2 left-21 h-4 w-4 rotate-45 bg-white/95" />
 
                       <div className="grid grid-cols-2 gap-x-6 px-6 py-4">
                         {/* Left column */}
                         <div>
-                          {["Poly", "Yamaha", "Logitech", "Knoftel"].map(
-                            (subItem) => (
-                              <a
-                                key={subItem}
-                                href="#"
-                                className="flex items-center justify-between py-1 px-1 text-[14px] text-[#565656] border-b border-slate-200/80 rounded-sm hover:bg-[#356DA4] hover:text-white"
-                              >
-                                <span>{subItem}</span>
-                                <span className="text-[#356DA4] hover:text-white text-xl">
-                                  →
-                                </span>
-                              </a>
-                            )
-                          )}
+                          {PRODUCT_ITEMS_LEFT.map((subItem) => (
+                            <Link
+                              key={subItem.label}
+                              href={subItem.href}
+                              onClick={() => setOpen(false)}
+                              className="flex items-center justify-between py-1 px-1 text-[14px] text-[#565656] border-b border-slate-200/80 rounded-sm hover:bg-[#356DA4] hover:text-white"
+                            >
+                              <span>{subItem.label}</span>
+                              <span className="text-[#356DA4] group-hover:text-white text-xl">
+                                →
+                              </span>
+                            </Link>
+                          ))}
                         </div>
 
                         {/* Right column */}
                         <div>
-                          {["Cisco", "Accutone", "Logic"].map((subItem) => (
-                            <a
-                              key={subItem}
-                              href="#"
-                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
+                          {PRODUCT_ITEMS_RIGHT.map((subItem) => (
+                            <Link
+                              key={subItem.label}
+                              href={subItem.href}
+                              onClick={() => setOpen(false)}
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80 hover:bg-[#356DA4] hover:text-white rounded-sm px-1"
                             >
-                              <span>{subItem}</span>
-                              <span className="text-[#356DA4] text-xl">
-                                →
-                              </span>
-                            </a>
+                              <span>{subItem.label}</span>
+                              <span className="text-[#356DA4] text-xl">→</span>
+                            </Link>
                           ))}
                           <div className="py-1 border-b border-transparent" />
                         </div>
@@ -194,53 +221,44 @@ function Navigation() {
                     </span>
                   </button>
 
-                  {/* ✅ Same alignment logic as Products */}
-                <div
-  className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
-    ${solutionsOpen ? "opacity-100 translate-y-0 visible pointer-events-auto"
-                   : "opacity-0 -translate-y-2 invisible pointer-events-none"}
-  `}
->
+                  <div
+                    className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+                      ${
+                        solutionsOpen
+                          ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                          : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                      }
+                    `}
+                  >
                     <div className="relative w-[600px] -ml-36 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       <div className="absolute -top-2 left-58 h-4 w-4 rotate-45 bg-white/95" />
 
                       <div className="grid grid-cols-2 gap-x-6 px-5 py-2">
                         <div>
-                          {[
-                            "Video Conferencing",
-                            "Headsets",
-                            "Speakerphones",
-                            "Cameras",
-                          ].map((subItem) => (
-                            <a
-                              key={subItem}
-                              href="#"
-                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
+                          {SOLUTIONS_LEFT.map((subItem) => (
+                            <Link
+                              key={subItem.label}
+                              href={subItem.href}
+                              onClick={() => setSolutionsOpen(false)}
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80 hover:bg-[#356DA4] hover:text-white rounded-sm px-1"
                             >
-                              <span>{subItem}</span>
-                              <span className="text-[#356DA4] text-2xl">
-                                →
-                              </span>
-                            </a>
+                              <span>{subItem.label}</span>
+                              <span className="text-[#356DA4] text-2xl">→</span>
+                            </Link>
                           ))}
                         </div>
 
                         <div>
-                          {[
-                            "Meeting Rooms",
-                            "Work From Home",
-                            "Training Rooms",
-                          ].map((subItem) => (
-                            <a
-                              key={subItem}
-                              href="#"
-                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80"
+                          {SOLUTIONS_RIGHT.map((subItem) => (
+                            <Link
+                              key={subItem.label}
+                              href={subItem.href}
+                              onClick={() => setSolutionsOpen(false)}
+                              className="flex items-center justify-between py-1 text-[14px] text-[#565656] border-b border-slate-200/80 hover:bg-[#356DA4] hover:text-white rounded-sm px-1"
                             >
-                              <span>{subItem}</span>
-                              <span className="text-[#356DA4] text-2xl">
-                                →
-                              </span>
-                            </a>
+                              <span>{subItem.label}</span>
+                              <span className="text-[#356DA4] text-2xl">→</span>
+                            </Link>
                           ))}
                           <div className="py-2 border-b border-transparent" />
                         </div>
@@ -255,9 +273,13 @@ function Navigation() {
           })}
         </ul>
 
-        <button className="bg-[#356DA4] text-white px-4 py-1 rounded-[50px] w-full xl:w-[172px] h-[40] border-[1px] font-[manrope] text-[16px] border-[#356DA4] font-thin">
+        {/* Download button as Link if you want route, else keep button */}
+        <Link
+          href="/profile" // change to your pdf route or download url
+          className="bg-[#356DA4] text-white px-4 py-2 rounded-[50px] xl:w-[172px] h-[40px] border-[1px] border-[#356DA4] font-[manrope] text-[16px] font-thin flex items-center justify-center"
+        >
           Download Profile
-        </button>
+        </Link>
       </div>
     </nav>
   );

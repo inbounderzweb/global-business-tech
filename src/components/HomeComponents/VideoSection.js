@@ -7,7 +7,7 @@ import React, { useMemo, useState } from "react";
 import Image from "next/image";
 
 // ✅ Replace with your real thumbnail later (local image recommended)
-import videoThumb from "../assets/banner/banner.png"; // change path
+import videoThumb from "../../assets/banner/banner.png"; // change path
 
 function VideoSection() {
   // ✅ Replace icons later

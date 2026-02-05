@@ -8,8 +8,8 @@ import React from "react";
 import Image from "next/image";
 
 // ✅ Import your exported images from Figma here:
-import desktopimg from "../assets/desktopbg.jpg";
-import mobbg from "../assets/mobbg.jpg";
+import desktopimg from "../../assets/desktopbg.jpg";
+import mobbg from "../../assets/mobbg.jpg";
 
 export default function DiscussWithUsSection({ onSubmit }) {
   return (

@@ -7,8 +7,8 @@ import React from "react";
 import BannerSlider from "./BannerSlider";
 
 // ✅ Replace these paths with your real images later
-import bannerDesktop from "../assets/banner/banner.png";
-import bannerMobile from "../assets/banner/mobilebanner.jpg";
+import bannerDesktop from "../../assets/banner/banner.png";
+import bannerMobile from "../../assets/banner/mobilebanner.jpg";
 
 function Banner() {
   const slides = [

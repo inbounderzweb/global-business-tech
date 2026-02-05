@@ -5,8 +5,8 @@
 
 import React, { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import cisco from "../assets/icons/cisco.jpg";
-import hpe from "../assets/icons/hpe.jpg";
+import cisco from "../../assets/icons/cisco.jpg";
+import hpe from "../../assets/icons/hpe.jpg";
 
 function Partnerships() {
   const filterScrollerRef = useRef(null);

@@ -28,7 +28,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
   if (!SLIDES.length) return null;
 
   return (
-    <div className="bg-gradient-to-r from-[#D5E7F7] to-white xl:mt-[5.5rem] py-1 lg:py-3">
+    <div className="bg-gradient-to-r from-[#D5E7F7] to-white xl:mt-[10rem] py-1 lg:py-3">
       {/* ========================= */}
       {/* Desktop Banner */}
       {/* ========================= */}
@@ -117,7 +117,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
       {/* ========================= */}
       {/* Mobile Banner */}
       {/* ========================= */}
-      <div className="w-full xl:w-[90%] mx-auto mt-3 px-4 block lg:hidden">
+      <div className="w-full xl:w-[90%] mx-auto mt-20 px-4 block lg:hidden">
         <div className="relative w-full h-[600px] rounded-[20px] overflow-hidden shadow-xl">
           {SLIDES.map((s, idx) => (
             <div

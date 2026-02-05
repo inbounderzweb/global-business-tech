@@ -12,7 +12,7 @@ import Navigation from "./Navigation";
 
 function Header() {
   return (
-    <div>
+    <div className="fixed top-0 bg-white z-10 w-full">
       <div className="grid grid-cols-1 xl:grid-cols-2 w-full xl:w-[90%] mx-auto items-center">
         {/* Logo + Mobile Menu */}
         <div className="flex justify-between xl:justify-start bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">

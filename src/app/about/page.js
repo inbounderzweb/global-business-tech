@@ -1,8 +1,20 @@
+import AboutIntroSection from '@/components/AboutComponents/AboutIntroSection'
+import Banner from '@/components/AboutComponents/Banner'
+import TechCTASection from '@/components/AboutComponents/TechCTASection'
+
+import TestimonialsSection from '@/components/HomeComponents/TestimonialsSection'
 import React from 'react'
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      
+      <Banner />
+      <AboutIntroSection />
+      <TechCTASection />
+      <TestimonialsSection />
+      
+    </div>
   )
 }
 

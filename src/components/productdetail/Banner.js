@@ -7,7 +7,7 @@ import React from "react";
 import Image from "next/image";
 
 // ✅ Replace with your exported Figma banner image
-import aboutBanner from "../../assets/banner/aboutbanner.png";
+import aboutBanner from "../../assets/banner/productdetailbg.jpg";
 
 export default function Banner() {
   return (
@@ -30,13 +30,13 @@ export default function Banner() {
           />
 
           {/* Blue overlay like screenshot */}
-          {/* <div className="absolute inset-0 bg-[#2E6EA5]/55" /> */}
+          <div className="absolute inset-0 bg-black/60" />
 
           {/* Text */}
           <div className="absolute inset-0 flex items-center justify-center text-center px-6">
             <div>
               <h1 className="text-white font-semibold text-[28px] md:text-[34px] leading-tight">
-                About
+                Product details
               </h1>
               <p className="mt-1 text-white/85 text-[12px] md:text-[14px] tracking-[0.08em] uppercase">
                 Learn about our business philosphy

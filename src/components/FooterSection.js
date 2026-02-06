@@ -100,20 +100,8 @@ export default function FooterSection() {
         {/* Mobile layout: stacked & centered like screenshot */}
         <div className="md:hidden text-center">
           <div className="flex flex-col items-center">
-            <div className="relative w-[78px] h-[78px]">
+            <div className="relative w-[200px] h-[200px]">
               <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
-            </div>
-
-            <div className="mt-3 font-semibold leading-tight text-[16px]">
-              Global Business
-              <br />
-              Tech PVT LTD
-            </div>
-            <div className="text-[12px] text-[rgba(255,255,255,0.75)] mt-1">
-              One Stop IT Solution
-            </div>
-            <div className="text-[11px] text-[rgba(255,255,255,0.65)] mt-4">
-              (An ISO 9001 : 2015 Company)
             </div>
           </div>
 

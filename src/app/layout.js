@@ -1,5 +1,8 @@
 import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import FooterSection from "@/components/FooterSection";
+import DiscussWithUsSection from "@/components/HomeComponents/DiscussWithUsSection";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -17,7 +20,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${manrope.variable} antialiased`}>
+        <Header />
         {children}
+        <DiscussWithUsSection />
+        <FooterSection />
       </body>
     </html>
   );

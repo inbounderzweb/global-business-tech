@@ -6,20 +6,21 @@
 import React, { useMemo, useRef } from "react";
 import Image from "next/image";
 import headset from "../../assets/dummyproductimages/headset.png";
+import Link from "next/link";
 
 function ProductsGrid() {
   const scrollerRef = useRef(null);
 
   const products = useMemo(
     () => [
-      { id: 1, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 2, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 3, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 4, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 5, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 6, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 7, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
-      { id: 8, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "#" },
+      { id: 1, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 2, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 3, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 4, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 5, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 6, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 7, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      { id: 8, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
     ],
     []
   );
@@ -82,12 +83,12 @@ function ProductsGrid() {
                   {p.title}
                 </h3>
 
-                <a
+                <Link
                   href={p.href}
                   className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-10 py-3 rounded-full text-[18px] hover:bg-[#2d5c8b] transition"
                 >
                   View Details
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -128,12 +129,12 @@ function ProductsGrid() {
                 {p.title}
               </h3>
 
-              <a
+              <Link
                 href={p.href}
                 className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-8 py-2 rounded-full text-[14px] hover:bg-[#2d5c8b] transition"
               >
                 View Details
-              </a>
+              </Link>
             </div>
           ))}
         </div>
@@ -142,12 +143,15 @@ function ProductsGrid() {
         {/* Bottom Button */}
         {/* ========================= */}
         <div className="flex justify-center mt-12">
-          <button
+          <Link href={"/productdetails"}>
+           <button
             type="button"
             className="border border-[#356DA4] text-[#356DA4] px-10 py-2 rounded-full hover:bg-white/60 transition"
           >
             Show all products
           </button>
+          </Link>
+         
         </div>
       </div>
 

@@ -1,8 +1,6 @@
 import AboutSection from "@/components/HomeComponents/AboutSection";
 import Banner from "@/components/HomeComponents/Banner";
 import CategoryStrip from "@/components/HomeComponents/CategoryStrip";
-import DiscussWithUsSection from "@/components/HomeComponents/DiscussWithUsSection";
-import Header from "@/components/Header";
 import Partnerships from "@/components/HomeComponents/Partnerships";
 import ProductsGrid from "@/components/products/ProductsGrid";
 import ServicesSection from "@/components/HomeComponents/ServicesSection";
@@ -14,7 +12,7 @@ import FooterSection from "@/components/FooterSection";
 export default function Home() {
   return (
    <div className="">
-    <Header />
+   
     <Banner />
     <CategoryStrip />
     <AboutSection />
@@ -24,8 +22,7 @@ export default function Home() {
     <VideoSection />
     <StatsStrip />
     <TestimonialsSection />
-    <DiscussWithUsSection/>
-    <FooterSection />
+
    </div>
   );
 }

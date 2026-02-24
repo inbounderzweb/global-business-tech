@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import logo from "../assets/logo.svg";
 import searchico from "../assets/icons/search.svg";
@@ -33,13 +34,15 @@ function Header() {
       <div className="grid grid-cols-1 xl:grid-cols-2 w-full xl:w-[90%] mx-auto items-center">
         {/* Logo + Mobile Menu */}
         <div className="flex justify-between xl:justify-start bg-gradient-to-l from-[#D5E7F7] to-white sm:bg-none items-center">
-          <Image
-            src={logo}
-            alt="gbt-logo"
-            className="p-2 w-[180px] md:w-[220px]"
-            priority
-          />
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="gbt-logo"
+              className="p-2 w-[180px] md:w-[220px]"
+              priority
+            />
 
+          </Link>
           <div className="block xl:hidden">
             {/* ✅ Show Search + Call from lg and above */}
             <div className="flex-col items-end gap-2">

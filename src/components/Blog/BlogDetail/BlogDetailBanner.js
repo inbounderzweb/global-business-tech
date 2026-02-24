@@ -7,9 +7,9 @@ import React from "react";
 import Image from "next/image";
 
 // ✅ Replace with your exported Figma banner image
-import aboutBanner from "../../assets/banner/productdetailbg.jpg";
+import aboutBanner from "../../../assets/banner/productdetailbg.jpg";
 
-export default function BlogBanner() {
+export default function BlogDetailBanner() {
     return (
         <section className="w-full bg-[#EEF3F8] py-10 md:py-12 mt-16 md:mt-40">
             <div className="mx-auto w-[98%] lg:w-[90%] px-4">
@@ -33,16 +33,7 @@ export default function BlogBanner() {
                     <div className="absolute inset-0 bg-black/60" />
 
                     {/* Text */}
-                    <div className="absolute inset-0 flex items-center justify-center text-center px-6">
-                        <div>
-                            <h1 className="text-white font-semibold text-[28px] md:text-[34px] leading-tight">
-                                Blog
-                            </h1>
-                            <p className="mt-1 text-white/85 text-[12px] md:text-[14px] tracking-[0.08em] uppercase">
-                                Read our latest blog posts
-                            </p>
-                        </div>
-                    </div>
+
 
                     {/* Optional subtle top shine (gives same soft depth) */}
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent" />

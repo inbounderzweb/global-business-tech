@@ -16,8 +16,8 @@ function Navigation() {
   const NAV_ITEMS = [
     { label: "Home", type: "link", href: "/" },
     { label: "About Us", type: "link", href: "/about" },
-    { label: "Products", type: "products", href: "/products" },
-    { label: "Solutions", type: "solutions", href: "/productdetails" }, // or "/collections"
+    { label: "Products", type: "products", href: "/productdetails" },
+    { label: "Solutions", type: "solutions", href: "/solutions" }, // or "/collections"
     { label: "Blog", type: "link", href: "/blog" },
     { label: "Contact Us", type: "link", href: "/contact" },
   ];
@@ -35,15 +35,17 @@ function Navigation() {
   ];
 
   const SOLUTIONS_LEFT = [
-    { label: "Video Conferencing", href: "/solutions/video-conferencing" },
+    { label: "Video Conferencing", href: "/videowallsolutions" },
     { label: "Headsets", href: "/solutions/headsets" },
     { label: "Speakerphones", href: "/solutions/speakerphones" },
     { label: "Cameras", href: "/solutions/cameras" },
+    { label: "Cyber Security", href: "/cybersecurity" },
   ];
   const SOLUTIONS_RIGHT = [
-    { label: "Meeting Rooms", href: "/solutions/meeting-rooms" },
+    { label: "Meeting Rooms", href: "/boardroom" },
     { label: "Work From Home", href: "/solutions/work-from-home" },
     { label: "Training Rooms", href: "/solutions/training-rooms" },
+    { label: "Networking", href: "/networking" },
   ];
 
   useEffect(() => {
@@ -135,9 +137,8 @@ function Navigation() {
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
-                        className={`block transition-transform duration-300 ease-in-out w-3 ${
-                          open ? "scale-y-[-1]" : "scale-y-100"
-                        }`}
+                        className={`block transition-transform duration-300 ease-in-out w-3 ${open ? "scale-y-[-1]" : "scale-y-100"
+                          }`}
                       >
                         <Image src={downarrow} alt="down-arrow" />
                       </span>
@@ -147,10 +148,9 @@ function Navigation() {
                   {/* Dropdown */}
                   <div
                     className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
-                      ${
-                        open
-                          ? "opacity-100 translate-y-0 visible pointer-events-auto"
-                          : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                      ${open
+                        ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                        : "opacity-0 -translate-y-2 invisible pointer-events-none"
                       }
                     `}
                     // ✅ keep dropdown open when mouse is over it
@@ -235,9 +235,8 @@ function Navigation() {
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
-                        className={`block transition-transform duration-300 ease-in-out w-3 ${
-                          solutionsOpen ? "scale-y-[-1]" : "scale-y-100"
-                        }`}
+                        className={`block transition-transform duration-300 ease-in-out w-3 ${solutionsOpen ? "scale-y-[-1]" : "scale-y-100"
+                          }`}
                       >
                         <Image src={downarrow} alt="down-arrow" />
                       </span>
@@ -247,10 +246,9 @@ function Navigation() {
                   {/* Dropdown */}
                   <div
                     className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
-                      ${
-                        solutionsOpen
-                          ? "opacity-100 translate-y-0 visible pointer-events-auto"
-                          : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                      ${solutionsOpen
+                        ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                        : "opacity-0 -translate-y-2 invisible pointer-events-none"
                       }
                     `}
                     onMouseEnter={() => {

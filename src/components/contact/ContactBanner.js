@@ -9,10 +9,10 @@ import Image from "next/image";
 // ✅ Replace with your exported Figma banner image
 import aboutBanner from "../../assets/banner/productdetailbg.jpg";
 
-export default function BlogBanner() {
+export default function ContactBanner() {
     return (
         <section className="w-full bg-[#EEF3F8] py-10 md:py-12 mt-16 md:mt-40">
-            <div className="mx-auto w-[98%] lg:w-[90%] px-4">
+            <div className="mx-auto w-full max-w-[1400px] px-4">
                 <div
                     className="
             relative w-full overflow-hidden
@@ -36,10 +36,10 @@ export default function BlogBanner() {
                     <div className="absolute inset-0 flex items-center justify-center text-center px-6">
                         <div>
                             <h1 className="text-white font-semibold text-[28px] md:text-[34px] leading-tight">
-                                Blog
+                                Contact Us
                             </h1>
                             <p className="mt-1 text-white/85 text-[12px] md:text-[14px] tracking-[0.08em] uppercase">
-                                Read our latest blog posts
+                                We are just a ring away!
                             </p>
                         </div>
                     </div>

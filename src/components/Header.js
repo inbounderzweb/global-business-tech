@@ -1,32 +1,32 @@
 // ============================
 // Header.js  (YOUR SAME DESIGN + Mobile Drawer feature added)
 // ============================
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import logo from "../assets/logo.svg";
-import searchico from "../assets/icons/search.svg";
-import callico from "../assets/icons/call.svg";
-import menu from "../assets/icons/menu.svg";
+import logo from '../assets/logo.svg';
+import searchico from '../assets/icons/search.svg';
+import callico from '../assets/icons/call.svg';
+import menu from '../assets/icons/menu.svg';
 
-import Navigation from "./Navigation";
-import MobileMenuDrawer from "./MobileMenuDrawer";
+import Navigation from './Navigation';
+import MobileMenuDrawer from './MobileMenuDrawer';
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Close drawer when switching to desktop (xl)
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(min-width: 1280px)"); // xl
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(min-width: 1280px)'); // xl
     const onChange = () => {
       if (mq.matches) setDrawerOpen(false);
     };
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
   }, []);
 
   return (
@@ -41,7 +41,6 @@ function Header() {
               className="p-2 w-[180px] md:w-[220px]"
               priority
             />
-
           </Link>
           <div className="block xl:hidden">
             {/* ✅ Show Search + Call from lg and above */}
@@ -131,7 +130,10 @@ function Header() {
       <Navigation />
 
       {/* ✅ Mobile Drawer */}
-      <MobileMenuDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+      <MobileMenuDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      />
     </div>
   );
 }

@@ -16,11 +16,11 @@ function Banner() {
       id: 1,
       imageUrl: bannerDesktop,        // ✅ Desktop image
       mobileImageUrl: bannerMobile,   // ✅ Mobile image
-      title: "Lorem ipsum dolor sit amet, consectetuer",
+      title: "One Stop Solution Provider For all your AV & IT Requirements ",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy volutpat.",
-      primaryBtn: "Know More",
-      secondaryBtn: "Get in Touch",
+        "We deliver integrated Audio-Visual and IT infrastructure solutions designed to power modern businesses.",
+      primaryBtn: "Request a Consultation",
+      secondaryBtn: "Talk to an Expert",
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ function Banner() {
 
   return (
     <div>
-      <BannerSlider slides={slides} autoPlay interval={5000} />
+      <BannerSlider slides={slides} autoPlay interval={10000} />
     </div>
   );
 }

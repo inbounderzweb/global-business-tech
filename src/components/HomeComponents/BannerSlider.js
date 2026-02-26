@@ -1,12 +1,16 @@
 // ============================
 // BannerSlider.js
 // ============================
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-export default function BannerSlider({ slides, autoPlay = true, interval = 5000 }) {
+export default function BannerSlider({
+  slides,
+  autoPlay = true,
+  interval = 5000,
+}) {
   const SLIDES = slides?.length ? slides : [];
 
   const [active, setActive] = useState(0);
@@ -38,7 +42,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
             <div
               key={s.id ?? idx}
               className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                idx === active ? "opacity-100" : "opacity-0"
+                idx === active ? 'opacity-100' : 'opacity-0'
               }`}
             >
               {s.imageUrl && (
@@ -96,8 +100,8 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all duration-300 ${
                   idx === active
-                    ? "w-8 h-2 bg-[#356DA4] rounded-full"
-                    : "w-2 h-2 bg-[#cbd5e1] rounded-full"
+                    ? 'w-8 h-2 bg-[#356DA4] rounded-full'
+                    : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
                 }`}
               />
             ))}
@@ -123,7 +127,7 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
             <div
               key={s.id ?? idx}
               className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                idx === active ? "opacity-100" : "opacity-0"
+                idx === active ? 'opacity-100' : 'opacity-0'
               }`}
             >
               {/* ✅ Mobile image if provided, else fallback to desktop image */}
@@ -182,8 +186,8 @@ export default function BannerSlider({ slides, autoPlay = true, interval = 5000 
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all duration-300 ${
                   idx === active
-                    ? "w-8 h-2 bg-[#356DA4] rounded-full"
-                    : "w-2 h-2 bg-[#cbd5e1] rounded-full"
+                    ? 'w-8 h-2 bg-[#356DA4] rounded-full'
+                    : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
                 }`}
               />
             ))}

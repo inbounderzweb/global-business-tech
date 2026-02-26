@@ -14,12 +14,12 @@ function CategoryStrip() {
   const scrollerRef = useRef(null);
 
   const ITEMS = [
-    { label: "Audio Conference", icon: audioicon },
-    { label: "Video Conference", icon: videoconf },
-    { label: "Professional Headsets", icon: headset },
-    { label: "Laptops", icon: laptop },
-    { label: "Servers", icon: server },
-    { label: "View More", icon: viewmore },
+    { label: "Technology", icon: audioicon },
+    { label: "Business Solutions", icon: videoconf },
+    { label: "Global Presence", icon: headset },
+    { label: "Innovation", icon: laptop },
+    // { label: "Servers", icon: server },
+    // { label: "View More", icon: viewmore },
   ];
 
   const scrollRight = () => {

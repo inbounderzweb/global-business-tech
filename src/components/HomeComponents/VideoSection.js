@@ -80,25 +80,34 @@ function VideoSection() {
           <div className="text-white">
             {/* Desktop title */}
             <h2 className="hidden lg:block text-[34px] font-semibold leading-tight text-white/90">
-              Why Global Business Tech
+              Why Choose Global Business Tech?
             </h2>
 
             {/* Mobile title */}
             <h2 className="lg:hidden text-center text-[32px] font-semibold leading-tight text-white/90">
-              Why <br />
-              Global Business Tech
+              Why Choose <br />
+              Global Business Tech ?
             </h2>
 
-            <p className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-white/80 text-center lg:text-left">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-              volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-              ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-              nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-              volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-              ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-            </p>
+            <div className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-white/80 text-center lg:text-left">
+           <b>Proven Expertise. Trusted Execution.</b>
+           <div className="flex gap-12 mt-2 items-center">
+            <div>
+            <ul className="list-disc">
+            <li>10+ Years of Industry Experience </li>
+            <li>Presence Across Major Metro Cities</li>
+           </ul>
+            </div>
+              <div>
+            <ul className="list-disc">
+            <li>10+ Years of Industry Experience </li>
+            <li>Presence Across Major Metro Cities</li>
+           </ul>
+            </div>
+           </div>
+          
+
+            </div>
           </div>
         </div>
 

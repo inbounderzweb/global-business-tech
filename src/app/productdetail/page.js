@@ -1,14 +1,14 @@
-import Banner from '@/components/productdetail/Banner'
-import React from 'react'
-import ProductDetailsSection from './ProductDetailsSection'
+import Banner from '@/components/productdetail/Banner';
+import React from 'react';
+import ProductDetailsSection from './ProductDetailsSection';
 
 function page() {
   return (
     <div>
-        <Banner/>
-        <ProductDetailsSection />
+      <Banner />
+      <ProductDetailsSection />
     </div>
-  )
+  );
 }
 
-export default page
+export default page;

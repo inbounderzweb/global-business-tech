@@ -1,11 +1,17 @@
-"use client";
+'use client';
 
-import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import Image from "next/image";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
+import Image from 'next/image';
 
-import t1 from "../../assets/testimonial/1.png";
-import t2 from "../../assets/testimonial/2.png";
-import t3 from "../../assets/testimonial/3.png";
+import t1 from '../../assets/testimonial/1.png';
+import t2 from '../../assets/testimonial/2.png';
+import t3 from '../../assets/testimonial/3.png';
 
 export default function TestimonialsSection() {
   const scrollerRef = useRef(null);
@@ -23,10 +29,30 @@ export default function TestimonialsSection() {
 
   const testimonials = useMemo(
     () => [
-      { id: 1, name: "Full Name", text: "Lorem ipsum dolor sit amet...", avatar: t1 },
-      { id: 2, name: "Full Name", text: "Lorem ipsum dolor sit amet...", avatar: t2 },
-      { id: 3, name: "Full Name", text: "Lorem ipsum dolor sit amet...", avatar: t3 },
-      { id: 4, name: "Full Name", text: "Lorem ipsum dolor sit amet...", avatar: t2 },
+      {
+        id: 1,
+        name: 'Full Name',
+        text: 'Lorem ipsum dolor sit amet...',
+        avatar: t1,
+      },
+      {
+        id: 2,
+        name: 'Full Name',
+        text: 'Lorem ipsum dolor sit amet...',
+        avatar: t2,
+      },
+      {
+        id: 3,
+        name: 'Full Name',
+        text: 'Lorem ipsum dolor sit amet...',
+        avatar: t3,
+      },
+      {
+        id: 4,
+        name: 'Full Name',
+        text: 'Lorem ipsum dolor sit amet...',
+        avatar: t2,
+      },
     ],
     []
   );
@@ -40,23 +66,26 @@ export default function TestimonialsSection() {
   }, [testimonials]);
 
   // Helper: smooth vs instant
-  const scrollToRenderedIndex = useCallback((renderedIdx, behavior = "smooth") => {
-    const scroller = scrollerRef.current;
-    const el = itemRefs.current[renderedIdx];
-    if (!scroller || !el) return;
+  const scrollToRenderedIndex = useCallback(
+    (renderedIdx, behavior = 'smooth') => {
+      const scroller = scrollerRef.current;
+      const el = itemRefs.current[renderedIdx];
+      if (!scroller || !el) return;
 
-    // Use the element’s offset within the scroll container
-    scroller.scrollTo({
-      left: el.offsetLeft - (scroller.clientWidth - el.clientWidth) / 2,
-      behavior,
-    });
-  }, []);
+      // Use the element’s offset within the scroll container
+      scroller.scrollTo({
+        left: el.offsetLeft - (scroller.clientWidth - el.clientWidth) / 2,
+        behavior,
+      });
+    },
+    []
+  );
 
   // Start on first REAL item (index = CLONE_COUNT in rendered array)
   useEffect(() => {
     // wait next tick so layout is ready
     const t = setTimeout(() => {
-      scrollToRenderedIndex(CLONE_COUNT, "auto");
+      scrollToRenderedIndex(CLONE_COUNT, 'auto');
     }, 0);
     return () => clearTimeout(t);
   }, [scrollToRenderedIndex]);
@@ -107,7 +136,7 @@ export default function TestimonialsSection() {
         // jump to the matching real slide at the end
         const targetRendered = CLONE_COUNT + realCount - 1; // last real
         requestAnimationFrame(() => {
-          scrollToRenderedIndex(targetRendered, "auto");
+          scrollToRenderedIndex(targetRendered, 'auto');
           isJumpingRef.current = false;
         });
       } else if (rightCloneZone) {
@@ -115,7 +144,7 @@ export default function TestimonialsSection() {
         // jump to the matching real slide at the start
         const targetRendered = CLONE_COUNT; // first real
         requestAnimationFrame(() => {
-          scrollToRenderedIndex(targetRendered, "auto");
+          scrollToRenderedIndex(targetRendered, 'auto');
           isJumpingRef.current = false;
         });
       }
@@ -130,16 +159,16 @@ export default function TestimonialsSection() {
     };
 
     compute();
-    scroller.addEventListener("scroll", onScroll, { passive: true });
+    scroller.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener('scroll', onScroll);
       if (raf) cancelAnimationFrame(raf);
     };
   }, [scrollToRenderedIndex, testimonials.length]);
 
   // Go prev/next in REAL indices
   const goToRealIndex = useCallback(
-    (realIdx, behavior = "smooth") => {
+    (realIdx, behavior = 'smooth') => {
       // realIdx in [0..n-1] -> rendered index = CLONE_COUNT + realIdx
       scrollToRenderedIndex(CLONE_COUNT + realIdx, behavior);
     },
@@ -163,9 +192,9 @@ export default function TestimonialsSection() {
     if (!AUTOPLAY) return;
 
     const prefersReduced =
-      typeof window !== "undefined" &&
+      typeof window !== 'undefined' &&
       window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReduced) return; // respect user preference
 
@@ -199,7 +228,8 @@ export default function TestimonialsSection() {
             User testimonials
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+            nonummy nibh.
           </p>
         </div>
 
@@ -280,8 +310,8 @@ export default function TestimonialsSection() {
                   aria-label={`Go to testimonial ${idx + 1}`}
                   className={`transition-all duration-300 ${
                     idx === activeReal
-                      ? "w-10 h-2 bg-[#356DA4] rounded-full"
-                      : "w-2 h-2 bg-[#cbd5e1] rounded-full"
+                      ? 'w-10 h-2 bg-[#356DA4] rounded-full'
+                      : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
                   }`}
                 />
               ))}

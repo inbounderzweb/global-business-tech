@@ -1,28 +1,28 @@
 // ============================
 // Partnerships.js
 // ============================
-"use client";
+'use client';
 
-import React, { useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import cisco from "../../assets/icons/cisco.jpg";
-import hpe from "../../assets/icons/hpe.jpg";
+import React, { useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
+import cisco from '../../assets/icons/cisco.jpg';
+import hpe from '../../assets/icons/hpe.jpg';
 
 function Partnerships() {
   const filterScrollerRef = useRef(null);
 
   const filters = useMemo(
     () => [
-      "All",
-      "Networking",
-      "Passive Networking",
-      "Audio-Video",
-      "Personal Computing",
-      "Server and Storage",
-      "Surveillance",
-      "Enterprise Security",
-      "Display solution",
-      "Enterprise Software",
+      'All',
+      'Networking',
+      'Passive Networking',
+      'Audio-Video',
+      'Personal Computing',
+      'Server and Storage',
+      'Surveillance',
+      'Enterprise Security',
+      'Display solution',
+      'Enterprise Software',
     ],
     []
   );
@@ -30,68 +30,68 @@ function Partnerships() {
   const partners = useMemo(
     () => [
       {
-        id: "microsoft",
-        name: "Microsoft",
+        id: 'microsoft',
+        name: 'Microsoft',
         logoSrc: cisco,
-        categories: ["Enterprise Software", "Personal Computing"],
+        categories: ['Enterprise Software', 'Personal Computing'],
       },
       {
-        id: "adobe",
-        name: "Adobe",
+        id: 'adobe',
+        name: 'Adobe',
         logoSrc: hpe,
-        categories: ["Enterprise Software"],
+        categories: ['Enterprise Software'],
       },
       {
-        id: "siemens",
-        name: "Siemens",
+        id: 'siemens',
+        name: 'Siemens',
         logoSrc: hpe,
-        categories: ["Enterprise Software", "Networking"],
+        categories: ['Enterprise Software', 'Networking'],
       },
       {
-        id: "zoho",
-        name: "Zoho",
+        id: 'zoho',
+        name: 'Zoho',
         logoSrc: cisco,
-        categories: ["Enterprise Software"],
+        categories: ['Enterprise Software'],
       },
       {
-        id: "amp-network",
-        name: "AMP Netconnect",
+        id: 'amp-network',
+        name: 'AMP Netconnect',
         logoSrc: cisco,
-        categories: ["Networking", "Passive Networking"],
+        categories: ['Networking', 'Passive Networking'],
       },
       {
-        id: "amp-av",
-        name: "AMP Netconnect",
+        id: 'amp-av',
+        name: 'AMP Netconnect',
         logoSrc: hpe,
-        categories: ["Audio-Video", "Personal Computing"],
+        categories: ['Audio-Video', 'Personal Computing'],
       },
       {
-        id: "amp-server",
-        name: "AMP Netconnect",
+        id: 'amp-server',
+        name: 'AMP Netconnect',
         logoSrc: cisco,
-        categories: ["Server and Storage", "Surveillance"],
+        categories: ['Server and Storage', 'Surveillance'],
       },
       {
-        id: "amp-security",
-        name: "AMP Netconnect",
+        id: 'amp-security',
+        name: 'AMP Netconnect',
         logoSrc: hpe,
-        categories: ["Enterprise Security"],
+        categories: ['Enterprise Security'],
       },
       {
-        id: "amp-display",
-        name: "AMP Netconnect",
+        id: 'amp-display',
+        name: 'AMP Netconnect',
         logoSrc: cisco,
-        categories: ["Display solution"],
+        categories: ['Display solution'],
       },
     ],
     []
   );
 
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState('All');
   const [isFading, setIsFading] = useState(false);
 
   const filteredPartners = useMemo(() => {
-    if (activeFilter === "All") return partners;
+    if (activeFilter === 'All') return partners;
     return partners.filter((p) => p.categories.includes(activeFilter));
   }, [partners, activeFilter]);
 
@@ -113,7 +113,7 @@ function Partnerships() {
 
   const scrollFiltersRight = () => {
     if (!filterScrollerRef.current) return;
-    filterScrollerRef.current.scrollBy({ left: 260, behavior: "smooth" });
+    filterScrollerRef.current.scrollBy({ left: 260, behavior: 'smooth' });
   };
 
   return (
@@ -125,8 +125,9 @@ function Partnerships() {
             Explore The
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+            volutpat.
           </p>
         </div>
 
@@ -141,8 +142,8 @@ function Partnerships() {
                 onClick={() => onChangeFilter(f)}
                 className={`px-6 py-1 rounded-full border text-[16px] transition ${
                   isActive
-                    ? "bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]"
-                    : "bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60"
+                    ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
+                    : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
                 }`}
               >
                 {f}
@@ -166,8 +167,8 @@ function Partnerships() {
                   onClick={() => onChangeFilter(f)}
                   className={`shrink-0 px-5 py-2 rounded-full border text-[14px] transition whitespace-nowrap ${
                     isActive
-                      ? "bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]"
-                      : "bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60"
+                      ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
+                      : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
                   }`}
                 >
                   {f}
@@ -182,7 +183,7 @@ function Partnerships() {
             className="absolute right-0 top-1/2 -translate-y-1/2 w-[42px] h-[42px] rounded-full bg-white shadow-md flex items-center justify-center"
             aria-label="Scroll right"
           >
-            <span className="text-[#356DA4] text-2xl">{">"}</span>
+            <span className="text-[#356DA4] text-2xl">{'>'}</span>
           </button>
         </div>
 
@@ -200,7 +201,7 @@ function Partnerships() {
             className={`
               hidden sm:flex w-full flex-wrap gap-8 justify-center items-center
               transition-opacity duration-300 ease-in-out
-              ${isFading ? "opacity-0" : "opacity-100"}
+              ${isFading ? 'opacity-0' : 'opacity-100'}
             `}
           >
             {filteredPartners.map((p) => (
@@ -230,7 +231,7 @@ function Partnerships() {
             className={`
               sm:hidden w-full
               transition-opacity duration-300 ease-in-out
-              ${isFading ? "opacity-0" : "opacity-100"}
+              ${isFading ? 'opacity-0' : 'opacity-100'}
             `}
           >
             {filteredPartners.length === 0 ? (

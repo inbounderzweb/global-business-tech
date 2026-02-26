@@ -1,10 +1,10 @@
 // ============================
 // FooterSection.jsx
-// Next.js + Tailwind (Pixel-style layout like your screenshots)
+// Next.js + Tailwind (Improved layout for multiple India addresses)
 // ============================
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,9 +12,9 @@ import Link from "next/link";
  * ✅ Replace these imports with your exported Figma assets
  * Put them inside /src/assets/footer/ (or your preferred folder)
  */
-import logo from "../assets/footer/logo.svg";         // company logo mark
-import indiaFlag from "../assets/footer/india.svg";   // india flag
-import meFlag from "../assets/footer/me.svg";         // middle east flag (or jordan/palestine flag like screenshot)
+import logo from "../assets/footer/logo.svg";
+import indiaFlag from "../assets/footer/india.svg";
+import meFlag from "../assets/footer/me.svg";
 
 export default function FooterSection() {
   const navLinks = [
@@ -26,64 +26,89 @@ export default function FooterSection() {
     { label: "Contact us", href: "/contact" },
   ];
 
+  const indiaLocations = [
+    {
+      city: "Bangalore",
+      lines: [
+        "1, 9th Cross Road,",
+        "Swimming Pool Extension, HN Layout,",
+        "Malleshwaram, Bengaluru, Karnataka 560003,",
+      ],
+    },
+    {
+      city: "Hyderabad",
+      lines: [
+        "Ground Floor,",
+        "Opp. Mandapats Hanumanth Rao Girls High School,",
+        "Venkateshwara Colony, King Koti, Narayanguda,",
+        "Hyderabad, Telangana 500029",
+      ],
+    },
+    {
+      city: "Chennai",
+      lines: [
+        "#123B, Ramalinga Nagar Main Road,",
+        "Sivaprakasam Nagar, Puzhuthivakkam,",
+        "Chennai - 600 091",
+      ],
+    },
+    {
+      city: "Mumbai",
+      lines: [
+        "Office No.10, Sagar Complex Bldg1,",
+        "Jesal Park, Bhayandar East,",
+        "Thane 401105",
+      ],
+    },
+  ];
+
+  const middleEast = {
+    title: "MIDDLE EAST",
+    lines: ["No 302, BaldhiyaBuilding,", "Freej Almurar,", "Deira Dubai UAE-241868"],
+  };
+
   return (
     <footer className="w-full bg-[#163A55] text-white">
       {/* Top content */}
       <div className="mx-auto w-full max-w-[1200px] px-4 md:px-8 py-10 md:py-12">
-        {/* Desktop layout: 4 columns */}
-        <div className="hidden md:grid grid-cols-4 gap-10 items-start">
-          {/* Column 1: Logo + name */}
-          <div className="flex items-start gap-4">
-            <div className="relative w-[200px] h-[200px] shrink-0">
-              <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
-            </div>
-         
-          </div>
-
-          {/* Column 2: India */}
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative w-[30px] h-[20px]">
-                <Image src={indiaFlag} alt="India" fill className="object-cover rounded-[2px]" />
-              </div>
-              <div className="text-[14px] font-medium text-[rgba(255,255,255,0.9)]">
-                INDIA (Head Quarter)
+        {/* Desktop */}
+        <div className="hidden md:grid grid-cols-12 gap-10 items-start">
+          {/* Col 1: Logo */}
+          <div className="col-span-3">
+            <div className="flex items-start gap-4">
+              <div className="relative w-[180px] h-[180px] shrink-0">
+                <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
               </div>
             </div>
-
-            <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
-              No 1, 3rd Floor, 9th Cross,
-              <br />
-              2nd Main Road, Swimming Pool
-              <br />
-              Extension, Malleshwaram,
-              <br />
-              Bangalore, Karnataka – 560003
-            </p>
           </div>
 
-          {/* Column 3: Middle East */}
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative w-[30px] h-[20px]">
-                <Image src={meFlag} alt="Middle East" fill className="object-cover rounded-[2px]" />
-              </div>
-              <div className="text-[14px] font-medium text-[rgba(255,255,255,0.9)]">
-                MIDDLE EAST
-              </div>
+          {/* Col 2-6: India (improved as scrollable list with cards) */}
+          <div className="col-span-5">
+            <SectionHeader
+              flag={indiaFlag}
+              flagAlt="India"
+              title="INDIA"
+              subtitle="(Head Quarter)"
+            />
+
+            {/* Two-column cards inside India for better density */}
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {indiaLocations.map((loc) => (
+                <AddressCard key={loc.city} title={loc.city} lines={loc.lines} />
+              ))}
             </div>
-
-            <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
-              No 302, BaldhiyaBuilding,
-              <br />
-              Freej Almurar,
-              <br />
-              Deira Dubai UAE-241868
-            </p>
           </div>
 
-          {/* Column 4: Contact details */}
-          <div>
+          {/* Col 7-9: Middle East */}
+          <div className="col-span-2">
+            <SectionHeader flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
+            <div className="mt-4">
+              <AddressCard title={null} lines={middleEast.lines} compact />
+            </div>
+          </div>
+
+          {/* Col 10-12: Contact */}
+          <div className="col-span-2">
             <div className="text-[14px] font-medium mb-4 text-[rgba(255,255,255,0.9)]">
               CONTACT DETAILS
             </div>
@@ -97,41 +122,39 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Mobile layout: stacked & centered like screenshot */}
+        {/* Mobile */}
         <div className="md:hidden text-center">
           <div className="flex flex-col items-center">
-            <div className="relative w-[200px] h-[200px]">
+            <div className="relative w-[190px] h-[190px]">
               <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
             </div>
           </div>
 
-          {/* India */}
-          <div className="mt-8 flex flex-col items-center">
-            <div className="relative w-[36px] h-[24px]">
-              <Image src={indiaFlag} alt="India" fill className="object-cover rounded-[2px]" />
+          {/* India (accordion style for many cities) */}
+          <div className="mt-8">
+            <SectionHeaderMobile flag={indiaFlag} flagAlt="India" title="INDIA (Head Quarter)" />
+            <div className="mt-4 space-y-3">
+              {indiaLocations.map((loc) => (
+                <AccordionAddress key={loc.city} title={loc.city} lines={loc.lines} />
+              ))}
             </div>
-            <div className="mt-3 text-[14px] font-medium text-[rgba(255,255,255,0.9)]">
-              INDIA (Head Quarter)
-            </div>
-            <p className="mt-2 text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)] max-w-[310px]">
-              No 1, 3rd Floor, 9th Cross, 2nd Main Road,
-              Swimming Pool Extension, Malleshwaram,
-              Bangalore, Karnataka – 560003
-            </p>
           </div>
 
           {/* Middle East */}
-          <div className="mt-8 flex flex-col items-center">
-            <div className="relative w-[36px] h-[24px]">
-              <Image src={meFlag} alt="Middle East" fill className="object-cover rounded-[2px]" />
+          <div className="mt-8">
+            <SectionHeaderMobile flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
+            <div className="mt-4">
+              <div className="mx-auto max-w-[340px] rounded-[14px] bg-[rgba(255,255,255,0.08)] p-4 text-left">
+                <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
+                  {middleEast.lines.map((l, idx) => (
+                    <React.Fragment key={idx}>
+                      {l}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </p>
+              </div>
             </div>
-            <div className="mt-3 text-[14px] font-medium text-[rgba(255,255,255,0.9)]">
-              MIDDLE EAST
-            </div>
-            <p className="mt-2 text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)] max-w-[310px]">
-              No 302, BaldhiyaBuilding, Freej Almurar,
-              Deira Dubai UAE-241868
-            </p>
           </div>
 
           {/* Contact */}
@@ -150,17 +173,17 @@ export default function FooterSection() {
         </div>
 
         {/* Nav Pills */}
-        <div className="mt-10 md:mt-12 flex flex-wrap gap-4 justify-center md:justify-start">
+        <div className="mt-10 md:mt-12 flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
           {navLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className="
-                px-6 py-2.5 rounded-[10px]
+                px-5 md:px-6 py-2.5 rounded-[10px]
                 bg-[rgba(255,255,255,0.08)]
                 text-[14px] font-medium
                 text-[rgba(255,255,255,0.9)]
-                hover:bg-[rgba(255,255,255,0.12)]
+                hover:bg-[rgba(255,255,255,0.14)]
                 transition
               "
             >
@@ -189,12 +212,108 @@ export default function FooterSection() {
 }
 
 /* ============================
-   Small UI bits
+   Helpers
 ============================ */
+function SectionHeader({ flag, flagAlt, title, subtitle }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="relative w-[30px] h-[20px]">
+        <Image src={flag} alt={flagAlt} fill className="object-cover rounded-[2px]" />
+      </div>
+      <div className="text-[14px] font-medium text-[rgba(255,255,255,0.9)] tracking-wide">
+        {title}{" "}
+        {subtitle ? (
+          <span className="text-[rgba(255,255,255,0.72)] font-medium">{subtitle}</span>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function SectionHeaderMobile({ flag, flagAlt, title }) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative w-[36px] h-[24px]">
+        <Image src={flag} alt={flagAlt} fill className="object-cover rounded-[2px]" />
+      </div>
+      <div className="mt-3 text-[14px] font-medium text-[rgba(255,255,255,0.9)]">
+        {title}
+      </div>
+    </div>
+  );
+}
+
+function AddressCard({ title, lines, compact = false }) {
+  return (
+    <div
+      className={[
+        "rounded-[14px] bg-[rgba(255,255,255,0.08)]",
+        compact ? "p-4" : "p-4",
+        "backdrop-blur-[1px]",
+      ].join(" ")}
+    >
+      {title ? (
+        <p className="text-white text-[14px] font-semibold mb-2">{title}</p>
+      ) : null}
+      <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
+        {lines.map((l, idx) => (
+          <React.Fragment key={idx}>
+            {l}
+            <br />
+          </React.Fragment>
+        ))}
+      </p>
+    </div>
+  );
+}
+
+function AccordionAddress({ title, lines }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mx-auto max-w-[360px] rounded-[14px] bg-[rgba(255,255,255,0.08)] overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((s) => !s)}
+        className="w-full flex items-center justify-between px-4 py-3 text-left"
+      >
+        <span className="text-[14px] font-semibold text-white">{title}</span>
+        <span
+          className={[
+            "transition-transform duration-200 text-[rgba(255,255,255,0.85)]",
+            open ? "rotate-180" : "",
+          ].join(" ")}
+          aria-hidden="true"
+        >
+          <ChevronIcon />
+        </span>
+      </button>
+
+      <div
+        className={[
+          "grid transition-all duration-200 ease-out",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        ].join(" ")}
+      >
+        <div className="overflow-hidden px-4 pb-4">
+          <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)] text-left">
+            {lines.map((l, idx) => (
+              <React.Fragment key={idx}>
+                {l}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Row({ icon, text, center = false }) {
   return (
-    <div className={`flex items-center gap-3 ${center ? "justify-center" : ""}`}>
-      <span className="w-[22px] h-[22px] flex items-center justify-center text-[rgba(255,255,255,0.75)]">
+    <div className={`flex items-start gap-3 ${center ? "justify-center" : ""}`}>
+      <span className="w-[22px] h-[22px] flex items-center justify-center text-[rgba(255,255,255,0.75)] mt-[2px]">
         {icon}
       </span>
       <span className="leading-relaxed">{text}</span>
@@ -223,6 +342,20 @@ function SocialCircle({ href, label, icon }) {
 /* ============================
    Inline SVG Icons
 ============================ */
+function ChevronIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path
+        d="m6 9 6 6 6-6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function PhoneIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">

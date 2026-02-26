@@ -2,14 +2,14 @@
 // DiscussWithUsSection.jsx
 // BG handled inside component
 // ============================
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 // ✅ Import your exported images from Figma here:
-import desktopimg from "../../assets/desktopbg.jpg";
-import mobbg from "../../assets/mobbg.jpg";
+import desktopimg from '../../assets/desktopbg.jpg';
+import mobbg from '../../assets/mobbg.jpg';
 
 export default function DiscussWithUsSection({ onSubmit }) {
   return (
@@ -42,7 +42,7 @@ export default function DiscussWithUsSection({ onSubmit }) {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(1200px 600px at 20% 20%, rgba(255,255,255,0.08), rgba(0,0,0,0) 60%), linear-gradient(90deg, rgba(9,18,33,0.55), rgba(9,18,33,0.25) 55%, rgba(9,18,33,0.35))",
+              'radial-gradient(1200px 600px at 20% 20%, rgba(255,255,255,0.08), rgba(0,0,0,0) 60%), linear-gradient(90deg, rgba(9,18,33,0.55), rgba(9,18,33,0.25) 55%, rgba(9,18,33,0.35))',
           }}
           aria-hidden="true"
         />
@@ -73,10 +73,22 @@ export default function DiscussWithUsSection({ onSubmit }) {
                   }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 max-w-[640px]">
-                    <Field label="Full Name" placeholder="Full Name" name="fullName" />
+                    <Field
+                      label="Full Name"
+                      placeholder="Full Name"
+                      name="fullName"
+                    />
                     <Field label="Mail id" placeholder="Mail id" name="email" />
-                    <Field label="Phone Number" placeholder="Phone Number" name="phone" />
-                    <Field label="Business" placeholder="Business" name="business" />
+                    <Field
+                      label="Phone Number"
+                      placeholder="Phone Number"
+                      name="phone"
+                    />
+                    <Field
+                      label="Business"
+                      placeholder="Business"
+                      name="business"
+                    />
                   </div>
 
                   <div className="mt-8 md:mt-9 max-w-[640px] flex justify-center md:justify-start">

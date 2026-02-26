@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import downarrow from "../assets/icons/Vector.svg";
+import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import downarrow from '../assets/icons/Vector.svg';
 
 function Navigation() {
   const [open, setOpen] = useState(false); // Products
@@ -14,69 +14,74 @@ function Navigation() {
 
   // ✅ NAV ITEMS (Products + Solutions now have href too)
   const NAV_ITEMS = [
-    { label: "Home", type: "link", href: "/" },
-    { label: "About Us", type: "link", href: "/about" },
-    { label: "Products", type: "products", href: "/productdetails" },
-    { label: "Solutions", type: "solutions", href: "/solutions" }, // or "/collections"
-    { label: "Blog", type: "link", href: "/blog" },
-    { label: "Contact Us", type: "link", href: "/contact" },
+    { label: 'Home', type: 'link', href: '/' },
+    { label: 'About Us', type: 'link', href: '/about' },
+    { label: 'Products', type: 'products', href: '/productdetails' },
+    { label: 'Solutions', type: 'solutions', href: '/solutions' }, // or "/collections"
+    { label: 'Blog', type: 'link', href: '/blog' },
+    { label: 'Contact Us', type: 'link', href: '/contact' },
   ];
 
   const PRODUCT_ITEMS_LEFT = [
-    { label: "Poly", href: "/products/poly" },
-    { label: "Yamaha", href: "/products/yamaha" },
-    { label: "Logitech", href: "/products/logitech" },
-    { label: "Knoftel", href: "/products/knoftel" },
+    { label: 'Poly', href: '/products/poly' },
+    { label: 'Yamaha', href: '/products/yamaha' },
+    { label: 'Logitech', href: '/products/logitech' },
+    { label: 'Knoftel', href: '/products/knoftel' },
   ];
   const PRODUCT_ITEMS_RIGHT = [
-    { label: "Cisco", href: "/products/cisco" },
-    { label: "Accutone", href: "/products/accutone" },
-    { label: "Logic", href: "/products/logic" },
+    { label: 'Cisco', href: '/products/cisco' },
+    { label: 'Accutone', href: '/products/accutone' },
+    { label: 'Logic', href: '/products/logic' },
   ];
 
   const SOLUTIONS_LEFT = [
-    { label: "Video Conferencing", href: "/videowallsolutions" },
-    { label: "Headsets", href: "/solutions/headsets" },
-    { label: "Speakerphones", href: "/solutions/speakerphones" },
-    { label: "Cameras", href: "/solutions/cameras" },
-    { label: "Cyber Security", href: "/cybersecurity" },
+    { label: 'Networking', href: '/networking' },
+    { label: 'Video Wall Solutions', href: '/videowallsolutions' },
+    { label: 'Virtualization', href: '/virtualization' },
+    
   ];
   const SOLUTIONS_RIGHT = [
-    { label: "Meeting Rooms", href: "/boardroom" },
-    { label: "Work From Home", href: "/solutions/work-from-home" },
-    { label: "Training Rooms", href: "/solutions/training-rooms" },
-    { label: "Networking", href: "/networking" },
+    { label: 'Cyber Security', href: '/cybersecurity' },
+    { label: 'Board Rooms', href: '/boardroom' },
+   
+    
   ];
 
   useEffect(() => {
     const handlePointerDown = (e) => {
-      if (productsWrapRef.current && !productsWrapRef.current.contains(e.target)) {
+      if (
+        productsWrapRef.current &&
+        !productsWrapRef.current.contains(e.target)
+      ) {
         setOpen(false);
       }
-      if (solutionsWrapRef.current && !solutionsWrapRef.current.contains(e.target)) {
+      if (
+        solutionsWrapRef.current &&
+        !solutionsWrapRef.current.contains(e.target)
+      ) {
         setSolutionsOpen(false);
       }
     };
 
     const handleEsc = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         setOpen(false);
         setSolutionsOpen(false);
       }
     };
 
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleEsc);
+    document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleEsc);
     return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleEsc);
     };
   }, []);
 
   const canHover =
-    typeof window !== "undefined" &&
+    typeof window !== 'undefined' &&
     window.matchMedia &&
-    window.matchMedia("(hover: hover)").matches;
+    window.matchMedia('(hover: hover)').matches;
 
   const closeAll = () => {
     setOpen(false);
@@ -89,7 +94,7 @@ function Navigation() {
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
             // -------- NORMAL LINK --------
-            if (item.type === "link") {
+            if (item.type === 'link') {
               return (
                 <li key={index} className="list-none px-2">
                   <Link
@@ -104,9 +109,13 @@ function Navigation() {
             }
 
             // -------- PRODUCTS (Text is Link, Arrow opens dropdown) --------
-            if (item.type === "products") {
+            if (item.type === 'products') {
               return (
-                <li key={index} ref={productsWrapRef} className="relative list-none px-2">
+                <li
+                  key={index}
+                  ref={productsWrapRef}
+                  className="relative list-none px-2"
+                >
                   <div className="flex items-center gap-2">
                     {/* ✅ Text navigates */}
                     <Link
@@ -137,7 +146,7 @@ function Navigation() {
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
-                        className={`block transition-transform duration-300 ease-in-out w-3 ${open ? "scale-y-[-1]" : "scale-y-100"
+                        className={`block transition-transform duration-300 ease-in-out w-3 ${open ? 'scale-y-[-1]' : 'scale-y-100'
                           }`}
                       >
                         <Image src={downarrow} alt="down-arrow" />
@@ -147,10 +156,10 @@ function Navigation() {
 
                   {/* Dropdown */}
                   <div
-                    className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-200 ease-out
                       ${open
-                        ? "opacity-100 translate-y-0 visible pointer-events-auto"
-                        : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                        ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+                        : 'opacity-0 -translate-y-2 invisible pointer-events-none'
                       }
                     `}
                     // ✅ keep dropdown open when mouse is over it
@@ -163,7 +172,7 @@ function Navigation() {
                   >
                     <div className="relative w-[600px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       {/* caret */}
-                      <div className="absolute -top-2 left-24 h-4 w-4 rotate-45 bg-white/95" />
+                      <div className="absolute -top-2 left-[85px] h-4 w-4 rotate-45 bg-white/95" />
 
                       <div className="grid grid-cols-2 gap-x-6 px-6 py-4">
                         <div>
@@ -202,9 +211,13 @@ function Navigation() {
             }
 
             // -------- SOLUTIONS (same behavior as Products) --------
-            if (item.type === "solutions") {
+            if (item.type === 'solutions') {
               return (
-                <li key={index} ref={solutionsWrapRef} className="relative list-none px-2">
+                <li
+                  key={index}
+                  ref={solutionsWrapRef}
+                  className="relative list-none px-2"
+                >
                   <div className="flex items-center gap-2">
                     {/* ✅ Text navigates */}
                     <Link
@@ -235,7 +248,7 @@ function Navigation() {
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
-                        className={`block transition-transform duration-300 ease-in-out w-3 ${solutionsOpen ? "scale-y-[-1]" : "scale-y-100"
+                        className={`block transition-transform duration-300 ease-in-out w-3 ${solutionsOpen ? 'scale-y-[-1]' : 'scale-y-100'
                           }`}
                       >
                         <Image src={downarrow} alt="down-arrow" />
@@ -245,10 +258,10 @@ function Navigation() {
 
                   {/* Dropdown */}
                   <div
-                    className={`absolute left-0 top-full z-50 pt-4 transition-all duration-200 ease-out
+                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-200 ease-out
                       ${solutionsOpen
-                        ? "opacity-100 translate-y-0 visible pointer-events-auto"
-                        : "opacity-0 -translate-y-2 invisible pointer-events-none"
+                        ? 'opacity-100 translate-y-0 visible pointer-events-auto'
+                        : 'opacity-0 -translate-y-2 invisible pointer-events-none'
                       }
                     `}
                     onMouseEnter={() => {
@@ -258,7 +271,7 @@ function Navigation() {
                       if (canHover) setSolutionsOpen(false);
                     }}
                   >
-                    <div className="relative w-[600px] -ml-36 max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
+                    <div className="relative w-[600px] -ml-[150px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       <div className="absolute -top-2 left-60 h-4 w-4 rotate-45 bg-white/95" />
 
                       <div className="grid grid-cols-2 gap-x-6 px-5 py-2">

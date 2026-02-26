@@ -2,62 +2,91 @@
 // ProductDetailsSection.jsx
 // Images handled INSIDE this component
 // ============================
-"use client";
+'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 // ✅ Import your local images here (export from Figma and place in assets)
-import p1 from "../../assets/dummyproductimages/headset.png";
-import p2 from "../../assets/dummyproductimages/headset.png";
-import p3 from "../../assets/dummyproductimages/headset.png";
-import p4 from "../../assets/dummyproductimages/headset.png";
-
+import p1 from '../../assets/dummyproductimages/headset.png';
+import p2 from '../../assets/dummyproductimages/headset.png';
+import p3 from '../../assets/dummyproductimages/headset.png';
+import p4 from '../../assets/dummyproductimages/headset.png';
 
 // ✅ Related products (use same for now; replace with your real related images)
-import r1 from "../../assets/dummyproductimages/headset.png";
-import r2 from "../../assets/dummyproductimages/headset.png";
-import r3 from "../../assets/dummyproductimages/headset.png";
-import r4 from "../../assets/dummyproductimages/headset.png";
+import r1 from '../../assets/dummyproductimages/headset.png';
+import r2 from '../../assets/dummyproductimages/headset.png';
+import r3 from '../../assets/dummyproductimages/headset.png';
+import r4 from '../../assets/dummyproductimages/headset.png';
 
 export default function ProductDetailsSection() {
   const data = useMemo(
     () => ({
-      title: "Poly Blackwire 3200",
-      subtitle: "Poly Blackwire 3220 CORDED UC HEADSET",
+      title: 'Poly Blackwire 3200',
+      subtitle: 'Poly Blackwire 3220 CORDED UC HEADSET',
       bullets: [
-        "Keep your connectivity options open",
-        "Get more done with the all-day comfort design",
-        "Ramp up UC adoption thanks to fast setup",
+        'Keep your connectivity options open',
+        'Get more done with the all-day comfort design',
+        'Ramp up UC adoption thanks to fast setup',
       ],
-      categories: ["Poly", "Poly Headsets"],
-      tag: "Poly Blackwire 3220",
+      categories: ['Poly', 'Poly Headsets'],
+      tag: 'Poly Blackwire 3220',
       images: [p1, p2, p3, p4],
 
       // ✅ Description section content
-      descriptionLeftTitle: "BLACKWIRE 3200 SERIES",
+      descriptionLeftTitle: 'BLACKWIRE 3200 SERIES',
       descriptionLeftText:
-        "The Blackwire 3200 Series corded UC headsets are durable, lightweight, easy to deploy and come in a variety of connectivity and wearing options. Add insights from Plantronics Manager Pro, an additional service, and you’ve got a future proof solution. The Blackwire 3200 series with Plantronics signature audio provides top-notch features at a price you can afford.",
+        'The Blackwire 3200 Series corded UC headsets are durable, lightweight, easy to deploy and come in a variety of connectivity and wearing options. Add insights from Plantronics Manager Pro, an additional service, and you’ve got a future proof solution. The Blackwire 3200 series with Plantronics signature audio provides top-notch features at a price you can afford.',
 
-      descriptionRightTitle: "TOP FEATURES",
+      descriptionRightTitle: 'TOP FEATURES',
       descriptionRightBullets: [
-        "Available in monaural (C3210/C3215) or hi-fi stereo with passive noise reduction (C3220/C3225)",
-        "Variants include universal USB or USB-C",
-        "Connectivity to smartphone and tablet via 3.5 mm (C3215/C3225)",
-        "Intuitive inline controls to answer/end calls, control volume, and mute",
-        "PC wideband audio with noise-canceling microphones for high-quality PC telephony",
-        "Plantronics Manager Pro, an additional purchase, enables your IT team to gain insight into every compatible Plantronics headset being used company-wide",
+        'Available in monaural (C3210/C3215) or hi-fi stereo with passive noise reduction (C3220/C3225)',
+        'Variants include universal USB or USB-C',
+        'Connectivity to smartphone and tablet via 3.5 mm (C3215/C3225)',
+        'Intuitive inline controls to answer/end calls, control volume, and mute',
+        'PC wideband audio with noise-canceling microphones for high-quality PC telephony',
+        'Plantronics Manager Pro, an additional purchase, enables your IT team to gain insight into every compatible Plantronics headset being used company-wide',
       ],
 
       // ✅ Related products slider data
-      relatedTitle: "Related Products",
+      relatedTitle: 'Related Products',
       related: [
-        { id: 1, badge: "Blackwire", title: "Poly Blackwire 3200", img: r1, href: "/products/poly-blackwire-3200" },
-        { id: 2, badge: "Blackwire", title: "Poly Blackwire 3200", img: r2, href: "/products/poly-blackwire-3200" },
-        { id: 3, badge: "Blackwire", title: "Poly Blackwire 3200", img: r3, href: "/products/poly-blackwire-3200" },
-        { id: 4, badge: "Blackwire", title: "Poly Blackwire 3200", img: r4, href: "/products/poly-blackwire-3200" },
-        { id: 5, badge: "Blackwire", title: "Poly Blackwire 3200", img: r1, href: "/products/poly-blackwire-3200" },
+        {
+          id: 1,
+          badge: 'Blackwire',
+          title: 'Poly Blackwire 3200',
+          img: r1,
+          href: '/products/poly-blackwire-3200',
+        },
+        {
+          id: 2,
+          badge: 'Blackwire',
+          title: 'Poly Blackwire 3200',
+          img: r2,
+          href: '/products/poly-blackwire-3200',
+        },
+        {
+          id: 3,
+          badge: 'Blackwire',
+          title: 'Poly Blackwire 3200',
+          img: r3,
+          href: '/products/poly-blackwire-3200',
+        },
+        {
+          id: 4,
+          badge: 'Blackwire',
+          title: 'Poly Blackwire 3200',
+          img: r4,
+          href: '/products/poly-blackwire-3200',
+        },
+        {
+          id: 5,
+          badge: 'Blackwire',
+          title: 'Poly Blackwire 3200',
+          img: r1,
+          href: '/products/poly-blackwire-3200',
+        },
       ],
     }),
     []
@@ -74,7 +103,11 @@ export default function ProductDetailsSection() {
     const scroller = scrollerRef.current;
     const node = slideRefs.current[idx];
     if (scroller && node) {
-      node.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      node.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
     }
   };
 
@@ -101,12 +134,12 @@ export default function ProductDetailsSection() {
       setActive(bestIdx);
     };
 
-    scroller.addEventListener("scroll", onScroll, { passive: true });
-    return () => scroller.removeEventListener("scroll", onScroll);
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+    return () => scroller.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleShare = async () => {
-    const url = typeof window !== "undefined" ? window.location.href : "";
+    const url = typeof window !== 'undefined' ? window.location.href : '';
     try {
       if (navigator.share) {
         await navigator.share({ title: data.title, text: data.subtitle, url });
@@ -115,9 +148,9 @@ export default function ProductDetailsSection() {
     } catch (_) {}
     try {
       await navigator.clipboard.writeText(url);
-      alert("Link copied!");
+      alert('Link copied!');
     } catch (_) {
-      if (typeof window !== "undefined") window.prompt("Copy this link:", url);
+      if (typeof window !== 'undefined') window.prompt('Copy this link:', url);
     }
   };
 
@@ -150,19 +183,24 @@ export default function ProductDetailsSection() {
                     key={idx}
                     onClick={() => setActiveIndex(idx)}
                     className={`relative h-[92px] w-[128px] rounded-[18px] overflow-hidden bg-white
-                      ${idx === active ? "ring-2 ring-[#7EA2C6]" : "ring-0"}
+                      ${idx === active ? 'ring-2 ring-[#7EA2C6]' : 'ring-0'}
                       shadow-[0_1px_0_rgba(0,0,0,0.03)]
                     `}
                     aria-label={`Select image ${idx + 1}`}
                   >
-                    <Image src={img} alt="" fill className="object-contain p-3" />
+                    <Image
+                      src={img}
+                      alt=""
+                      fill
+                      className="object-contain p-3"
+                    />
                   </button>
                 ))}
 
                 <button
                   onClick={() => setActiveIndex(3)}
                   className={`h-[92px] w-[128px] rounded-[18px] bg-[#C7D7E8] ${
-                    active === 3 ? "ring-2 ring-[#7EA2C6]" : ""
+                    active === 3 ? 'ring-2 ring-[#7EA2C6]' : ''
                   }`}
                   aria-label="Select image 4"
                 />
@@ -192,7 +230,13 @@ export default function ProductDetailsSection() {
                 >
                   <div className="bg-white rounded-[28px] p-6">
                     <div className="relative w-full aspect-[1/1] rounded-[22px] overflow-hidden bg-white">
-                      <Image src={img} alt={data.title} fill className="object-contain" priority={idx === 0} />
+                      <Image
+                        src={img}
+                        alt={data.title}
+                        fill
+                        className="object-contain"
+                        priority={idx === 0}
+                      />
                     </div>
                   </div>
                 </div>
@@ -205,7 +249,7 @@ export default function ProductDetailsSection() {
                 <button
                   key={idx}
                   onClick={() => setActiveIndex(idx)}
-                  className={`h-2 rounded-full transition-all ${idx === active ? "w-8 bg-[#356DA4]" : "w-2 bg-[#cbd5e1]"}`}
+                  className={`h-2 rounded-full transition-all ${idx === active ? 'w-8 bg-[#356DA4]' : 'w-2 bg-[#cbd5e1]'}`}
                   aria-label={`Go to image ${idx + 1}`}
                 />
               ))}
@@ -219,7 +263,9 @@ export default function ProductDetailsSection() {
       {/* ===== DESCRIPTION ===== */}
       <div className="pb-8 md:pb-12">
         <div className="mx-auto w-full max-w-[1400px] px-4 md:px-8">
-          <div className="text-center text-[#2F2F2F] font-medium mb-6">Description</div>
+          <div className="text-center text-[#2F2F2F] font-medium mb-6">
+            Description
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left description card */}
@@ -251,7 +297,9 @@ export default function ProductDetailsSection() {
       {/* ===== RELATED PRODUCTS (SLIDER) ===== */}
       <div className="pb-14 md:pb-16">
         <div className="mx-auto w-full max-w-[1400px] px-4 md:px-8">
-          <div className="text-center text-[#2F2F2F] font-medium mb-6">{data.relatedTitle}</div>
+          <div className="text-center text-[#2F2F2F] font-medium mb-6">
+            {data.relatedTitle}
+          </div>
         </div>
 
         <RelatedProductsSlider items={data.related} />
@@ -284,7 +332,12 @@ function DetailsCard({ data, onShare }) {
         >
           {/* icon */}
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 3v10" stroke="#2E6EA5" strokeWidth="2" strokeLinecap="round" />
+            <path
+              d="M12 3v10"
+              stroke="#2E6EA5"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
             <path
               d="M8 6l4-4 4 4"
               stroke="#2E6EA5"
@@ -326,7 +379,10 @@ function DetailsCard({ data, onShare }) {
         <div className="flex items-center gap-3 flex-wrap">
           <span className="min-w-[92px]">Categories:</span>
           {data.categories.map((c) => (
-            <span key={c} className="bg-[#EDF3F9] text-[#3A3A3A] rounded-[6px] px-6 py-2">
+            <span
+              key={c}
+              className="bg-[#EDF3F9] text-[#3A3A3A] rounded-[6px] px-6 py-2"
+            >
               {c}
             </span>
           ))}
@@ -357,7 +413,7 @@ function RelatedProductsSlider({ items }) {
     const el = scrollerRef.current;
     if (!el) return;
     const amount = Math.round(el.clientWidth * 0.85) * dir;
-    el.scrollBy({ left: amount, behavior: "smooth" });
+    el.scrollBy({ left: amount, behavior: 'smooth' });
   };
 
   return (
@@ -400,7 +456,12 @@ function RelatedProductsSlider({ items }) {
               <div className="bg-white rounded-[22px] p-5">
                 {/* image */}
                 <div className="relative w-full aspect-[1/1] rounded-[18px] overflow-hidden bg-white">
-                  <Image src={p.img} alt={p.title} fill className="object-contain" />
+                  <Image
+                    src={p.img}
+                    alt={p.title}
+                    fill
+                    className="object-contain"
+                  />
 
                   {/* small badge */}
                   <div className="absolute top-3 right-3 bg-[#E9EEF6] text-[#2F2F2F] text-[12px] px-3 py-1 rounded-[8px]">
@@ -427,4 +488,3 @@ function RelatedProductsSlider({ items }) {
     </div>
   );
 }
-

@@ -1,23 +1,23 @@
 // ============================
 // AboutSection.js
 // ============================
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
-import abtimg from '../assets/aboutimg.jpg'
+import React from 'react';
+import Image from 'next/image';
+import abtimg from '../assets/aboutimg.jpg';
 
 // ✅ Replace this with your real image import later
 // import aboutImg from "../assets/about/about.png";
 
 function AboutSection({
-  imageSrc = "/dummy/about.jpg", // ✅ you can replace with imported image later
-  heading = "About us dolor sit amet, consectetuer",
+  imageSrc = '/dummy/about.jpg', // ✅ you can replace with imported image later
+  heading = 'About us dolor sit amet, consectetuer',
   description = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
 nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
 Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
 lobortis nisl ut aliquip ex ea commodo consequat.`,
-  buttonText = "Read more",
+  buttonText = 'Read more',
   onButtonClick,
 }) {
   return (

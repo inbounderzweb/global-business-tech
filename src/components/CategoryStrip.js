@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import Image from "next/image";
+import React, { useRef } from 'react';
+import Image from 'next/image';
 
-import audioicon from "../assets/icons/audioconf.svg";
-import videoconf from "../assets/icons/videoconf.svg";
-import headset from "../assets/icons/headset.svg";
-import laptop from "../assets/icons/laptop.svg";
-import server from "../assets/icons/server.svg";
-import viewmore from "../assets/icons/more.svg";
+import audioicon from '../assets/icons/audioconf.svg';
+import videoconf from '../assets/icons/videoconf.svg';
+import headset from '../assets/icons/headset.svg';
+import laptop from '../assets/icons/laptop.svg';
+import server from '../assets/icons/server.svg';
+import viewmore from '../assets/icons/more.svg';
 
 function CategoryStrip() {
   const scrollerRef = useRef(null);
 
   const ITEMS = [
-    { label: "Audio Conference", icon: audioicon },
-    { label: "Video Conference", icon: videoconf },
-    { label: "Professional Headsets", icon: headset },
-    { label: "Laptops", icon: laptop },
-    { label: "Servers", icon: server },
-    { label: "View More", icon: viewmore },
+    { label: 'Audio Conference', icon: audioicon },
+    { label: 'Video Conference', icon: videoconf },
+    { label: 'Professional Headsets', icon: headset },
+    { label: 'Laptops', icon: laptop },
+    { label: 'Servers', icon: server },
+    { label: 'View More', icon: viewmore },
   ];
 
   const scrollRight = () => {
     if (!scrollerRef.current) return;
-    scrollerRef.current.scrollBy({ left: 260, behavior: "smooth" });
+    scrollerRef.current.scrollBy({ left: 260, behavior: 'smooth' });
   };
 
   return (

@@ -1,13 +1,13 @@
 // ============================
 // SimplePageBanner.jsx
 // ============================
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 // ✅ Replace with your exported Figma banner image
-import aboutBanner from "../../assets/banner/aboutbanner.png";
+import aboutBanner from '../../assets/banner/aboutbanner.png';
 
 export default function Banner() {
   return (

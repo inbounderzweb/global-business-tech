@@ -12,14 +12,18 @@ import abtimg from '../../assets/aboutimg.jpg'
 
 function AboutSection({
   imageSrc = "/dummy/about.jpg", // ✅ you can replace with imported image later
-  heading = "About us dolor sit amet, consectetuer",
-  description = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-lobortis nisl ut aliquip ex ea commodo consequat.`,
+  heading = "About Global Business Tech",
+  description = `Global Business Tech is a trusted AV and IT solutions provider with over 10 years of expertise delivering turnkey technology projects across major metro cities in India.
+We help businesses design, deploy, and manage robust technology ecosystems. From communication systems and secure access control to enterprise-grade networking and storage solutions.
+With 200+ satisfied clients, 100+ turnkey projects, and 20+ certifications, we combine technical excellence with reliable service support.`,
   buttonText = "Read more",
   onButtonClick,
-}) {
+})
+
+
+
+
+{
   return (
     <section className="w-full bg-[#EEF3F8] py-10">
       <div className="w-full xl:w-[90%] mx-auto px-2">

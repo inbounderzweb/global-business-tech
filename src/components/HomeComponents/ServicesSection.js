@@ -20,36 +20,36 @@ export default function ServicesSection() {
     () => [
       {
         id: 1,
-        title: "Networking",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.",
+        title: "Networking & Infrastructure",
+        desc: "Reliable, scalable network architecture built for performance, speed, and future growth.",
         imageUrl: service1,
         href: "#",
       },
       {
         id: 2,
-        title: "Virtualization",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.",
+        title: "Access Control Systems",
+        desc: "Secure access management solutions to protect people, data, and physical assets.",
         imageUrl: service2,
         href: "#",
       },
       {
         id: 3,
-        title: "Board Room",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.",
+        title: "Network Storage Solutions",
+        desc: "Efficient data storage systems ensure security, high performance, and uninterrupted business continuity..",
         imageUrl: service3,
         href: "#",
       },
       {
         id: 4,
-        title: "Cyber Security",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.",
+        title: "Professional Headsets",
+        desc: "Comfortable, high-quality audio solutions designed for professional calling and conferencing environments.",
         imageUrl: service4,
         href: "#",
       },
       {
         id: 5,
-        title: "Video Wall and\nSignage Solutions",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.",
+        title: "Highlighted Service",
+        desc: "Video & Audio Conferencing Solutions – Our flagship offering delivers seamless business communication experiences.",
         imageUrl: service5,
         href: "#",
       },
@@ -112,8 +112,7 @@ export default function ServicesSection() {
             Services
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-            euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            Comprehensive AV & IT Solutions Under One Roof
           </p>
         </div>
 

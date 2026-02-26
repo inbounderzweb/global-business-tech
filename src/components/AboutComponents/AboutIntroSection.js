@@ -2,11 +2,11 @@
 // AboutIntroSection.jsx
 // (matches screenshot layout: left collage image + right heading + paragraph)
 // ============================
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
-import aboutintro from '../../assets/about/aboutintro.jpg'
+import React from 'react';
+import Image from 'next/image';
+import aboutintro from '../../assets/about/aboutintro.jpg';
 
 export default function AboutIntroSection() {
   return (

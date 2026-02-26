@@ -1,26 +1,74 @@
 // ============================
 // ProductsGrid.js
 // ============================
-"use client";
+'use client';
 
-import React, { useMemo, useRef } from "react";
-import Image from "next/image";
-import headset from "../../assets/dummyproductimages/headset.png";
-import Link from "next/link";
+import React, { useMemo, useRef } from 'react';
+import Image from 'next/image';
+import headset from '../../assets/dummyproductimages/headset.png';
+import Link from 'next/link';
 
 function ProductsGrid() {
   const scrollerRef = useRef(null);
 
   const products = useMemo(
     () => [
-      { id: 1, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 2, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 3, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 4, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 5, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 6, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 7, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
-      { id: 8, title: "Poly Blackwire 3200", badge: "Blackwire", imageUrl: headset, href: "/productdetail" },
+      {
+        id: 1,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 2,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 3,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 4,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 5,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 6,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 7,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
+      {
+        id: 8,
+        title: 'Poly Blackwire 3200',
+        badge: 'Blackwire',
+        imageUrl: headset,
+        href: '/productdetail',
+      },
     ],
     []
   );
@@ -29,7 +77,7 @@ function ProductsGrid() {
     if (!scrollerRef.current) return;
     scrollerRef.current.scrollBy({
       left: 300,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
@@ -45,7 +93,8 @@ function ProductsGrid() {
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+            volutpat.
           </p>
         </div>
 
@@ -58,10 +107,7 @@ function ProductsGrid() {
             className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pl-8 pr-6"
           >
             {products.map((p) => (
-              <div
-                key={p.id}
-                className="shrink-0 w-[280px] text-center"
-              >
+              <div key={p.id} className="shrink-0 w-[280px] text-center">
                 <div className="bg-white rounded-[16px] p-5 shadow-sm">
                   <div className="relative w-full h-[260px] overflow-hidden rounded-[12px] group">
                     {/* Badge */}
@@ -143,15 +189,14 @@ function ProductsGrid() {
         {/* Bottom Button */}
         {/* ========================= */}
         <div className="flex justify-center mt-12">
-          <Link href={"/productdetails"}>
-           <button
-            type="button"
-            className="border border-[#356DA4] text-[#356DA4] px-10 py-2 rounded-full hover:bg-white/60 transition"
-          >
-            Show all products
-          </button>
+          <Link href={'/productdetails'}>
+            <button
+              type="button"
+              className="border border-[#356DA4] text-[#356DA4] px-10 py-2 rounded-full hover:bg-white/60 transition"
+            >
+              Show all products
+            </button>
           </Link>
-         
         </div>
       </div>
 

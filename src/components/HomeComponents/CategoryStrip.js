@@ -19,7 +19,7 @@ function CategoryStrip() {
     { label: "Global Presence", icon: headset },
     { label: "Innovation", icon: laptop },
     // { label: "Servers", icon: server },
-    // { label: "View More", icon: viewmore },
+    { label: "View More", icon: viewmore },
   ];
 
   const scrollRight = () => {

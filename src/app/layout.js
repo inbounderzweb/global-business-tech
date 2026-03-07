@@ -1,8 +1,9 @@
 import { Geist, Geist_Mono, Manrope } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
 import FooterSection from '@/components/FooterSection';
 import DiscussWithUsSection from '@/components/HomeComponents/DiscussWithUsSection';
+// import HeaderToggle from '.HeaderToggle/components/HeaderToggle';
+import HeaderToggle from '@/components/HeaderToggle';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -17,10 +18,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // HeaderToggle will hide Header on admin routes
   return (
     <html lang="en">
-      <body className={`${manrope.variable} antialiased`}>
-        <Header />
+      <body className={`antialiased`}>
+        <HeaderToggle />
         {children}
         <DiscussWithUsSection />
         <FooterSection />

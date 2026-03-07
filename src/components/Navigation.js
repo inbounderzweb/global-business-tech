@@ -38,13 +38,11 @@ function Navigation() {
     { label: 'Networking', href: '/networking' },
     { label: 'Video Wall Solutions', href: '/videowallsolutions' },
     { label: 'Virtualization', href: '/virtualization' },
-    
+
   ];
   const SOLUTIONS_RIGHT = [
     { label: 'Cyber Security', href: '/cybersecurity' },
     { label: 'Board Rooms', href: '/boardroom' },
-   
-    
   ];
 
   useEffect(() => {
@@ -149,7 +147,7 @@ function Navigation() {
                         className={`block transition-transform duration-300 ease-in-out w-3 ${open ? 'scale-y-[-1]' : 'scale-y-100'
                           }`}
                       >
-                        <Image src={downarrow} alt="down-arrow" />
+                        <Image src={downarrow} alt="down-arrow" width={12} height={12} />
                       </span>
                     </button>
                   </div>

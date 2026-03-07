@@ -7,7 +7,6 @@ import ServicesSection from '@/components/HomeComponents/ServicesSection';
 import StatsStrip from '@/components/HomeComponents/StatsStrip';
 import TestimonialsSection from '@/components/HomeComponents/TestimonialsSection';
 import VideoSection from '@/components/HomeComponents/VideoSection';
-import FooterSection from '@/components/FooterSection';
 
 export default function Home() {
   return (

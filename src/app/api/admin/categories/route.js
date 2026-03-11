@@ -1,24 +1,12 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
-
-// Prevent multiple instances of Prisma Client in development
-const globalForPrisma = globalThis;
-if (!globalForPrisma.prisma) {
-    const connectionString = process.env.DATABASE_URL;
-    const pool = new Pool({ connectionString });
-    const adapter = new PrismaPg(pool);
-
-    globalForPrisma.prisma = new PrismaClient({ adapter });
-}
-const prisma = globalForPrisma.prisma;
+// src/app/api/admin/categories/route.js
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 // GET /api/admin/categories
 export async function GET() {
     try {
         const categories = await prisma.category.findMany({
-            orderBy: { createdAt: 'desc' }
+            orderBy: { createdAt: "desc" },
         });
         return NextResponse.json(categories, { status: 200 });
     } catch (error) {
@@ -33,13 +21,15 @@ export async function POST(req) {
         const body = await req.json();
         const { name } = body;
 
-        if (!name || name.trim() === '') {
+        if (!name || name.trim() === "") {
             return NextResponse.json({ error: "Category name is required" }, { status: 400 });
         }
 
+        const trimmedName = name.trim();
+
         // Check if category already exists
         const existingCategory = await prisma.category.findUnique({
-            where: { name: name.trim() }
+            where: { name: trimmedName },
         });
 
         if (existingCategory) {
@@ -48,9 +38,7 @@ export async function POST(req) {
 
         // Create the new category
         const category = await prisma.category.create({
-            data: {
-                name: name.trim()
-            }
+            data: { name: trimmedName },
         });
 
         return NextResponse.json(category, { status: 201 });

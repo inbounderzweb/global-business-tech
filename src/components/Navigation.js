@@ -11,6 +11,8 @@ function Navigation() {
 
   const productsWrapRef = useRef(null);
   const solutionsWrapRef = useRef(null);
+  const productsTimerRef = useRef(null);
+  const solutionsTimerRef = useRef(null);
 
   // ✅ NAV ITEMS (Products + Solutions now have href too)
   const NAV_ITEMS = [
@@ -84,10 +86,44 @@ function Navigation() {
   const closeAll = () => {
     setOpen(false);
     setSolutionsOpen(false);
+    if (productsTimerRef.current) clearTimeout(productsTimerRef.current);
+    if (solutionsTimerRef.current) clearTimeout(solutionsTimerRef.current);
+  };
+
+  const handleProductsEnter = () => {
+    if (canHover) {
+      if (productsTimerRef.current) clearTimeout(productsTimerRef.current);
+      setOpen(true);
+      setSolutionsOpen(false);
+    }
+  };
+
+  const handleProductsLeave = () => {
+    if (canHover) {
+      productsTimerRef.current = setTimeout(() => {
+        setOpen(false);
+      }, 200); // 200ms delay
+    }
+  };
+
+  const handleSolutionsEnter = () => {
+    if (canHover) {
+      if (solutionsTimerRef.current) clearTimeout(solutionsTimerRef.current);
+      setSolutionsOpen(true);
+      setOpen(false);
+    }
+  };
+
+  const handleSolutionsLeave = () => {
+    if (canHover) {
+      solutionsTimerRef.current = setTimeout(() => {
+        setSolutionsOpen(false);
+      }, 200); // 200ms delay
+    }
   };
 
   return (
-    <nav className="bg-gradient-to-l from-[#D5E7F7] to-white py-6 w-full float-end hidden xl:block px-2">
+    <nav className="bg-linear-to-l from-[#D5E7F7] to-white py-6 w-full float-end hidden xl:block px-2">
       <div className="flex items-center gap-6 mx-auto justify-end w-[90%]">
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
@@ -132,15 +168,15 @@ function Navigation() {
                       aria-expanded={open}
                       onClick={(e) => {
                         e.stopPropagation();
-                        setOpen((v) => !v);
-                        setSolutionsOpen(false);
+                        if (open) {
+                          setOpen(false);
+                        } else {
+                          setOpen(true);
+                          setSolutionsOpen(false);
+                        }
                       }}
-                      onMouseEnter={() => {
-                        if (canHover) setOpen(true);
-                      }}
-                      onMouseLeave={() => {
-                        if (canHover) setOpen(false);
-                      }}
+                      onMouseEnter={handleProductsEnter}
+                      onMouseLeave={handleProductsLeave}
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
@@ -154,19 +190,15 @@ function Navigation() {
 
                   {/* Dropdown */}
                   <div
-                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-200 ease-out
+                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-300 ease-in-out
                       ${open
                         ? 'opacity-100 translate-y-0 visible pointer-events-auto'
                         : 'opacity-0 -translate-y-2 invisible pointer-events-none'
                       }
                     `}
                     // ✅ keep dropdown open when mouse is over it
-                    onMouseEnter={() => {
-                      if (canHover) setOpen(true);
-                    }}
-                    onMouseLeave={() => {
-                      if (canHover) setOpen(false);
-                    }}
+                    onMouseEnter={handleProductsEnter}
+                    onMouseLeave={handleProductsLeave}
                   >
                     <div className="relative w-[600px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       {/* caret */}
@@ -234,15 +266,15 @@ function Navigation() {
                       aria-expanded={solutionsOpen}
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSolutionsOpen((v) => !v);
-                        setOpen(false);
+                        if (solutionsOpen) {
+                          setSolutionsOpen(false);
+                        } else {
+                          setSolutionsOpen(true);
+                          setOpen(false);
+                        }
                       }}
-                      onMouseEnter={() => {
-                        if (canHover) setSolutionsOpen(true);
-                      }}
-                      onMouseLeave={() => {
-                        if (canHover) setSolutionsOpen(false);
-                      }}
+                      onMouseEnter={handleSolutionsEnter}
+                      onMouseLeave={handleSolutionsLeave}
                       className="p-1 rounded hover:bg-black/5 transition"
                     >
                       <span
@@ -256,18 +288,14 @@ function Navigation() {
 
                   {/* Dropdown */}
                   <div
-                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-200 ease-out
+                    className={`absolute left-0 top-full z-50 pt-1 transition-all duration-300 ease-in-out
                       ${solutionsOpen
                         ? 'opacity-100 translate-y-0 visible pointer-events-auto'
                         : 'opacity-0 -translate-y-2 invisible pointer-events-none'
                       }
                     `}
-                    onMouseEnter={() => {
-                      if (canHover) setSolutionsOpen(true);
-                    }}
-                    onMouseLeave={() => {
-                      if (canHover) setSolutionsOpen(false);
-                    }}
+                    onMouseEnter={handleSolutionsEnter}
+                    onMouseLeave={handleSolutionsLeave}
                   >
                     <div className="relative w-[600px] -ml-[150px] max-w-[calc(100vw-32px)] rounded-2xl bg-white/95 shadow-xl ring-1 ring-black/5">
                       <div className="absolute -top-2 left-60 h-4 w-4 rotate-45 bg-white/95" />
@@ -314,7 +342,7 @@ function Navigation() {
 
         <Link
           href="/profile"
-          className="bg-[#356DA4] text-white px-4 py-2 rounded-[50px] xl:w-[172px] h-[40px] border-[1px] border-[#356DA4] font-[manrope] text-[16px] font-thin flex items-center justify-center"
+          className="bg-[#356DA4] text-white px-4 py-2 rounded-[50px] xl:w-[172px] h-[40px] border border-[#356DA4] font-[manrope] text-[16px] font-thin flex items-center justify-center transform transition-transform hover:scale-105 active:scale-95 shadow-sm hover:shadow-md"
         >
           Download Profile
         </Link>

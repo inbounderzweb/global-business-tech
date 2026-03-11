@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono, Manrope } from 'next/font/google';
 import './globals.css';
-import FooterSection from '@/components/FooterSection';
-import DiscussWithUsSection from '@/components/HomeComponents/DiscussWithUsSection';
+import FooterToggle from '@/components/FooterToggle';
 // import HeaderToggle from '.HeaderToggle/components/HeaderToggle';
 import HeaderToggle from '@/components/HeaderToggle';
 
@@ -18,14 +17,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  // HeaderToggle will hide Header on admin routes
+  // HeaderToggle and FooterToggle will hide components on admin routes
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`${manrope.className} antialiased`} suppressHydrationWarning>
         <HeaderToggle />
         {children}
-        <DiscussWithUsSection />
-        <FooterSection />
+        <FooterToggle />
       </body>
     </html>
   );

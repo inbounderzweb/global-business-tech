@@ -82,7 +82,7 @@ export default function AdminLogin() {
                     <div className="p-7 sm:p-10 lg:p-12">
                         <div className="mx-auto max-w-md">
                             <div className="mb-6">
-                                <h2 className="text-2xl font-semibold text-slate-900">Admin Login</h2>
+                                <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">Admin Login</h2>
                                 <p className="mt-2 text-sm text-slate-500">
                                     Enter your credentials to continue.
                                 </p>

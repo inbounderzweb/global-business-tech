@@ -1,17 +1,49 @@
-// ============================
-// DiscussWithUsSection.jsx
-// BG handled inside component
-// ============================
+// src/components/HomeComponents/DiscussWithUsSection.js
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 // ✅ Import your exported images from Figma here:
 import desktopimg from '../../assets/desktopbg.jpg';
 import mobbg from '../../assets/mobbg.jpg';
 
-export default function DiscussWithUsSection({ onSubmit }) {
+export default function DiscussWithUsSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    business: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: `Business Inquiry: ${formData.business || "None"}`,
+          message: `Phone: ${formData.phone} | Business: ${formData.business}`
+        }),
+      });
+      if (res.ok) {
+        setSuccess(true);
+        setFormData({ name: '', email: '', phone: '', business: '' });
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="w-full">
       <div className="relative w-full overflow-hidden">
@@ -37,7 +69,7 @@ export default function DiscussWithUsSection({ onSubmit }) {
           />
         </div>
 
-        {/* Overlay (for readability like screenshot) */}
+        {/* Overlay */}
         <div
           className="absolute inset-0"
           style={{
@@ -65,55 +97,71 @@ export default function DiscussWithUsSection({ onSubmit }) {
                   you with handful offers
                 </p>
 
-                <form
-                  className="mt-7 md:mt-9"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    onSubmit?.(e);
-                  }}
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 max-w-[640px]">
-                    <Field
-                      label="Full Name"
-                      placeholder="Full Name"
-                      name="fullName"
-                    />
-                    <Field label="Mail id" placeholder="Mail id" name="email" />
-                    <Field
-                      label="Phone Number"
-                      placeholder="Phone Number"
-                      name="phone"
-                    />
-                    <Field
-                      label="Business"
-                      placeholder="Business"
-                      name="business"
-                    />
+                {success ? (
+                  <div className="mt-10 p-6 bg-white/10 backdrop-blur rounded-2xl border border-white/20 text-[#D6E3F3]">
+                    <p className="font-bold text-lg">Thank you!</p>
+                    <p className="text-sm opacity-80 mt-1">Our team will call you shortly to discuss your business requirements.</p>
                   </div>
+                ) : (
+                  <form className="mt-7 md:mt-9" onSubmit={handleSubmit}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 max-w-[640px]">
+                      <Field
+                        label="Full Name"
+                        placeholder="Full Name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                      />
+                      <Field
+                        label="Mail id"
+                        placeholder="Mail id"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                      />
+                      <Field
+                        label="Phone Number"
+                        placeholder="Phone Number"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        required
+                      />
+                      <Field
+                        label="Business"
+                        placeholder="Business Name"
+                        value={formData.business}
+                        onChange={(e) => setFormData({ ...formData, business: e.target.value })}
+                      />
+                    </div>
 
-                  <div className="mt-8 md:mt-9 max-w-[640px] flex justify-center md:justify-start">
-                    <button
-                      type="submit"
-                      className="
-                        w-[220px] md:w-[260px]
-                        h-[46px]
-                        rounded-full
-                        bg-[#2F6FAE]
-                        text-white
-                        text-[14px]
-                        font-medium
-                        hover:brightness-110
-                        active:brightness-95
-                        transition
-                      "
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
+                    <div className="mt-8 md:mt-9 max-w-[640px] flex justify-center md:justify-start">
+                      <button
+                        type="submit"
+                        disabled={loading}
+                        className="
+                          w-[220px] md:w-[260px]
+                          h-[46px]
+                          rounded-full
+                          bg-[#2F6FAE]
+                          text-white
+                          text-[14px]
+                          font-extrabold
+                          hover:brightness-110
+                          active:brightness-95
+                          transition
+                          disabled:opacity-50
+                          flex items-center justify-center
+                        "
+                      >
+                        {loading ? "Processing..." : "Submit Inquiry"}
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
 
-              {/* RIGHT (empty because it’s in the BG image) */}
+              {/* RIGHT */}
               <div className="hidden md:block md:w-[42%]" />
             </div>
           </div>
@@ -123,13 +171,16 @@ export default function DiscussWithUsSection({ onSubmit }) {
   );
 }
 
-function Field({ label, placeholder, name }) {
+function Field({ label, placeholder, type = "text", value, onChange, required = false }) {
   return (
     <label className="block">
-      <span className="block text-[#B9C6D8] text-[12px] mb-2">{label}</span>
+      <span className="block text-[#B9C6D8] text-[12px] mb-2 font-bold uppercase tracking-widest">{label}</span>
       <input
-        name={name}
+        type={type}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        required={required}
         className="
           w-full
           h-[42px]

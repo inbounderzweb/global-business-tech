@@ -2,9 +2,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export async function GET(request, { params }) {
+export async function GET(request, { params: paramsPromise }) {
     try {
-        const { id } = await params;
+        const params = await paramsPromise;
+        const { id } = params;
         const product = await prisma.product.findUnique({
             where: { id: parseInt(id) },
             include: { variants: true }
@@ -16,9 +17,10 @@ export async function GET(request, { params }) {
     }
 }
 
-export async function PUT(request, { params }) {
+export async function PUT(request, { params: paramsPromise }) {
     try {
-        const { id } = await params;
+        const params = await paramsPromise;
+        const { id } = params;
         const data = await request.json();
         const { name, description, price, categoryId, variants, mainImage, gallery } = data;
 
@@ -49,15 +51,23 @@ export async function PUT(request, { params }) {
     }
 }
 
-export async function DELETE(request, { params }) {
+export async function DELETE(request, { params: paramsPromise }) {
     try {
-        const { id } = await params;
-        // Variants will be deleted automatically if we have cascade, 
-        // but it's safer to do it manually if not sure.
-        await prisma.variant.deleteMany({ where: { productId: parseInt(id) } });
-        await prisma.product.delete({ where: { id: parseInt(id) } });
-        return NextResponse.json({ message: "Product deleted" });
+        const params = await paramsPromise;
+        const id = parseInt(params.id);
+
+        // Clean up everything linked to this product to avoid foreign key errors
+        await prisma.order.deleteMany({ where: { productId: id } });
+        await prisma.variant.deleteMany({ where: { productId: id } });
+
+        await prisma.product.delete({ where: { id: id } });
+
+        return NextResponse.json({ message: "Product deleted successfully" });
     } catch (error) {
-        return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
+        console.error("Delete error:", error);
+        return NextResponse.json({
+            error: "Failed to delete product",
+            details: error.message
+        }, { status: 500 });
     }
 }

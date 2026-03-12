@@ -81,7 +81,7 @@ export default function ProductsList() {
                                 <tr key={p.id} className="group hover:bg-slate-50/40 transition-colors">
                                     <td className="px-8 py-5">
                                         <div className="flex items-center gap-4">
-                                            <div className="h-14 w-14 rounded-2xl bg-slate-100 overflow-hidden border border-slate-200 flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <div className="h-14 w-14 rounded-2xl bg-slate-100 overflow-hidden border border-slate-200 shrink-0 group-hover:scale-110 transition-transform">
                                                 {p.thumbnail || p.mainImage ? (
                                                     <img
                                                         src={p.thumbnail || p.mainImage}
@@ -121,9 +121,12 @@ export default function ProductsList() {
                                     </td>
                                     <td className="px-8 py-5 text-right">
                                         <div className="flex items-center justify-end gap-2">
-                                            <button className="p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-xl transition">
+                                            <Link
+                                                href={`/admin/products/edit/${p.id}`}
+                                                className="p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-xl transition"
+                                            >
                                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
-                                            </button>
+                                            </Link>
                                             <button
                                                 onClick={() => deleteProduct(p.id)}
                                                 className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition"

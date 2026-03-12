@@ -1,13 +1,14 @@
-// src/app/admin/products/create/page.js
+// src/app/admin/products/edit/[id]/page.js
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function AddProductPage() {
+export default function EditProductPage({ params: paramsPromise }) {
+    const params = use(paramsPromise);
     const router = useRouter();
     const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(null);
     const [error, setError] = useState("");
 
@@ -26,15 +27,45 @@ export default function AddProductPage() {
     const [variants, setVariants] = useState([{ name: '', price: '', image: '' }]);
 
     useEffect(() => {
-        setLoading(true);
-        fetch("/api/admin/categories")
-            .then((res) => res.json())
-            .then((data) => {
-                setCategories(Array.isArray(data) ? data : []);
+        const fetchData = async () => {
+            try {
+                const [catsRes, prodRes] = await Promise.all([
+                    fetch("/api/admin/categories"),
+                    fetch(`/api/admin/products/${params.id}`)
+                ]);
+
+                const catsData = await catsRes.json();
+                const prodData = await prodRes.json();
+
+                setCategories(Array.isArray(catsData) ? catsData : []);
+
+                if (prodData) {
+                    setProductName(prodData.name || '');
+                    setDescription(prodData.description || '');
+                    setPrice(prodData.price || '');
+                    setCategoryId(prodData.categoryId || '');
+                    setMainImage(prodData.mainImage || '');
+                    setGallery(JSON.parse(prodData.gallery || "[]"));
+
+                    if (prodData.variants && prodData.variants.length > 0) {
+                        setHasVariants(true);
+                        setVariants(prodData.variants.map(v => ({
+                            name: v.name,
+                            price: v.price,
+                            image: v.image || ''
+                        })));
+                    }
+                }
                 setLoading(false);
-            })
-            .catch(() => setLoading(false));
-    }, []);
+            } catch (err) {
+                console.error(err);
+                setError("Failed to load product data");
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [params.id]);
 
     const uploadFile = async (file, fieldId) => {
         if (!file) return null;
@@ -112,13 +143,13 @@ export default function AddProductPage() {
 
         try {
             setLoading(true);
-            const res = await fetch("/api/admin/products", {
-                method: "POST",
+            const res = await fetch(`/api/admin/products/${params.id}`, {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
             });
 
-            if (!res.ok) throw new Error("Could not add product");
+            if (!res.ok) throw new Error("Could not update product");
 
             router.push("/admin/products");
             router.refresh();
@@ -128,12 +159,14 @@ export default function AddProductPage() {
         }
     };
 
+    if (loading && !productName) return <div className="p-20 text-center font-bold text-slate-400 animate-pulse">Loading Product Data...</div>;
+
     return (
         <div className="max-w-6xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Create Product</h1>
-                    <p className="mt-2 text-slate-500 font-medium">Add a new item to your catalog. Variations and gallery are optional.</p>
+                    <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Edit Product</h1>
+                    <p className="mt-2 text-slate-500 font-medium tracking-wide">Refine your product details, gallery, and variations.</p>
                 </div>
                 <button
                     type="button"
@@ -141,12 +174,12 @@ export default function AddProductPage() {
                     className="flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-900 transition-colors"
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
-                    Discard & Back
+                    Cancel Editing
                 </button>
             </div>
 
             {error && (
-                <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 text-sm font-bold animate-in fade-in slide-in-from-top-2">
+                <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-2xl text-red-600 text-sm font-bold">
                     {error}
                 </div>
             )}
@@ -183,7 +216,6 @@ export default function AddProductPage() {
                         </div>
                     </div>
 
-                    {/* Media Management - Removed Thumbnail per request */}
                     <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-8">
                         <h2 className="text-2xl font-bold text-slate-900">Product Media</h2>
 
@@ -215,7 +247,6 @@ export default function AddProductPage() {
                             </div>
                         </div>
 
-                        {/* Gallery Upload */}
                         <div className="space-y-6 pt-6 border-t border-slate-50">
                             <label className="block text-sm font-bold text-slate-400 ml-1 uppercase tracking-wider">Additional Gallery Images</label>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -243,7 +274,6 @@ export default function AddProductPage() {
                         </div>
                     </div>
 
-                    {/* Variations Management */}
                     <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-8">
                         <div className="flex items-center justify-between">
                             <h2 className="text-2xl font-bold text-slate-900">Product Variations</h2>
@@ -257,7 +287,7 @@ export default function AddProductPage() {
                         </div>
 
                         {hasVariants && (
-                            <div className="space-y-6 animate-in fade-in slide-in-from-top-4 duration-500">
+                            <div className="space-y-6">
                                 {variants.map((v, index) => (
                                     <div key={index} className="flex flex-col sm:flex-row gap-6 p-6 rounded-[30px] bg-slate-50/50 border border-slate-100 items-start">
                                         <div className="relative h-24 w-24 rounded-2xl border-2 border-dashed border-slate-200 flex shrink-0 items-center justify-center overflow-hidden bg-white shadow-sm hover:border-blue-400 transition-colors">
@@ -371,7 +401,7 @@ export default function AddProductPage() {
                             {loading ? (
                                 <div className="h-6 w-6 animate-spin rounded-full border-4 border-slate-500 border-t-white" />
                             ) : (
-                                "Publish Product"
+                                "Update Product"
                             )}
                         </button>
                     </div>

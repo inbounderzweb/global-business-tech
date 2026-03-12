@@ -82,9 +82,12 @@ export default function BlogsList() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 self-end sm:self-auto">
-                                <button className="p-3 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-2xl transition-all">
+                                <Link
+                                    href={`/admin/blogs/edit/${b.id}`}
+                                    className="p-3 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-2xl transition-all"
+                                >
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
-                                </button>
+                                </Link>
                                 <button
                                     onClick={() => deleteBlog(b.id)}
                                     className="p-3 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"

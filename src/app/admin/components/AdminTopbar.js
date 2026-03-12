@@ -24,36 +24,42 @@ export default function AdminTopbar({ onMenuToggle }) {
     };
 
     return (
-        <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/80 backdrop-blur">
-            <div className="flex items-center justify-between px-4 py-4 sm:px-6">
-                <div className="flex items-center gap-3">
-                    {/* Hamburger on mobile */}
+        <header className="sticky top-0 z-20 border-b border-slate-100 bg-white/70 backdrop-blur-xl">
+            <div className="flex items-center justify-between px-6 py-4">
+                <div className="flex items-center gap-5">
                     <button
                         onClick={onMenuToggle}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 lg:hidden"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-100 bg-white text-[#356DA4] shadow-sm hover:scale-105 transition-transform lg:hidden"
                         aria-label="Open menu"
                     >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 7h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                            <path d="M4 12h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                            <path d="M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 7h16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                            <path d="M4 12h11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                            <path d="M4 17h16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                         </svg>
                     </button>
 
                     <div>
-                        <p className="text-xs text-slate-500">Admin Panel</p>
-                        <h1 className="text-lg font-semibold text-slate-900">
-                            {titleMap[pathname] || "Admin"}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-black text-[#7FA1C4] uppercase tracking-[0.2em]">Management</span>
+                            <span className="h-1 w-1 rounded-full bg-slate-200" />
+                            <span className="text-[10px] font-black text-[#7FA1C4] uppercase tracking-[0.2em]">{titleMap[pathname] || "Core"}</span>
+                        </div>
+                        <h1 className="text-xl font-black text-slate-900 tracking-tight">
+                            {titleMap[pathname] || "Admin Console"}
                         </h1>
                     </div>
                 </div>
 
-                <button
-                    onClick={handleLogout}
-                    className="rounded-2xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-slate-200"
-                >
-                    Logout
-                </button>
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={handleLogout}
+                        className="group flex items-center gap-2 rounded-[18px] bg-linear-to-r from-red-500 to-red-600 px-6 py-2.5 text-xs font-black text-white shadow-lg shadow-red-500/20 hover:scale-105 active:scale-95 transition-all"
+                    >
+                        <span>Terminate Session</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
             </div>
         </header>
     );

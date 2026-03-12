@@ -18,7 +18,7 @@ export default function Layout({ children }) {
     if (pathname === "/admin/login") return <>{children}</>;
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-linear-to-tr from-slate-50 via-white to-[#D5E7F7]/30">
             {/* Sidebar drawer (mobile) + static space (desktop) */}
             <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 

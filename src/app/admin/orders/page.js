@@ -138,7 +138,7 @@ export default function OrdersPage() {
 
             {/* Order Details Modal */}
             {selectedOrder && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedOrder(null)}></div>
                     <div className="relative bg-white w-full max-w-2xl rounded-[40px] p-10 shadow-2xl overflow-hidden">
                         <div className="flex items-start justify-between mb-8">

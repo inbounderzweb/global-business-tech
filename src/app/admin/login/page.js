@@ -27,13 +27,16 @@ export default function AdminLogin() {
         }
     };
 
+
     return (
+
         <div className="min-h-screen bg-slate-50 relative overflow-hidden">
             <div className="pointer-events-none absolute inset-0">
                 <div className="absolute -top-40 -right-40 h-[520px] w-[520px] rounded-full bg-blue-200/40 blur-3xl" />
                 <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-indigo-200/40 blur-3xl" />
                 <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:22px_22px] opacity-[0.18]" />
             </div>
+
 
             <div className="relative mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
                 <div className="grid w-full overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_-40px_rgba(2,6,23,0.35)] ring-1 ring-slate-200 lg:grid-cols-2">

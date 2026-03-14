@@ -5,7 +5,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ProductsGrid() {
+function AllProductsGrid() {
     const scrollerRef = useRef(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -151,4 +151,4 @@ function ProductsGrid() {
     );
 }
 
-export default ProductsGrid;
+export default AllProductsGrid;

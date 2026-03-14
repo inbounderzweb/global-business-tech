@@ -156,7 +156,7 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
 
             {/* MODAL */}
             {showModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-[#0B1F3A]/80 backdrop-blur-md" onClick={() => setShowModal(false)}></div>
                     <div className="relative bg-white w-full max-w-xl rounded-[48px] p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
                         {success ? (

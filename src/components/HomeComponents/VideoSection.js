@@ -91,7 +91,7 @@ function VideoSection() {
 
             <div className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-white/80 text-center lg:text-left">
               <b>Proven Expertise. Trusted Execution.</b>
-              <div className="flex gap-12 mt-2 items-center">
+              <div className="flex gap-12 mt-2 items-center text-left md:text-center">
                 <div>
                   <ul className="list-disc">
                     <li>10+ Years of Industry Experience </li>

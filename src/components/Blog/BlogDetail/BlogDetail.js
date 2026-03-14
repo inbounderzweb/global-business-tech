@@ -1,136 +1,113 @@
-// components/BlogDetail.jsx
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import RelatedBlogs from './RelatedBlogs';
-import blogimage from '../../../assets/blog/bd1.jpg';
 
 function Pagination() {
   return (
-    <div className="mt-10 flex items-center justify-center gap-3 text-sm text-slate-500">
-      <button
-        type="button"
-        className="px-2 py-1 text-slate-400 hover:text-slate-600"
-      >
+    <div className="mt-16 flex items-center justify-center gap-4 text-[13px] font-medium text-[#849DB6]">
+      <button type="button" className="flex items-center gap-1 hover:text-[#2F6FB3] transition">
         &lt; Page 1
       </button>
-      <span className="text-slate-300">|</span>
-      <button type="button" className="px-2 py-1 font-medium text-slate-700">
+      <span className="text-[#849DB6]/30">|</span>
+      <button type="button" className="text-[#333] hover:text-[#2F6FB3] transition">
         Page 2
       </button>
-      <span className="text-slate-300">|</span>
-      <button
-        type="button"
-        className="px-2 py-1 text-slate-400 hover:text-slate-600"
-      >
+      <span className="text-[#849DB6]/30">|</span>
+      <button type="button" className="flex items-center gap-1 hover:text-[#2F6FB3] transition">
         Page 3 &gt;
       </button>
     </div>
   );
 }
 
-function BlogDetail() {
+function FloatingActions() {
   return (
-    <section className="w-full bg-[#EEF3F9] py-10 md:py-14">
-      <div className="mx-auto w-[98%] lg:w-[90%] px-4 md:px-6">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] items-start">
-          {/* Main article */}
-          <article className="min-w-0 rounded-2xl bg-[#E7EEF6] p-6 md:p-8 ring-1 ring-slate-200/60">
-            <h1 className="text-[34px] leading-[1.05] font-medium text-[#2F6FB3] md:text-[44px]">
-              Corporate Boardrooms are no longer just an image building tool
-            </h1>
+    <div className="fixed right-6 bottom-10 flex flex-col gap-4 z-50">
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="h-10 w-10 border-2 border-[#849DB6] rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-[#849DB6] hover:bg-[#849DB6] hover:text-white transition cursor-pointer shadow-sm"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+          <path d="M18 15l-6-6-6 6" />
+        </svg>
+      </button>
+    </div>
+  );
+}
 
-            <p className="mt-5 text-sm leading-6 text-slate-600">
-              Corporate Boardrooms are no longer just an image building tool for
-              large multi-national organisations. Over the last decade they have
-              evolved into the hub for most strategic, operational and tactical
-              decision making within organisations and are powered by a whole
-              new generation of tools for presentations and smooth sharing of
-              content.
-            </p>
+function BlogDetail({ blog }) {
+  if (!blog) return null;
 
-            <p className="mt-4 text-sm leading-6 text-slate-600">
-              The modern boardroom &amp; conference room design features
-              high-resolution displays of up to 4K for improved image clarity
-              resulting in crisper more engaging presentations. This means that
-              communicating finer details like intricate graphs, detailed
-              spreadsheets and high-definition photographs etc., is simpler than
-              ever before. These displays can also be touch sensitive, which
-              allows information to be annotated to convey ideas in a more
-              dynamic and precise way.
-            </p>
+  // Split description into two halves for the design layout if it's long
+  const descParts = blog.description.split('\n\n');
+  const midPoint = Math.ceil(descParts.length / 2);
+  const firstHalf = descParts.slice(0, midPoint).join('\n\n');
+  const secondHalf = descParts.slice(midPoint).join('\n\n');
 
-            <p className="mt-6 text-sm leading-6 text-slate-600">
-              Corporate Boardrooms are no longer just an image building tool for
-              large multi-national organisations. Over the last decade they have
-              evolved into the hub for most strategic, operational and tactical
-              decision making within organisations and are powered by a whole
-              new generation of tools for presentations and smooth sharing of
-              content.
-            </p>
+  return (
+    <section className="w-full bg-[#EEF3F9] py-10 md:py-16 relative z-0">
+      <FloatingActions />
 
-            {/* Image + Quote block */}
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <div className="relative overflow-hidden rounded-xl bg-slate-200">
-                <div className="aspect-[16/10]" />
-                <Image
-                  src={blogimage}
-                  alt="Boardroom"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
+      <div className="mx-auto w-[98%] lg:w-[94%] xl:w-[90%] px-4 md:px-6">
+        <div className="grid gap-12 lg:grid-cols-[1fr_360px] items-start">
+
+          {/* Main Article Section */}
+          <div className="bg-[#EBF1F7] rounded-[40px] p-8 md:p-14 shadow-sm border border-slate-100/50">
+
+            {/* Blog Title */}
+            <h2 className="text-[34px] md:text-[50px] leading-[1.05] font-medium text-[#2F6FB3] mb-8 tracking-tight">
+              {blog.title}
+            </h2>
+
+            {/* Description First Part */}
+            <div className="text-[15px] leading-[1.8] text-[#555] mb-10 whitespace-pre-wrap font-light">
+              {firstHalf}
+            </div>
+
+            {/* Featured Image & Quote Row - Now with matched heights */}
+            <div className="grid md:grid-cols-2 gap-6 mb-10 items-stretch">
+              {/* Image Box */}
+              <div className="relative rounded-2xl overflow-hidden shadow-md min-h-[300px] h-full">
+                {blog.image ? (
+                  <Image
+                    src={blog.image}
+                    alt={blog.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-200 animate-pulse" />
+                )}
               </div>
 
-              <div className="relative rounded-xl bg-[#BFD3E7] p-6 md:p-7">
-                <div className="text-6xl leading-none text-[#7FA2C4]/70">“</div>
-                <p className="-mt-2 text-[18px] leading-7 font-medium text-[#2F6FB3] md:text-[20px]">
-                  Corporate Boardrooms are no longer just an image building tool
-                  for large multi-national organisations.
+              {/* Quote Block */}
+              <div className="bg-[#BFD3EA]/70 rounded-2xl p-8 md:p-10 flex flex-col justify-center relative overflow-hidden group h-full">
+                <div className="text-7xl font-serif text-[#A0BCD8] mb-1 select-none pointer-events-none">“</div>
+                <p className="text-[19px] md:text-[24px] lg:text-[26px] leading-[1.2] font-medium text-[#2F6FB3] relative z-10 tracking-tight">
+                  {blog.shortDescription || blog.title}
                 </p>
+                {/* Decorative Big Quote in background */}
+                <div className="absolute -bottom-6 -right-4 text-[140px] font-serif text-[#A0BCD8]/20 select-none pointer-events-none">”</div>
               </div>
             </div>
 
-            <p className="mt-6 text-sm leading-6 text-slate-600">
-              Corporate Boardrooms are no longer just an image building tool for
-              large multi-national organisations. Over the last decade they have
-              evolved into the hub for most strategic, operational and tactical
-              decision making within organisations and are powered by a whole
-              new generation of tools for presentations and smooth sharing of
-              content.
-            </p>
-
-            <p className="mt-4 text-sm leading-6 text-slate-600">
-              The modern boardroom &amp; conference room design features
-              high-resolution displays of up to 4K for improved image clarity
-              resulting in crisper more engaging presentations. This means that
-              communicating finer details like intricate graphs, detailed
-              spreadsheets and high-definition photographs etc., is simpler than
-              ever before.
-            </p>
-
-            <p className="mt-6 text-sm leading-6 text-slate-600">
-              Corporate Boardrooms are no longer just an image building tool for
-              large multi-national organisations. Over the last decade they have
-              evolved into the hub for most strategic, operational and tactical
-              decision making within organisations and are powered by a whole
-              new generation of tools for presentations and smooth sharing of
-              content.
-            </p>
-
-            <Pagination />
-
-            {/* Mobile only: Related below content */}
-            <div className="mt-10 lg:hidden">
-              <RelatedBlogs />
+            {/* Description Second Part */}
+            <div className="text-[15px] leading-[1.8] text-[#555] whitespace-pre-wrap font-light">
+              {secondHalf}
             </div>
-          </article>
 
-          <div className="hidden lg:block min-w-0">
-            <aside className="sticky top-48">
-              <RelatedBlogs />
-            </aside>
+            {/* Pagination Component */}
+            <Pagination />
           </div>
+
+          {/* Sidebar Section */}
+          <aside className="sticky top-50 space-y-10 px-2">
+            <RelatedBlogs />
+          </aside>
+
         </div>
       </div>
     </section>

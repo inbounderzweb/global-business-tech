@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function BannerSlider({
   slides,
@@ -41,9 +42,8 @@ export default function BannerSlider({
           {SLIDES.map((s, idx) => (
             <div
               key={s.id ?? idx}
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                idx === active ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${idx === active ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               {s.imageUrl && (
                 <Image
@@ -70,13 +70,17 @@ export default function BannerSlider({
               </p>
 
               <div className="flex gap-4 flex-wrap">
-                <button className="bg-[#356DA4] hover:bg-[#2d5c8b] transition text-white px-6 py-3 rounded-full text-[14px] md:text-[16px]">
-                  {current?.primaryBtn}
-                </button>
+                <Link href="/contact">
+                  <button className="bg-[#356DA4] hover:bg-[#2d5c8b] transition text-white px-6 py-3 rounded-full text-[14px] md:text-[16px]">
+                    {current?.primaryBtn}
+                  </button>
+                </Link>
 
-                <button className="border border-white text-white hover:bg-white hover:text-black transition px-6 py-3 rounded-full text-[14px] md:text-[16px]">
-                  {current?.secondaryBtn}
-                </button>
+                <Link href="/contact">
+                  <button className="border border-white text-white hover:bg-white hover:text-black transition px-6 py-3 rounded-full text-[14px] md:text-[16px]">
+                    {current?.secondaryBtn}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -98,11 +102,10 @@ export default function BannerSlider({
                 key={idx}
                 onClick={() => setActive(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 ${
-                  idx === active
+                className={`transition-all duration-300 ${idx === active
                     ? 'w-8 h-2 bg-[#356DA4] rounded-full'
                     : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
-                }`}
+                  }`}
               />
             ))}
           </div>
@@ -126,9 +129,8 @@ export default function BannerSlider({
           {SLIDES.map((s, idx) => (
             <div
               key={s.id ?? idx}
-              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                idx === active ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${idx === active ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               {/* ✅ Mobile image if provided, else fallback to desktop image */}
               {(s.mobileImageUrl || s.imageUrl) && (
@@ -184,11 +186,10 @@ export default function BannerSlider({
                 key={idx}
                 onClick={() => setActive(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 ${
-                  idx === active
+                className={`transition-all duration-300 ${idx === active
                     ? 'w-8 h-2 bg-[#356DA4] rounded-full'
                     : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
-                }`}
+                  }`}
               />
             ))}
           </div>

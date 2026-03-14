@@ -92,9 +92,9 @@ export default function DiscussWithUsSection() {
                 </h2>
 
                 <p className="mt-4 text-[#B9C6D8] text-[14px] md:text-[15px] leading-relaxed max-w-[520px]">
-                  Drop your Email address and Phone number, will we reach
+                  Drop your contact details and our team will get in
                   <br className="hidden md:block" />
-                  you with handful offers
+                  touch with you shortly to discuss your requirements.
                 </p>
 
                 {success ? (

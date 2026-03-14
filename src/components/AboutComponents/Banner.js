@@ -39,13 +39,13 @@ export default function Banner() {
                 About
               </h1>
               <p className="mt-1 text-white/85 text-[12px] md:text-[14px] tracking-[0.08em] uppercase">
-                Learn about our business philosphy
+                Learn about our business philosophy
               </p>
             </div>
           </div>
 
           {/* Optional subtle top shine (gives same soft depth) */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/10 via-transparent to-transparent" />
         </div>
       </div>
     </section>

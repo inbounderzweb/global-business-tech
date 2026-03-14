@@ -14,35 +14,35 @@ const SOLUTIONS = [
   {
     id: 1,
     title: 'Networking',
-    desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.',
+    desc: 'Scalable and secure networking infrastructure designed for high-performance enterprise connectivity.',
     image: s1,
     href: '/solutions/networking',
   },
   {
     id: 2,
     title: 'Virtualization',
-    desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.',
+    desc: 'Optimized server virtualization and cloud integration to maximize your business resource efficiency.',
     image: s2,
     href: '/solutions/virtualization',
   },
   {
     id: 3,
     title: 'Board Room',
-    desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.',
+    desc: 'State-of-the-art AV solutions for modern meeting rooms and collaborative corporate environments.',
     image: s3,
     href: '/solutions/board-room',
   },
   {
     id: 4,
     title: 'Cyber Security',
-    desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.',
+    desc: 'Advanced threat protection and data security strategies to safeguard your digital assets.',
     image: s4,
     href: '/solutions/cyber-security',
   },
   {
     id: 5,
     title: 'Video Wall and Signage Solutions',
-    desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.',
+    desc: 'High-impact visual communication systems for retail, corporate lobbies, and command centers.',
     image: s5,
     href: '/solutions/video-wall-signage',
     wide: true,
@@ -54,7 +54,7 @@ function SolutionCard({ item }) {
     <div className="text-center">
       <div className="mx-auto w-full max-w-[360px] md:max-w-none">
         <div className="relative overflow-hidden rounded-2xl bg-slate-200 shadow-[0_14px_40px_rgba(15,23,42,0.10)]">
-          <div className="aspect-[16/9]" />
+          <div className="aspect-video" />
           <Image
             src={item.image}
             alt={item.title}
@@ -94,9 +94,7 @@ function Solutions() {
         {/* Intro text */}
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <p className="text-sm leading-6 text-slate-600">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-            volutpat.
+            We provide specialized technology solutions tailored to your unique business challenges, ensuring seamless integration and long-term reliability.
           </p>
         </div>
 

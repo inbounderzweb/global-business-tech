@@ -106,8 +106,8 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveImage(img)}
-                                        className={`relative shrink-0 h-24 w-32 rounded-2xl overflow-hidden bg-white border-2 transition-all
-                                            ${activeImage === img ? 'border-[#356DA4] scale-105 shadow-md' : 'border-transparent opacity-70'}
+                                        className={`relative shrink-0 h-24 w-32 overflow-hidden bg-white transition-all
+                                            ${activeImage === img ? 'scale-105 shadow-md' : ''}
                                         `}
                                     >
                                         <Image src={img} alt="" fill className="object-contain p-2" />
@@ -121,19 +121,19 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
                             <div>
                                 <h1 className="text-4xl md:text-5xl font-black text-[#2E6EA5] leading-tight mb-4">{product.name}</h1>
                                 <div className="flex items-center gap-2">
-                                    <span className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100">
+                                    {/* <span className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100">
                                         {product.category?.name}
-                                    </span>
+                                    </span> */}
                                 </div>
                             </div>
 
-                            <div className="h-px bg-slate-100 w-full"></div>
+                            {/* <div className="h-px bg-slate-100 w-full"></div> */}
 
                             <div className="space-y-6">
-                                <p className="text-slate-600 leading-relaxed text-lg italic ">{product.description}</p>
-                                <div className="text-5xl font-black text-slate-900 tracking-tighter">
+                                <p className="text-slate-600 leading-relaxed text-lg">{product.description}</p>
+                                {/* <div className="text-5xl font-black text-slate-900 tracking-tighter">
                                     ₹{product.price.toLocaleString()}
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="pt-6">

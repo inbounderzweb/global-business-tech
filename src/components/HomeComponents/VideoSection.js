@@ -15,18 +15,18 @@ function VideoSection() {
     () => [
       {
         id: 1,
-        title: "USP 1",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "End-to-End Solutions",
+        desc: " Complete AV and IT solutions delivered under one roof.",
       },
       {
         id: 2,
-        title: "USP 2",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "Proven Expertise",
+        desc: "10+ years of experience with 200+ satisfied clients.",
       },
       {
         id: 3,
-        title: "USP 3",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "Trusted OEM Partnerships",
+        desc: "Strong alliances with leading global technology brands.",
       },
     ],
     []
@@ -90,22 +90,22 @@ function VideoSection() {
             </h2>
 
             <div className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-white/80 text-center lg:text-left">
-           <b>Proven Expertise. Trusted Execution.</b>
-           <div className="flex gap-12 mt-2 items-center">
-            <div>
-            <ul className="list-disc">
-            <li>10+ Years of Industry Experience </li>
-            <li>Presence Across Major Metro Cities</li>
-           </ul>
-            </div>
-              <div>
-            <ul className="list-disc">
-            <li>10+ Years of Industry Experience </li>
-            <li>Presence Across Major Metro Cities</li>
-           </ul>
-            </div>
-           </div>
-          
+              <b>Proven Expertise. Trusted Execution.</b>
+              <div className="flex gap-12 mt-2 items-center">
+                <div>
+                  <ul className="list-disc">
+                    <li>10+ Years of Industry Experience </li>
+                    <li>Presence Across Major Metro Cities</li>
+                  </ul>
+                </div>
+                <div>
+                  <ul className="list-disc">
+                    <li>10+ Years of Industry Experience </li>
+                    <li>Presence Across Major Metro Cities</li>
+                  </ul>
+                </div>
+              </div>
+
 
             </div>
           </div>

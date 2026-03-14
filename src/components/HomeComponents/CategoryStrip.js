@@ -9,6 +9,7 @@ import headset from "../../assets/icons/headset.svg";
 import laptop from "../../assets/icons/laptop.svg";
 import server from "../../assets/icons/server.svg";
 import viewmore from "../../assets/icons/more.svg";
+import Link from "next/link";
 
 function CategoryStrip() {
   const scrollerRef = useRef(null);
@@ -19,7 +20,7 @@ function CategoryStrip() {
     { label: "Global Presence", icon: headset },
     { label: "Innovation", icon: laptop },
     // { label: "Servers", icon: server },
-    { label: "View More", icon: viewmore },
+    { label: "View More", href: "/products", icon: viewmore },
   ];
 
   const scrollRight = () => {
@@ -34,15 +35,17 @@ function CategoryStrip() {
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-center gap-8">
             {ITEMS.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4">
-                <div className="w-[56px] h-[56px] rounded-full bg-[#356DA4] flex items-center justify-center shrink-0">
-                  <Image src={item.icon} alt="service-icons" />
-                </div>
+              <Link key={idx} href={item.href || "#"}>
+                <div className="flex items-center gap-4 cursor-pointer">
+                  <div className="w-[56px] h-[56px] rounded-full bg-[#356DA4] flex items-center justify-center shrink-0">
+                    <Image src={item.icon} alt="service-icons" />
+                  </div>
 
-                <p className="text-[#2C5C8F] text-[16px] leading-tight">
-                  {item.label}
-                </p>
-              </div>
+                  <p className="text-[#2C5C8F] text-[16px] leading-tight">
+                    {item.label}
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
 

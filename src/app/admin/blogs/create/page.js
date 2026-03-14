@@ -11,8 +11,37 @@ export default function AddBlogPage() {
 
     // Form states
     const [title, setTitle] = useState('');
+    const [shortDescription, setShortDescription] = useState('');
     const [description, setDescription] = useState('');
+    const [image, setImage] = useState('');
     const [author, setAuthor] = useState('');
+
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            setLoading(true);
+            const res = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const data = await res.json();
+            if (data.url) {
+                setImage(data.url);
+                setError("");
+            } else {
+                setError(data.error || "Upload failed");
+            }
+        } catch (err) {
+            setError("Upload failed");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,7 +49,9 @@ export default function AddBlogPage() {
 
         const formData = {
             title,
+            shortDescription,
             description,
+            image,
             author,
         };
 
@@ -32,7 +63,11 @@ export default function AddBlogPage() {
                 body: JSON.stringify(formData),
             });
 
-            if (!res.ok) throw new Error("Could not publish blog post");
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || "Could not publish blog post");
+            }
 
             router.push("/admin/blogs");
             router.refresh();
@@ -71,7 +106,7 @@ export default function AddBlogPage() {
                     </div>
 
                     {/* Author */}
-                    <div className="md:col-span-2">
+                    <div className="md:col-span-1">
                         <label className="block text-sm font-semibold text-slate-700 mb-2 ml-1">Author Name</label>
                         <input
                             type="text"
@@ -80,6 +115,52 @@ export default function AddBlogPage() {
                             placeholder="e.g. Inbounderz Team"
                             className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100"
                             required
+                        />
+                    </div>
+
+                    {/* Featured Image Upload */}
+                    <div className="md:col-span-1">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2 ml-1">Featured Image</label>
+                        <div className="relative group">
+                            <input
+                                type="file"
+                                onChange={handleFileUpload}
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                accept="image/*"
+                            />
+                            <div className={`w-full h-[60px] rounded-2xl border-2 border-dashed transition-all flex items-center justify-center gap-2 px-5 ${image ? 'border-green-400 bg-green-50' : 'border-slate-200 bg-slate-50'}`}>
+                                <svg className={`w-5 h-5 ${image ? 'text-green-500' : 'text-slate-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                                <span className={`text-sm font-medium ${image ? 'text-green-600' : 'text-slate-500'}`}>
+                                    {image ? "Image Uploaded" : "Click to upload image"}
+                                </span>
+                            </div>
+                        </div>
+                        {image && (
+                            <div className="mt-3 relative w-full h-40 rounded-2xl overflow-hidden border border-slate-100 shadow-sm">
+                                <img src={image} alt="Preview" className="w-full h-full object-cover" />
+                                <button
+                                    type="button"
+                                    onClick={() => setImage("")}
+                                    className="absolute top-2 right-2 bg-white/90 backdrop-blur p-1.5 rounded-full text-red-500 shadow-sm hover:bg-white"
+                                >
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Short Description */}
+                    <div className="md:col-span-2">
+                        <label className="block text-sm font-semibold text-slate-700 mb-2 ml-1">Short Description (for list view)</label>
+                        <textarea
+                            value={shortDescription}
+                            onChange={(e) => setShortDescription(e.target.value)}
+                            placeholder="A brief summary of the article..."
+                            className="w-full h-24 rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 resize-none leading-relaxed"
                         />
                     </div>
 

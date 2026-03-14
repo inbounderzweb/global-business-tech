@@ -31,26 +31,26 @@ export default function TestimonialsSection() {
     () => [
       {
         id: 1,
-        name: 'Full Name',
-        text: 'Lorem ipsum dolor sit amet...',
+        name: 'Technical Director, Corporate Group',
+        text: 'The AV installation in our boardroom has completely transformed our meetings. The integration is seamless and the support has been outstanding.',
         avatar: t1,
       },
       {
         id: 2,
-        name: 'Full Name',
-        text: 'Lorem ipsum dolor sit amet...',
+        name: 'IT Manager, Leading University',
+        text: 'Reliable networking and virtualization solutions that have significantly improved our campus infrastructure. Global Business Tech truly understands enterprise needs.',
         avatar: t2,
       },
       {
         id: 3,
-        name: 'Full Name',
-        text: 'Lorem ipsum dolor sit amet...',
+        name: 'Operations Head, Retail Chain',
+        text: 'The video wall solutions provided for our flagship stores are amazing. High clarity and dependable performance that our brand relies on daily.',
         avatar: t3,
       },
       {
         id: 4,
-        name: 'Full Name',
-        text: 'Lorem ipsum dolor sit amet...',
+        name: 'Security Head, Finance Firm',
+        text: 'Excellent cybersecurity implementation. They provided a comprehensive strategy that gave us peace of mind and robust protection for our data.',
         avatar: t2,
       },
     ],
@@ -228,8 +228,7 @@ export default function TestimonialsSection() {
             User testimonials
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh.
+            Hear from organizations that have partnered with Global Business Tech to build reliable, future-ready technology environments. Our clients trust us for quality solutions, expert guidance, and dependable service support
           </p>
         </div>
 
@@ -308,11 +307,10 @@ export default function TestimonialsSection() {
                   key={idx}
                   onClick={() => goToRealIndex(idx)}
                   aria-label={`Go to testimonial ${idx + 1}`}
-                  className={`transition-all duration-300 ${
-                    idx === activeReal
+                  className={`transition-all duration-300 ${idx === activeReal
                       ? 'w-10 h-2 bg-[#356DA4] rounded-full'
                       : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
-                  }`}
+                    }`}
                 />
               ))}
             </div>

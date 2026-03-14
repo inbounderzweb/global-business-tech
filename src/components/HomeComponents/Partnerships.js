@@ -125,9 +125,7 @@ function Partnerships() {
             Explore The
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-            volutpat.
+            Find a comprehensive range of technology solutions designed to support modern business operations. From advanced networking infrastructure to enterprise security and collaboration systems, our solutions are built to improve efficiency, connectivity, and reliability across your organization.
           </p>
         </div>
 
@@ -140,17 +138,18 @@ function Partnerships() {
                 key={f}
                 type="button"
                 onClick={() => onChangeFilter(f)}
-                className={`px-6 py-1 rounded-full border text-[16px] transition ${
-                  isActive
-                    ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
-                    : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
-                }`}
+                className={`px-6 py-1 rounded-full border text-[16px] transition ${isActive
+                  ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
+                  : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
+                  }`}
               >
                 {f}
               </button>
             );
           })}
         </div>
+
+
 
         {/* Filters - Mobile Slider */}
         <div className="mt-6 sm:hidden relative">
@@ -165,11 +164,10 @@ function Partnerships() {
                   key={f}
                   type="button"
                   onClick={() => onChangeFilter(f)}
-                  className={`shrink-0 px-5 py-2 rounded-full border text-[14px] transition whitespace-nowrap ${
-                    isActive
-                      ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
-                      : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
-                  }`}
+                  className={`shrink-0 px-5 py-2 rounded-full border text-[14px] transition whitespace-nowrap ${isActive
+                    ? 'bg-[#B9C9DA] border-[#B9C9DA] text-[#1E2B3A]'
+                    : 'bg-transparent border-[#B9D0E6] text-[#356DA4] hover:bg-white/60'
+                    }`}
                 >
                   {f}
                 </button>

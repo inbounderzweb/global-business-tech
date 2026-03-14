@@ -16,21 +16,21 @@ function Banner() {
       id: 1,
       imageUrl: bannerDesktop, // ✅ Desktop image
       mobileImageUrl: bannerMobile, // ✅ Mobile image
-      title: 'Lorem ipsum dolor sit amet, consectetuer',
+      title: 'Powering Your Business with Advanced Technology',
       subtitle:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy volutpat.',
-      primaryBtn: 'Know More',
+        'End-to-end AV and IT solutions designed to scale your enterprise and enhance productivity.',
+      primaryBtn: 'Our Solutions',
       secondaryBtn: 'Get in Touch',
     },
     {
       id: 2,
       imageUrl: bannerDesktop, // ✅ Desktop image
       mobileImageUrl: bannerMobile, // ✅ Mobile image
-      title: 'Lorem ipsum dolor sit amet, consectetuer',
+      title: 'Strategic Partnerships with Global Tech Leaders',
       subtitle:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy volutpat.',
-      primaryBtn: 'Know More',
-      secondaryBtn: 'Get In Touch',
+        'Delivering industry-leading products from trusted brands like Samsung, Dell, and Cisco.',
+      primaryBtn: 'View Products',
+      secondaryBtn: 'Partner with Us',
     },
   ];
 

@@ -12,11 +12,8 @@ import abtimg from '../assets/aboutimg.jpg';
 
 function AboutSection({
   imageSrc = '/dummy/about.jpg', // ✅ you can replace with imported image later
-  heading = 'About us dolor sit amet, consectetuer',
-  description = `Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-lobortis nisl ut aliquip ex ea commodo consequat.`,
+  heading = 'Leading the Way in Enterprise Technology Solutions',
+  description = `Global Business Tech is a premier provider of AV and IT solutions, dedicated to helping organizations build robust, efficient, and future-ready technology environments. With over a decade of experience and a client-first approach, we deliver high-performance systems from the world's most trusted global brands.`,
   buttonText = 'Read more',
   onButtonClick,
 }) {

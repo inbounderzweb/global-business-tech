@@ -1,128 +1,87 @@
-// components/RelatedBlogs.jsx
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import relatedimg from '../../../assets/blog/b1.jpg';
-import relatedimg1 from '../../../assets/blog/b2.jpg';
-import relatedimg2 from '../../../assets/blog/b3.jpg';
-
-const RELATED = [
-  {
-    id: 1,
-    title: 'Corporate Boardrooms are no longer just an image building tool',
-    date: 'Sep',
-    excerpt:
-      'Corporate Boardrooms are no longer just an image building tool for large multi-national organisations. Over the last decade',
-    image: relatedimg,
-    href: '/blog/corporate-boardrooms-1',
-  },
-  {
-    id: 2,
-    title: 'Corporate Boardrooms are no longer just an image building tool',
-    date: 'Sep',
-    excerpt:
-      'Corporate Boardrooms are no longer just an image building tool for large multi-national organisations. Over the last decade',
-    image: relatedimg1,
-    href: '/blog/corporate-boardrooms-2',
-  },
-  {
-    id: 3,
-    title: 'Corporate Boardrooms are no longer just an image building tool',
-    date: 'Sep',
-    excerpt:
-      'Corporate Boardrooms are no longer just an image building tool for large multi-national organisations. Over the last decade',
-    image: relatedimg2,
-    href: '/blog/corporate-boardrooms-3',
-  },
-];
 
 function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 function RelatedCard({ post }) {
+  const formattedDate = new Date(post.createdAt || Date.now()).toLocaleDateString('en-US', {
+    month: 'short',
+  });
+
   return (
     <Link
-      href={post.href}
+      href={`/blog/${post.id}`}
       className={cn(
-        'group block rounded-2xl bg-white',
-        'shadow-[0_10px_30px_rgba(15,23,42,0.06)] ring-1 ring-slate-200/70',
-        'transition hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]'
+        'group block rounded-[24px] bg-white p-4',
+        'shadow-[0_15px_40px_rgba(47,111,179,0.06)] ring-1 ring-[#2F6FB3]/10',
+        'transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(47,111,179,0.12)]'
       )}
     >
-      <div className="p-4">
-        <div className="relative w-full overflow-hidden rounded-xl bg-slate-200/70">
-          <div className="aspect-[16/9]" />
+      <div className="relative aspect-16/10 w-full overflow-hidden rounded-xl bg-slate-100">
+        {post.image ? (
           <Image
             src={post.image}
             alt={post.title}
             fill
-            className="object-cover transition duration-300 group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 85vw, (max-width: 1024px) 45vw, 28vw"
+            className="object-cover transition duration-500 group-hover:scale-105"
+            sizes="(max-width: 1024px) 45vw, 25vw"
           />
-        </div>
+        ) : (
+          <div className="absolute inset-0 bg-slate-200" />
+        )}
       </div>
 
-      <div className="px-5 pb-5">
-        <h3 className="text-[20px] leading-[1.15] font-medium text-[#2F6FB3] group-hover:text-[#245b95]">
+      <div className="mt-5 px-1 pb-2">
+        <h3 className="text-[18px] md:text-[20px] leading-[1.2] font-medium text-[#2F6FB3] group-hover:text-[#245b95] line-clamp-2 tracking-tight">
           {post.title}
         </h3>
 
-        <p className="mt-3 text-xs text-slate-400">{post.date}</p>
+        <div className="mt-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+          {formattedDate}
+        </div>
 
-        <p className="mt-2 text-[13px] leading-5 text-slate-600">
-          {post.excerpt}
+        <p className="mt-2 text-[13px] leading-relaxed text-slate-500 line-clamp-2">
+          {post.shortDescription || (post.description ? post.description.substring(0, 80) + '...' : '')}
         </p>
       </div>
     </Link>
   );
 }
 
-function RelatedBlogs({ title = 'Related Posts', items = RELATED }) {
+function RelatedBlogs({ title = 'Related Posts' }) {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchRelated = async () => {
+      try {
+        const res = await fetch('/api/blogs');
+        if (!res.ok) throw new Error("Failed to fetch");
+        const data = await res.json();
+        setBlogs(data.slice(0, 3));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchRelated();
+  }, []);
+
+  if (blogs.length === 0) return null;
+
   return (
-    <aside className="w-full">
-      <h2 className="mb-3 text-lg font-semibold text-slate-700">{title}</h2>
+    <div className="w-full">
+      <h2 className="mb-6 text-[26px] font-bold text-[#333] tracking-tight">{title}</h2>
 
-      {/* Desktop: stacked cards + scroll if long */}
-      <div className="hidden lg:block">
-        <div className="flex flex-col gap-6 max-h-[calc(100vh-140px)] overflow-y-auto pr-2">
-          {items.map((p) => (
-            <RelatedCard key={p.id} post={p} />
-          ))}
-        </div>
+      <div className="flex flex-col gap-8">
+        {blogs.map((p) => (
+          <RelatedCard key={p.id} post={p} />
+        ))}
       </div>
-
-      {/* Mobile/Tablet: clean slider */}
-      <div className="lg:hidden">
-        {/* IMPORTANT: keep overflow contained to this container */}
-        <div className="overflow-hidden">
-          <div
-            className={cn(
-              'flex gap-4 overflow-x-auto pb-3',
-              'snap-x snap-mandatory scroll-smooth',
-              '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
-            )}
-          >
-            {items.map((p) => (
-              <div
-                key={p.id}
-                className={cn(
-                  'snap-start',
-                  'shrink-0',
-                  'w-[86%] sm:w-[60%]' // clean widths
-                )}
-              >
-                <RelatedCard post={p} />
-              </div>
-            ))}
-
-            {/* right padding so last card doesn't stick to edge */}
-            <div className="shrink-0 w-4" />
-          </div>
-        </div>
-      </div>
-    </aside>
+    </div>
   );
 }
 

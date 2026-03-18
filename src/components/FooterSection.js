@@ -76,7 +76,7 @@ export default function FooterSection() {
           {/* Col 1: Logo */}
           <div className="col-span-3">
             <div className="flex items-start gap-4">
-              <div className="relative w-[180px] h-[180px] shrink-0">
+              <div className="relative w-[240px] h-[240px] shrink-0">
                 <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function FooterSection() {
             </div>
 
             <div className="space-y-3 text-[13px] text-[rgba(255,255,255,0.78)]">
-              <Row icon={<PhoneIcon />} text="+91 80 35493772" />
+              <Row icon={<PhoneIcon />} text="+91 80 23660415" />
               <Row icon={<MobileIcon />} text="+91 8904341299 | +91 9739919398" />
               <Row icon={<MailIcon />} text="Info@globalbusinesstech.in" />
               <Row icon={<WhatsappIcon />} text="+91 8904341299" />
@@ -194,10 +194,8 @@ export default function FooterSection() {
 
         {/* Social Icons */}
         <div className="mt-8 flex items-center gap-6 justify-center md:justify-end">
-          <SocialCircle href="#" label="Facebook" icon={<FacebookIcon />} />
-          <SocialCircle href="#" label="Instagram" icon={<InstagramIcon />} />
-          <SocialCircle href="#" label="LinkedIn" icon={<LinkedInIcon />} />
-          <SocialCircle href="#" label="X" icon={<XIcon />} />
+          <SocialCircle href="https://www.facebook.com/globalbusinesstech1/" label="Facebook" icon={<FacebookIcon />} />
+          <SocialCircle href="https://www.linkedin.com/company/global-business-tech-pvt-ltd?originalSubdomain=in" label="LinkedIn" icon={<LinkedInIcon />} />
         </div>
       </div>
 
@@ -436,45 +434,10 @@ function FacebookIcon() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="7"
-        y="7"
-        width="10"
-        height="10"
-        rx="3"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M9 7h6a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-6a4 4 0 0 1 4-4Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M16.5 7.7h.01"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function LinkedInIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M6.5 9H3.8v11h2.7V9Zm-.1-3.4a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0ZM10 9h2.6v1.5h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.1 3.9 4.9V20h-2.7v-5.4c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V20H10V9Z" />
-    </svg>
-  );
-}
-
-function XIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.9 2H22l-7.2 8.3L23 22h-6.6l-5.1-6.7L5.7 22H2.6l7.8-9-7.8-11H9.4l4.6 6.1L18.9 2Zm-1.2 18h1.7L8.2 3.9H6.4L17.7 20Z" />
     </svg>
   );
 }

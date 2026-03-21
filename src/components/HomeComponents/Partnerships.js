@@ -6,63 +6,80 @@
 import React, { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 // LOGO IMPORTS
-import networking_cisco_logo_jpg from '../../assets/clientlogos/Networking/Cisco-logo.jpg';
-import networking_cisco_meraki_logo__png from '../../assets/clientlogos/Networking/cisco-meraki-logo-.png';
-import networking_hpe_aruba_jpg from '../../assets/clientlogos/Networking/HPE Aruba.jpg';
-import networking_ruckus_networks_logo_png from '../../assets/clientlogos/Networking/ruckus networks logo.png';
-import networkingpassive_amp_netconnect_logo_png from '../../assets/clientlogos/Networkingpassive/amp-netconnect-logo.png';
-import networkingpassive_apc_logo_png from '../../assets/clientlogos/Networkingpassive/apc-logo.png';
-import networkingpassive_commscope_logo_png from '../../assets/clientlogos/Networkingpassive/Commscope-Logo.png';
-import networkingpassive_d_link_jpg from '../../assets/clientlogos/Networkingpassive/D LINK.jpg';
-import networkingpassive_netrack_png from '../../assets/clientlogos/Networkingpassive/netrack.png';
-import audiovideo_ahuja_logo_png from '../../assets/clientlogos/audiovideo/ahuja-logo.png';
-import audiovideo_barco_logo_webp from '../../assets/clientlogos/audiovideo/barco_logo.webp';
-import audiovideo_benq_logo_jpeg from '../../assets/clientlogos/audiovideo/Benq logo.jpeg';
-import audiovideo_bose_logo_jpg from '../../assets/clientlogos/audiovideo/Bose-Logo.jpg';
-import audiovideo_crestron_logo_jpg from '../../assets/clientlogos/audiovideo/Crestron-Logo.jpg';
-import audiovideo_epson_logo_png from '../../assets/clientlogos/audiovideo/Epson_Logo.png';
-import audiovideo_hp_poly_logo_jpg from '../../assets/clientlogos/audiovideo/hp_poly-logo.jpg';
-import audiovideo_jabra_logo_webp from '../../assets/clientlogos/audiovideo/jabra_logo.webp';
-import audiovideo_kramer_logo_jpg from '../../assets/clientlogos/audiovideo/kramer_logo.jpg';
-import audiovideo_logic_log_jpg from '../../assets/clientlogos/audiovideo/Logic log.jpg';
-import audiovideo_logitech_logo_2015_present_jpg from '../../assets/clientlogos/audiovideo/Logitech-Logo-2015-present.jpg';
-import audiovideo_neat_jpg from '../../assets/clientlogos/audiovideo/neat.jpg';
-import audiovideo_nureva_logo_webp from '../../assets/clientlogos/audiovideo/nureva-logo.webp';
-import audiovideo_sennheiser_logo_jpg from '../../assets/clientlogos/audiovideo/Sennheiser-logo.jpg';
-import audiovideo_shure_logo__jpg from '../../assets/clientlogos/audiovideo/Shure Logo .jpg';
-import pccomputing_acer_logo_jpg from '../../assets/clientlogos/pccomputing/acer-logo.jpg';
-import pccomputing_apple_logo_jpg from '../../assets/clientlogos/pccomputing/Apple logo.jpg';
-import pccomputing_asusu_logo_jpg from '../../assets/clientlogos/pccomputing/Asusu Logo.jpg';
-import pccomputing_dell_log_png from '../../assets/clientlogos/pccomputing/DELL log.png';
-import pccomputing_hp_logo_png_seeklogo_265723_png from '../../assets/clientlogos/pccomputing/hp-logo-png_seeklogo-265723.png';
-import pccomputing_lenovo_global_corporate_logo_png from '../../assets/clientlogos/pccomputing/Lenovo_Global_Corporate_Logo.png';
-import serverandstorage_dell_log_png from '../../assets/clientlogos/serverandstorage/DELL log.png';
-import serverandstorage_hp_logo_png_seeklogo_265723_png from '../../assets/clientlogos/serverandstorage/hp-logo-png_seeklogo-265723.png';
-import serverandstorage_net_gear_logo_png from '../../assets/clientlogos/serverandstorage/Net gear logo.png';
-import serverandstorage_qnap_logo_png from '../../assets/clientlogos/serverandstorage/Qnap logo.png';
-import serverandstorage_synology_logo_jpg from '../../assets/clientlogos/serverandstorage/synology Logo.jpg';
-import surveillance_axxis_logo_png from '../../assets/clientlogos/surveillance/Axxis logo.png';
-import surveillance_hikvision_logo_jpg from '../../assets/clientlogos/surveillance/Hikvision logo.jpg';
-import surveillance_honeywell_logo_jpg from '../../assets/clientlogos/surveillance/Honeywell-logo.jpg';
-import enterprise_security_check_point_logo_jpeg from '../../assets/clientlogos/enterprise Security/check_point_logo.jpeg';
-import enterprise_security_cisco_logo_jpg from '../../assets/clientlogos/enterprise Security/Cisco-logo.jpg';
-import enterprise_security_crowdstrike_logo_jpg from '../../assets/clientlogos/enterprise Security/Crowdstrike-logo.jpg';
-import enterprise_security_fortinet_logo_png from '../../assets/clientlogos/enterprise Security/Fortinet Logo.png';
-import enterprise_security_netskope_logo_jpeg from '../../assets/clientlogos/enterprise Security/netskope logo.jpeg';
-import enterprise_security_palo_alto_logo_jpg from '../../assets/clientlogos/enterprise Security/Palo-Alto-Logo.jpg';
-import enterprise_security_sophos_logo_jpg from '../../assets/clientlogos/enterprise Security/Sophos-Logo.jpg';
-import displaysolution_absen_logo_png from '../../assets/clientlogos/displaysolution/Absen logo.png';
-import displaysolution_aet_logo_jpeg from '../../assets/clientlogos/displaysolution/aet_logo.jpeg';
-import displaysolution_lg_logos_png from '../../assets/clientlogos/displaysolution/LG Logos.png';
-import displaysolution_logic_log_jpg from '../../assets/clientlogos/displaysolution/Logic log.jpg';
-import displaysolution_panasonic_logo__webp from '../../assets/clientlogos/displaysolution/panasonic-logo-.webp';
-import displaysolution_samsung_logo_avif from '../../assets/clientlogos/displaysolution/Samsung Logo.avif';
-import enterprise_software_adobe_logo_webp from '../../assets/clientlogos/enterprise software/adobe-logo.webp';
-import enterprise_software_amp_netconnect_logo_png from '../../assets/clientlogos/enterprise software/amp-netconnect-logo.png';
-import enterprise_software_autodesk_autocad_logo_jpg from '../../assets/clientlogos/enterprise software/Autodesk-AutoCAD-logo.jpg';
-import enterprise_software_microsoft_logo_jpg from '../../assets/clientlogos/enterprise software/Microsoft_Logo.jpg';
-import enterprise_software_siemens_logo_jpg from '../../assets/clientlogos/enterprise software/Siemens Logo.jpg';
-import enterprise_software_zoho_logo_png from '../../assets/clientlogos/enterprise software/zoho-logo.png';
+// Networking
+import networking_0 from '../../assets/clientlogos/Networking/Networking.png';
+import networking_1 from '../../assets/clientlogos/Networking/Networking-1.png';
+import networking_2 from '../../assets/clientlogos/Networking/Networking-2.png';
+import networking_3 from '../../assets/clientlogos/Networking/Networking-3.png';
+
+// Networking Passive
+import networking_passive_0 from '../../assets/clientlogos/Networkingpassive/Networking Passive.png';
+import networking_passive_1 from '../../assets/clientlogos/Networkingpassive/Networking Passive-1.png';
+import networking_passive_2 from '../../assets/clientlogos/Networkingpassive/Networking Passive-2.png';
+import networking_passive_3 from '../../assets/clientlogos/Networkingpassive/Networking Passive-3.png';
+import networking_passive_4 from '../../assets/clientlogos/Networkingpassive/Networking Passive-4.png';
+
+// Audio Video
+import audio_video_0 from '../../assets/clientlogos/audiovideo/Audio Video.png';
+import audio_video_1 from '../../assets/clientlogos/audiovideo/Audio Video-1.png';
+import audio_video_2 from '../../assets/clientlogos/audiovideo/Audio Video-2.png';
+import audio_video_3 from '../../assets/clientlogos/audiovideo/Audio Video-3.png';
+import audio_video_4 from '../../assets/clientlogos/audiovideo/Audio Video-4.png';
+import audio_video_5 from '../../assets/clientlogos/audiovideo/Audio Video-5.png';
+import audio_video_6 from '../../assets/clientlogos/audiovideo/Audio Video-6.png';
+import audio_video_7 from '../../assets/clientlogos/audiovideo/Audio Video-7.png';
+import audio_video_8 from '../../assets/clientlogos/audiovideo/Audio Video-8.png';
+import audio_video_9 from '../../assets/clientlogos/audiovideo/Audio Video-9.png';
+import audio_video_10 from '../../assets/clientlogos/audiovideo/Audio Video-10.png';
+import audio_video_11 from '../../assets/clientlogos/audiovideo/Audio Video-11.png';
+import audio_video_12 from '../../assets/clientlogos/audiovideo/Audio Video-12.png';
+import audio_video_13 from '../../assets/clientlogos/audiovideo/Audio Video-13.png';
+import audio_video_14 from '../../assets/clientlogos/audiovideo/Audio Video-14.png';
+
+// PC Computing
+import pc_computing_0 from '../../assets/clientlogos/pccomputing/PC Computing.png';
+import pc_computing_1 from '../../assets/clientlogos/pccomputing/PC Computing-1.png';
+import pc_computing_2 from '../../assets/clientlogos/pccomputing/PC Computing-2.png';
+import pc_computing_3 from '../../assets/clientlogos/pccomputing/PC Computing-3.png';
+import pc_computing_4 from '../../assets/clientlogos/pccomputing/PC Computing-4.png';
+import pc_computing_5 from '../../assets/clientlogos/pccomputing/PC Computing-5.png';
+
+// Server and Storage
+import server_storage_0 from '../../assets/clientlogos/serverandstorage/Server and Storage.png';
+import server_storage_1 from '../../assets/clientlogos/serverandstorage/Server and Storage-1.png';
+import server_storage_2 from '../../assets/clientlogos/serverandstorage/Server and Storage-2.png';
+import server_storage_3 from '../../assets/clientlogos/serverandstorage/Server and Storage-3.png';
+import server_storage_4 from '../../assets/clientlogos/serverandstorage/Server and Storage-4.png';
+
+// Surveillance
+import surveillance_0 from '../../assets/clientlogos/surveillance/Surveillance.png';
+import surveillance_1 from '../../assets/clientlogos/surveillance/Surveillance-1.png';
+import surveillance_2 from '../../assets/clientlogos/surveillance/Surveillance-2.png';
+
+// Enterprise Security
+import enterprise_security_0 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security.png';
+import enterprise_security_1 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-1.png';
+import enterprise_security_2 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-2.png';
+import enterprise_security_3 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-3.png';
+import enterprise_security_4 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-4.png';
+import enterprise_security_5 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-5.png';
+import enterprise_security_6 from '../../assets/clientlogos/enterprisesecurity/Enterprise Security-6.png';
+
+// Display Solution
+import display_solution_0 from '../../assets/clientlogos/displaysolution/Display Solution.png';
+import display_solution_1 from '../../assets/clientlogos/displaysolution/Display Solution-1.png';
+import display_solution_2 from '../../assets/clientlogos/displaysolution/Display Solution-2.png';
+import display_solution_3 from '../../assets/clientlogos/displaysolution/Display Solution-3.png';
+import display_solution_4 from '../../assets/clientlogos/displaysolution/Display Solution-4.png';
+import display_solution_5 from '../../assets/clientlogos/displaysolution/Display Solution-5.png';
+
+// Enterprise Software
+import enterprise_software_0 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software.png';
+import enterprise_software_1 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-1.png';
+import enterprise_software_2 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-2.png';
+import enterprise_software_3 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-3.png';
+import enterprise_software_4 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-4.png';
+import enterprise_software_5 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-5.png';
 
 function Partnerships() {
   const filterScrollerRef = useRef(null);
@@ -71,476 +88,94 @@ function Partnerships() {
     () => [
       'All',
       'Networking',
-      'Networkingpassive',
-      'audiovideo',
-      'pccomputing',
-      'serverandstorage',
-      'surveillance',
-      'enterprise Security',
-      'displaysolution',
-      'enterprise software'
+      'Networking Passive',
+      'Audio Video',
+      'PC Computing',
+      'Server and Storage',
+      'Surveillance',
+      'Enterprise Security',
+      'Display Solution',
+      'Enterprise Software'
     ],
     []
   );
 
   const partners = useMemo(
     () => [
-      {
-        "id": "networking-cisco-logo.jpg",
-        "name": "Cisco Logo",
-        "logoSrc": networking_cisco_logo_jpg,
-        "categories": [
-          "Networking"
-        ]
-      },
-      {
-        "id": "networking-cisco-meraki-logo-.png",
-        "name": "Cisco Meraki Logo ",
-        "logoSrc": networking_cisco_meraki_logo__png,
-        "categories": [
-          "Networking"
-        ]
-      },
-      {
-        "id": "networking-hpe aruba.jpg",
-        "name": "Hpe Aruba",
-        "logoSrc": networking_hpe_aruba_jpg,
-        "categories": [
-          "Networking"
-        ]
-      },
-      {
-        "id": "networking-ruckus networks logo.png",
-        "name": "Ruckus Networks Logo",
-        "logoSrc": networking_ruckus_networks_logo_png,
-        "categories": [
-          "Networking"
-        ]
-      },
-      {
-        "id": "networkingpassive-amp-netconnect-logo.png",
-        "name": "Amp Netconnect Logo",
-        "logoSrc": networkingpassive_amp_netconnect_logo_png,
-        "categories": [
-          "Networkingpassive"
-        ]
-      },
-      {
-        "id": "networkingpassive-apc-logo.png",
-        "name": "Apc Logo",
-        "logoSrc": networkingpassive_apc_logo_png,
-        "categories": [
-          "Networkingpassive"
-        ]
-      },
-      {
-        "id": "networkingpassive-commscope-logo.png",
-        "name": "Commscope Logo",
-        "logoSrc": networkingpassive_commscope_logo_png,
-        "categories": [
-          "Networkingpassive"
-        ]
-      },
-      {
-        "id": "networkingpassive-d link.jpg",
-        "name": "D Link",
-        "logoSrc": networkingpassive_d_link_jpg,
-        "categories": [
-          "Networkingpassive"
-        ]
-      },
-      {
-        "id": "networkingpassive-netrack.png",
-        "name": "Netrack",
-        "logoSrc": networkingpassive_netrack_png,
-        "categories": [
-          "Networkingpassive"
-        ]
-      },
-      {
-        "id": "audiovideo-ahuja-logo.png",
-        "name": "Ahuja Logo",
-        "logoSrc": audiovideo_ahuja_logo_png,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-barco_logo.webp",
-        "name": "Barco Logo",
-        "logoSrc": audiovideo_barco_logo_webp,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-benq logo.jpeg",
-        "name": "Benq Logo",
-        "logoSrc": audiovideo_benq_logo_jpeg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-bose-logo.jpg",
-        "name": "Bose Logo",
-        "logoSrc": audiovideo_bose_logo_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-crestron-logo.jpg",
-        "name": "Crestron Logo",
-        "logoSrc": audiovideo_crestron_logo_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-epson_logo.png",
-        "name": "Epson Logo",
-        "logoSrc": audiovideo_epson_logo_png,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-hp_poly-logo.jpg",
-        "name": "Hp Poly Logo",
-        "logoSrc": audiovideo_hp_poly_logo_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-jabra_logo.webp",
-        "name": "Jabra Logo",
-        "logoSrc": audiovideo_jabra_logo_webp,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-kramer_logo.jpg",
-        "name": "Kramer Logo",
-        "logoSrc": audiovideo_kramer_logo_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-logic log.jpg",
-        "name": "Logic Log",
-        "logoSrc": audiovideo_logic_log_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-logitech-logo-2015-present.jpg",
-        "name": "Logitech Logo 2015 Present",
-        "logoSrc": audiovideo_logitech_logo_2015_present_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-neat.jpg",
-        "name": "Neat",
-        "logoSrc": audiovideo_neat_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-nureva-logo.webp",
-        "name": "Nureva Logo",
-        "logoSrc": audiovideo_nureva_logo_webp,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-sennheiser-logo.jpg",
-        "name": "Sennheiser Logo",
-        "logoSrc": audiovideo_sennheiser_logo_jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "audiovideo-shure logo .jpg",
-        "name": "Shure Logo ",
-        "logoSrc": audiovideo_shure_logo__jpg,
-        "categories": [
-          "audiovideo"
-        ]
-      },
-      {
-        "id": "pccomputing-acer-logo.jpg",
-        "name": "Acer Logo",
-        "logoSrc": pccomputing_acer_logo_jpg,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "pccomputing-apple logo.jpg",
-        "name": "Apple Logo",
-        "logoSrc": pccomputing_apple_logo_jpg,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "pccomputing-asusu logo.jpg",
-        "name": "Asusu Logo",
-        "logoSrc": pccomputing_asusu_logo_jpg,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "pccomputing-dell log.png",
-        "name": "Dell Log",
-        "logoSrc": pccomputing_dell_log_png,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "pccomputing-hp-logo-png_seeklogo-265723.png",
-        "name": "Hp Logo Png Seeklogo 265723",
-        "logoSrc": pccomputing_hp_logo_png_seeklogo_265723_png,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "pccomputing-lenovo_global_corporate_logo.png",
-        "name": "Lenovo Global Corporate Logo",
-        "logoSrc": pccomputing_lenovo_global_corporate_logo_png,
-        "categories": [
-          "pccomputing"
-        ]
-      },
-      {
-        "id": "serverandstorage-dell log.png",
-        "name": "Dell Log",
-        "logoSrc": serverandstorage_dell_log_png,
-        "categories": [
-          "serverandstorage"
-        ]
-      },
-      {
-        "id": "serverandstorage-hp-logo-png_seeklogo-265723.png",
-        "name": "Hp Logo Png Seeklogo 265723",
-        "logoSrc": serverandstorage_hp_logo_png_seeklogo_265723_png,
-        "categories": [
-          "serverandstorage"
-        ]
-      },
-      {
-        "id": "serverandstorage-net gear logo.png",
-        "name": "Net Gear Logo",
-        "logoSrc": serverandstorage_net_gear_logo_png,
-        "categories": [
-          "serverandstorage"
-        ]
-      },
-      {
-        "id": "serverandstorage-qnap logo.png",
-        "name": "Qnap Logo",
-        "logoSrc": serverandstorage_qnap_logo_png,
-        "categories": [
-          "serverandstorage"
-        ]
-      },
-      {
-        "id": "serverandstorage-synology logo.jpg",
-        "name": "Synology Logo",
-        "logoSrc": serverandstorage_synology_logo_jpg,
-        "categories": [
-          "serverandstorage"
-        ]
-      },
-      {
-        "id": "surveillance-axxis logo.png",
-        "name": "Axxis Logo",
-        "logoSrc": surveillance_axxis_logo_png,
-        "categories": [
-          "surveillance"
-        ]
-      },
-      {
-        "id": "surveillance-hikvision logo.jpg",
-        "name": "Hikvision Logo",
-        "logoSrc": surveillance_hikvision_logo_jpg,
-        "categories": [
-          "surveillance"
-        ]
-      },
-      {
-        "id": "surveillance-honeywell-logo.jpg",
-        "name": "Honeywell Logo",
-        "logoSrc": surveillance_honeywell_logo_jpg,
-        "categories": [
-          "surveillance"
-        ]
-      },
-      {
-        "id": "enterprise security-check_point_logo.jpeg",
-        "name": "Check Point Logo",
-        "logoSrc": enterprise_security_check_point_logo_jpeg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-cisco-logo.jpg",
-        "name": "Cisco Logo",
-        "logoSrc": enterprise_security_cisco_logo_jpg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-crowdstrike-logo.jpg",
-        "name": "Crowdstrike Logo",
-        "logoSrc": enterprise_security_crowdstrike_logo_jpg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-fortinet logo.png",
-        "name": "Fortinet Logo",
-        "logoSrc": enterprise_security_fortinet_logo_png,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-netskope logo.jpeg",
-        "name": "Netskope Logo",
-        "logoSrc": enterprise_security_netskope_logo_jpeg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-palo-alto-logo.jpg",
-        "name": "Palo Alto Logo",
-        "logoSrc": enterprise_security_palo_alto_logo_jpg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "enterprise security-sophos-logo.jpg",
-        "name": "Sophos Logo",
-        "logoSrc": enterprise_security_sophos_logo_jpg,
-        "categories": [
-          "enterprise Security"
-        ]
-      },
-      {
-        "id": "displaysolution-absen logo.png",
-        "name": "Absen Logo",
-        "logoSrc": displaysolution_absen_logo_png,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "displaysolution-aet_logo.jpeg",
-        "name": "Aet Logo",
-        "logoSrc": displaysolution_aet_logo_jpeg,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "displaysolution-lg logos.png",
-        "name": "Lg Logos",
-        "logoSrc": displaysolution_lg_logos_png,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "displaysolution-logic log.jpg",
-        "name": "Logic Log",
-        "logoSrc": displaysolution_logic_log_jpg,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "displaysolution-panasonic-logo-.webp",
-        "name": "Panasonic Logo ",
-        "logoSrc": displaysolution_panasonic_logo__webp,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "displaysolution-samsung logo.avif",
-        "name": "Samsung Logo",
-        "logoSrc": displaysolution_samsung_logo_avif,
-        "categories": [
-          "displaysolution"
-        ]
-      },
-      {
-        "id": "enterprise software-adobe-logo.webp",
-        "name": "Adobe Logo",
-        "logoSrc": enterprise_software_adobe_logo_webp,
-        "categories": [
-          "enterprise software"
-        ]
-      },
-      {
-        "id": "enterprise software-amp-netconnect-logo.png",
-        "name": "Amp Netconnect Logo",
-        "logoSrc": enterprise_software_amp_netconnect_logo_png,
-        "categories": [
-          "enterprise software"
-        ]
-      },
-      {
-        "id": "enterprise software-autodesk-autocad-logo.jpg",
-        "name": "Autodesk Autocad Logo",
-        "logoSrc": enterprise_software_autodesk_autocad_logo_jpg,
-        "categories": [
-          "enterprise software"
-        ]
-      },
-      {
-        "id": "enterprise software-microsoft_logo.jpg",
-        "name": "Microsoft Logo",
-        "logoSrc": enterprise_software_microsoft_logo_jpg,
-        "categories": [
-          "enterprise software"
-        ]
-      },
-      {
-        "id": "enterprise software-siemens logo.jpg",
-        "name": "Siemens Logo",
-        "logoSrc": enterprise_software_siemens_logo_jpg,
-        "categories": [
-          "enterprise software"
-        ]
-      },
-      {
-        "id": "enterprise software-zoho-logo.png",
-        "name": "Zoho Logo",
-        "logoSrc": enterprise_software_zoho_logo_png,
-        "categories": [
-          "enterprise software"
-        ]
-      }
+      // Networking
+      { id: "nw0", name: "Networking", logoSrc: networking_0, categories: ["Networking"] },
+      { id: "nw1", name: "Networking 1", logoSrc: networking_1, categories: ["Networking"] },
+      { id: "nw2", name: "Networking 2", logoSrc: networking_2, categories: ["Networking"] },
+      { id: "nw3", name: "Networking 3", logoSrc: networking_3, categories: ["Networking"] },
+
+      // Networking Passive
+      { id: "nwp0", name: "Networking Passive", logoSrc: networking_passive_0, categories: ["Networking Passive"] },
+      { id: "nwp1", name: "Networking Passive 1", logoSrc: networking_passive_1, categories: ["Networking Passive"] },
+      { id: "nwp2", name: "Networking Passive 2", logoSrc: networking_passive_2, categories: ["Networking Passive"] },
+      { id: "nwp3", name: "Networking Passive 3", logoSrc: networking_passive_3, categories: ["Networking Passive"] },
+      { id: "nwp4", name: "Networking Passive 4", logoSrc: networking_passive_4, categories: ["Networking Passive"] },
+
+      // Audio Video
+      { id: "av0", name: "Audio Video", logoSrc: audio_video_0, categories: ["Audio Video"] },
+      { id: "av1", name: "Audio Video 1", logoSrc: audio_video_1, categories: ["Audio Video"] },
+      { id: "av2", name: "Audio Video 2", logoSrc: audio_video_2, categories: ["Audio Video"] },
+      { id: "av3", name: "Audio Video 3", logoSrc: audio_video_3, categories: ["Audio Video"] },
+      { id: "av4", name: "Audio Video 4", logoSrc: audio_video_4, categories: ["Audio Video"] },
+      { id: "av5", name: "Audio Video 5", logoSrc: audio_video_5, categories: ["Audio Video"] },
+      { id: "av6", name: "Audio Video 6", logoSrc: audio_video_6, categories: ["Audio Video"] },
+      { id: "av7", name: "Audio Video 7", logoSrc: audio_video_7, categories: ["Audio Video"] },
+      { id: "av8", name: "Audio Video 8", logoSrc: audio_video_8, categories: ["Audio Video"] },
+      { id: "av9", name: "Audio Video 9", logoSrc: audio_video_9, categories: ["Audio Video"] },
+      { id: "av10", name: "Audio Video 10", logoSrc: audio_video_10, categories: ["Audio Video"] },
+      { id: "av11", name: "Audio Video 11", logoSrc: audio_video_11, categories: ["Audio Video"] },
+      { id: "av12", name: "Audio Video 12", logoSrc: audio_video_12, categories: ["Audio Video"] },
+      { id: "av13", name: "Audio Video 13", logoSrc: audio_video_13, categories: ["Audio Video"] },
+      { id: "av14", name: "Audio Video 14", logoSrc: audio_video_14, categories: ["Audio Video"] },
+
+      // PC Computing
+      { id: "pc0", name: "PC Computing", logoSrc: pc_computing_0, categories: ["PC Computing"] },
+      { id: "pc1", name: "PC Computing 1", logoSrc: pc_computing_1, categories: ["PC Computing"] },
+      { id: "pc2", name: "PC Computing 2", logoSrc: pc_computing_2, categories: ["PC Computing"] },
+      { id: "pc3", name: "PC Computing 3", logoSrc: pc_computing_3, categories: ["PC Computing"] },
+      { id: "pc4", name: "PC Computing 4", logoSrc: pc_computing_4, categories: ["PC Computing"] },
+      { id: "pc5", name: "PC Computing 5", logoSrc: pc_computing_5, categories: ["PC Computing"] },
+
+      // Server and Storage
+      { id: "ss0", name: "Server and Storage", logoSrc: server_storage_0, categories: ["Server and Storage"] },
+      { id: "ss1", name: "Server and Storage 1", logoSrc: server_storage_1, categories: ["Server and Storage"] },
+      { id: "ss2", name: "Server and Storage 2", logoSrc: server_storage_2, categories: ["Server and Storage"] },
+      { id: "ss3", name: "Server and Storage 3", logoSrc: server_storage_3, categories: ["Server and Storage"] },
+      { id: "ss4", name: "Server and Storage 4", logoSrc: server_storage_4, categories: ["Server and Storage"] },
+
+      // Surveillance
+      { id: "surv0", name: "Surveillance", logoSrc: surveillance_0, categories: ["Surveillance"] },
+      { id: "surv1", name: "Surveillance 1", logoSrc: surveillance_1, categories: ["Surveillance"] },
+      { id: "surv2", name: "Surveillance 2", logoSrc: surveillance_2, categories: ["Surveillance"] },
+
+      // Enterprise Security
+      { id: "es0", name: "Enterprise Security", logoSrc: enterprise_security_0, categories: ["Enterprise Security"] },
+      { id: "es1", name: "Enterprise Security 1", logoSrc: enterprise_security_1, categories: ["Enterprise Security"] },
+      { id: "es2", name: "Enterprise Security 2", logoSrc: enterprise_security_2, categories: ["Enterprise Security"] },
+      { id: "es3", name: "Enterprise Security 3", logoSrc: enterprise_security_3, categories: ["Enterprise Security"] },
+      { id: "es4", name: "Enterprise Security 4", logoSrc: enterprise_security_4, categories: ["Enterprise Security"] },
+      { id: "es5", name: "Enterprise Security 5", logoSrc: enterprise_security_5, categories: ["Enterprise Security"] },
+      { id: "es6", name: "Enterprise Security 6", logoSrc: enterprise_security_6, categories: ["Enterprise Security"] },
+
+      // Display Solution
+      { id: "ds0", name: "Display Solution", logoSrc: display_solution_0, categories: ["Display Solution"] },
+      { id: "ds1", name: "Display Solution 1", logoSrc: display_solution_1, categories: ["Display Solution"] },
+      { id: "ds2", name: "Display Solution 2", logoSrc: display_solution_2, categories: ["Display Solution"] },
+      { id: "ds3", name: "Display Solution 3", logoSrc: display_solution_3, categories: ["Display Solution"] },
+      { id: "ds4", name: "Display Solution 4", logoSrc: display_solution_4, categories: ["Display Solution"] },
+      { id: "ds5", name: "Display Solution 5", logoSrc: display_solution_5, categories: ["Display Solution"] },
+
+      // Enterprise Software
+      { id: "esw0", name: "Enterprise Software", logoSrc: enterprise_software_0, categories: ["Enterprise Software"] },
+      { id: "esw1", name: "Enterprise Software 1", logoSrc: enterprise_software_1, categories: ["Enterprise Software"] },
+      { id: "esw2", name: "Enterprise Software 2", logoSrc: enterprise_software_2, categories: ["Enterprise Software"] },
+      { id: "esw3", name: "Enterprise Software 3", logoSrc: enterprise_software_3, categories: ["Enterprise Software"] },
+      { id: "esw4", name: "Enterprise Software 4", logoSrc: enterprise_software_4, categories: ["Enterprise Software"] },
+      { id: "esw5", name: "Enterprise Software 5", logoSrc: enterprise_software_5, categories: ["Enterprise Software"] }
     ],
     []
   );

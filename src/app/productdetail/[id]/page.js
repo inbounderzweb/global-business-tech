@@ -120,10 +120,12 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
                         <div className="bg-white rounded-[40px] p-10 shadow-sm space-y-8">
                             <div>
                                 <h1 className="text-4xl md:text-5xl font-black text-[#2E6EA5] leading-tight mb-4">{product.name}</h1>
-                                <div className="flex items-center gap-2">
-                                    {/* <span className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100">
-                                        {product.category?.name}
-                                    </span> */}
+                                <div className="flex flex-wrap items-center gap-2">
+                                    {product.categories && product.categories.map((cat, idx) => (
+                                        <span key={idx} className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100 shadow-sm">
+                                            {cat.name}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
 

@@ -24,14 +24,14 @@ if [ $? -ne 0 ]; then
 fi
 echo "✅ Build successful."
 
-# Step 2: Sync .next folder to VPS (excluding dev cache)
+# Step 2: Sync files to VPS
 echo ""
 echo "📡 Step 2/3 — Syncing files to VPS..."
 rsync -avz --progress \
   --exclude '.next/cache' \
   --exclude 'node_modules' \
   --exclude '.git' \
-  .next "$VPS_USER@$VPS_HOST:$VPS_PATH/"
+  . "$VPS_USER@$VPS_HOST:$VPS_PATH/"
 
 if [ $? -ne 0 ]; then
   echo "❌ File sync failed! Check your VPS connection."
@@ -41,9 +41,9 @@ echo "✅ Files synced to VPS."
 
 # Step 3: Restart app on VPS
 echo ""
-echo "🔄 Step 3/3 — Restarting PM2 app on VPS..."
+echo "🔄 Step 3/3 — Syncing models and restarting PM2 app on VPS..."
 ssh -o StrictHostKeyChecking=no "$VPS_USER@$VPS_HOST" \
-  "cd $VPS_PATH && pm2 restart $PM2_APP_NAME"
+  "cd $VPS_PATH && npx prisma generate && pm2 restart $PM2_APP_NAME"
 
 if [ $? -ne 0 ]; then
   echo "❌ PM2 restart failed!"

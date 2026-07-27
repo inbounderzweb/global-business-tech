@@ -8,6 +8,7 @@ const titleMap = {
     "/admin/blogs": "Blogs",
     "/admin/orders": "Orders",
     "/admin/categories": "Categories",
+    "/admin/brands": "Brands",
     "/admin/customers": "Customers",
 };
 

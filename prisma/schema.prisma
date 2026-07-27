@@ -8,25 +8,44 @@ datasource db {
 }
 
 model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  slug        String?   @unique
+  description String?   @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[] @relation("CategoryToProduct")
+}
+
+model Brand {
   id        Int       @id @default(autoincrement())
   name      String    @unique
+  slug      String    @unique
+  logoUrl   String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  products  Product[] @relation("CategoryToProduct")
+  products  Product[]
 }
 
 model Product {
-  id          Int        @id @default(autoincrement())
-  name        String
-  description String?    @db.Text
-  price       Float
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  gallery     String?    @db.Text
-  mainImage   String?
-  orders      Order[]
-  variants    Variant[]
-  categories  Category[] @relation("CategoryToProduct")
+  id             Int        @id @default(autoincrement())
+  name           String
+  description    String?    @db.Text
+  price          Float
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  gallery        String?    @db.Text
+  mainImage      String?
+  brandId        Int?
+  platforms      String?    @db.Text
+  certifications String?    @db.Text
+  faqs           String?    @db.Text
+  brand          Brand?     @relation(fields: [brandId], references: [id])
+  orders         Order[]
+  variants       Variant[]
+  categories     Category[] @relation("CategoryToProduct")
+
+  @@index([brandId])
 }
 
 model Variant {

@@ -8,7 +8,7 @@ export async function GET(request, { params: paramsPromise }) {
         const { id } = params;
         const product = await prisma.product.findUnique({
             where: { id: parseInt(id) },
-            include: { variants: true, categories: true }
+            include: { variants: true, categories: true, brand: true }
         });
         if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
         return NextResponse.json(product);
@@ -22,7 +22,7 @@ export async function PUT(request, { params: paramsPromise }) {
         const params = await paramsPromise;
         const { id } = params;
         const data = await request.json();
-        const { name, description, price, categoryIds, variants, mainImage, gallery } = data;
+        const { name, description, price, categoryIds, variants, mainImage, gallery, brandId, platforms, certifications, faqs } = data;
 
         // Delete existing variants first for a clean update
         await prisma.variant.deleteMany({ where: { productId: parseInt(id) } });
@@ -36,6 +36,10 @@ export async function PUT(request, { params: paramsPromise }) {
                 categories: {
                     set: categoryIds ? categoryIds.map(id => ({ id: parseInt(id) })) : []
                 },
+                brandId: brandId ? parseInt(brandId) : null,
+                platforms: Array.isArray(platforms) ? JSON.stringify(platforms) : null,
+                certifications: Array.isArray(certifications) ? JSON.stringify(certifications) : null,
+                faqs: Array.isArray(faqs) ? JSON.stringify(faqs) : null,
                 mainImage,
                 gallery: Array.isArray(gallery) ? JSON.stringify(gallery) : gallery,
                 variants: variants && variants.length > 0 ? {

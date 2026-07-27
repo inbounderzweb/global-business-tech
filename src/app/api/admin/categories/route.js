@@ -2,6 +2,15 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+function slugify(name) {
+    return name
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+}
+
 // GET /api/admin/categories
 export async function GET() {
     try {
@@ -19,7 +28,7 @@ export async function GET() {
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { name } = body;
+        const { name, description } = body;
 
         if (!name || name.trim() === "") {
             return NextResponse.json({ error: "Category name is required" }, { status: 400 });
@@ -38,7 +47,7 @@ export async function POST(req) {
 
         // Create the new category
         const category = await prisma.category.create({
-            data: { name: trimmedName },
+            data: { name: trimmedName, slug: slugify(trimmedName), description: description || null },
         });
 
         return NextResponse.json(category, { status: 201 });

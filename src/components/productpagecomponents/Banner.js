@@ -9,7 +9,7 @@ import Image from 'next/image';
 // ✅ Replace with your exported Figma banner image
 import aboutBanner from '../../assets/banner/productsbanner.jpg';
 
-export default function Banner() {
+export default function Banner({ title = 'Products', subtitle = 'Learn about our business philosphy' }) {
   return (
     <section className="w-full bg-[#EEF3F8] py-10 md:py-12 mt-16 md:mt-40">
       <div className="mx-auto w-full max-w-[1400px] px-4">
@@ -36,10 +36,10 @@ export default function Banner() {
           <div className="absolute inset-0 flex items-center justify-center text-center px-6">
             <div>
               <h1 className="text-white font-semibold text-[28px] md:text-[34px] leading-tight">
-                Products
+                {title}
               </h1>
               <p className="mt-1 text-white/85 text-[12px] md:text-[14px] tracking-[0.08em] uppercase">
-                Learn about our business philosphy
+                {subtitle}
               </p>
             </div>
           </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import downarrow from '../assets/icons/Vector.svg';
+import { NAV_CATEGORIES } from '../lib/navCategories';
 
 function Navigation() {
   const [open, setOpen] = useState(false); // Products
@@ -24,25 +25,8 @@ function Navigation() {
     { label: 'Contact Us', type: 'link', href: '/contact' },
   ];
 
-  const PRODUCT_ITEMS_LEFT = [
-    { label: 'HP | POLY', href: '/productdetails' },
-    { label: 'LOGIC', href: '/productdetails' },
-    { label: 'SAMSUNG', href: '/productdetails' },
-    { label: 'PANASONIC', href: '/productdetails' },
-    { label: 'LOGITECH', href: '/productdetails' },
-    { label: 'ZEBRA', href: '/productdetails' },
-    { label: 'Cisco', href: '/productdetails' },
-    { label: 'Barco', href: '/productdetails' },
-  ];
-  const PRODUCT_ITEMS_RIGHT = [
-    { label: 'Dell', href: '/productdetails' },
-    { label: 'Lenovo', href: '/productdetails' },
-    { label: 'Acer', href: '/productdetails' },
-    { label: 'Asus', href: '/productdetails' },
-    { label: 'Adobe', href: '/productdetails' },
-    { label: 'Microsoft', href: '/productdetails' },
-    { label: 'Honeywell', href: '/productdetails' },
-  ];
+  const PRODUCT_ITEMS_LEFT = NAV_CATEGORIES.slice(0, 6);
+  const PRODUCT_ITEMS_RIGHT = NAV_CATEGORIES.slice(6);
 
   const SOLUTIONS_LEFT = [
     { label: 'Networking', href: '/productdetails' },

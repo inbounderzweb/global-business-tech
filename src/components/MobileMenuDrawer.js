@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import logo from '../assets/logo.svg';
+import { NAV_CATEGORIES } from '../lib/navCategories';
 
 export default function MobileMenuDrawer({ open, onClose }) {
   const [productsOpen, setProductsOpen] = useState(false);
@@ -15,23 +16,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
 
   const NAV = useMemo(
     () => ({
-      products: [
-        { label: 'HP | POLY', href: '/productdetails' },
-        { label: 'LOGIC', href: '/productdetails' },
-        { label: 'SAMSUNG', href: '/productdetails' },
-        { label: 'PANASONIC', href: '/productdetails' },
-        { label: 'LOGITECH', href: '/productdetails' },
-        { label: 'ZEBRA', href: '/productdetails' },
-        { label: 'Cisco', href: '/productdetails' },
-        { label: 'Barco', href: '/productdetails' },
-        { label: 'Dell', href: '/productdetails' },
-        { label: 'Lenovo', href: '/productdetails' },
-        { label: 'Acer', href: '/productdetails' },
-        { label: 'Asus', href: '/productdetails' },
-        { label: 'Adobe', href: '/productdetails' },
-        { label: 'Microsoft', href: '/productdetails' },
-        { label: 'Honeywell', href: '/productdetails' },
-      ],
+      products: NAV_CATEGORIES,
       solutions: [
         { label: 'Video Conferencing', href: '/productdetails' },
         { label: 'Headsets', href: '/productdetails' },

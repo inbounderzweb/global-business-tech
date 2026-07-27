@@ -4,9 +4,12 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+const PLATFORM_OPTIONS = ['Microsoft Teams', 'Zoom', 'Google Meet', 'Any Platform'];
+
 export default function AddProductPage() {
     const router = useRouter();
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(null);
     const [error, setError] = useState("");
@@ -16,6 +19,10 @@ export default function AddProductPage() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
+    const [brandId, setBrandId] = useState('');
+    const [platforms, setPlatforms] = useState([]);
+    const [certifications, setCertifications] = useState([]);
+    const [certInput, setCertInput] = useState('');
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -25,16 +32,41 @@ export default function AddProductPage() {
     const [hasVariants, setHasVariants] = useState(false);
     const [variants, setVariants] = useState([{ name: '', price: '', image: '' }]);
 
+    // FAQ states
+    const [faqs, setFaqs] = useState([]);
+
     useEffect(() => {
         setLoading(true);
-        fetch("/api/admin/categories")
-            .then((res) => res.json())
-            .then((data) => {
-                setCategories(Array.isArray(data) ? data : []);
+        Promise.all([
+            fetch("/api/admin/categories").then((res) => res.json()),
+            fetch("/api/admin/brands").then((res) => res.json()),
+        ])
+            .then(([categoryData, brandData]) => {
+                setCategories(Array.isArray(categoryData) ? categoryData : []);
+                setBrands(Array.isArray(brandData) ? brandData : []);
                 setLoading(false);
             })
             .catch(() => setLoading(false));
     }, []);
+
+    const togglePlatform = (platform) => {
+        setPlatforms((prev) =>
+            prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
+        );
+    };
+
+    const addCertification = (e) => {
+        e.preventDefault();
+        const value = certInput.trim();
+        if (value && !certifications.includes(value)) {
+            setCertifications([...certifications, value]);
+        }
+        setCertInput('');
+    };
+
+    const removeCertification = (value) => {
+        setCertifications(certifications.filter((c) => c !== value));
+    };
 
     const uploadFile = async (file, fieldId) => {
         if (!file) return null;
@@ -91,6 +123,14 @@ export default function AddProductPage() {
     const removeVariant = (index) => setVariants(variants.filter((_, i) => i !== index));
     const removeGalleryItem = (index) => setGallery(gallery.filter((_, i) => i !== index));
 
+    const addFaq = () => setFaqs([...faqs, { question: '', answer: '' }]);
+    const removeFaq = (index) => setFaqs(faqs.filter((_, i) => i !== index));
+    const handleFaqChange = (index, field, value) => {
+        const newFaqs = [...faqs];
+        newFaqs[index][field] = value;
+        setFaqs(newFaqs);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -105,6 +145,10 @@ export default function AddProductPage() {
             description,
             price,
             categoryIds: selectedCategoryIds,
+            brandId: brandId || null,
+            platforms,
+            certifications,
+            faqs: faqs.filter(f => f.question && f.answer),
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -325,6 +369,49 @@ export default function AddProductPage() {
                             </div>
                         )}
                     </div>
+
+                    {/* FAQ Management */}
+                    <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-8">
+                        <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
+
+                        <div className="space-y-6">
+                            {faqs.map((faq, index) => (
+                                <div key={index} className="flex flex-col gap-4 p-6 rounded-[30px] bg-slate-50/50 border border-slate-100">
+                                    <div className="flex items-center justify-between gap-4">
+                                        <input
+                                            type="text"
+                                            value={faq.question}
+                                            onChange={(e) => handleFaqChange(index, 'question', e.target.value)}
+                                            placeholder="Question"
+                                            className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold outline-none focus:border-blue-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => removeFaq(index)}
+                                            className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition"
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                                        </button>
+                                    </div>
+                                    <textarea
+                                        value={faq.answer}
+                                        onChange={(e) => handleFaqChange(index, 'answer', e.target.value)}
+                                        placeholder="Answer"
+                                        rows={2}
+                                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 resize-none"
+                                    />
+                                </div>
+                            ))}
+                            <button
+                                type="button"
+                                onClick={addFaq}
+                                className="w-full py-5 border-2 border-dashed border-slate-200 rounded-[30px] text-sm font-extrabold text-slate-400 hover:border-blue-400 hover:text-blue-600 transition-all flex items-center justify-center gap-2 bg-slate-50/20"
+                            >
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" /></svg>
+                                Add FAQ
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Column */}
@@ -376,6 +463,67 @@ export default function AddProductPage() {
                                     ))}
                                 </div>
                                 <p className="mt-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center italic">Select one or more categories</p>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Brand</label>
+                                <select
+                                    value={brandId}
+                                    onChange={(e) => setBrandId(e.target.value)}
+                                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                >
+                                    <option value="">No brand</option>
+                                    {brands.map((b) => (
+                                        <option key={b.id} value={b.id}>{b.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Platform Support</label>
+                                <div className="flex flex-wrap gap-2">
+                                    {PLATFORM_OPTIONS.map((platform) => (
+                                        <button
+                                            key={platform}
+                                            type="button"
+                                            onClick={() => togglePlatform(platform)}
+                                            className={`px-4 py-2 rounded-full text-xs font-bold border transition-all ${platforms.includes(platform) ? 'bg-[#356DA4] text-white border-[#356DA4]' : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'}`}
+                                        >
+                                            {platform}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Certifications</label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={certInput}
+                                        onChange={(e) => setCertInput(e.target.value)}
+                                        onKeyDown={(e) => { if (e.key === 'Enter') addCertification(e); }}
+                                        placeholder="e.g. ISO 9001"
+                                        className="flex-1 rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-3 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={addCertification}
+                                        className="px-5 rounded-2xl bg-slate-900 text-white text-sm font-bold hover:brightness-110 transition"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                                {certifications.length > 0 && (
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        {certifications.map((cert) => (
+                                            <span key={cert} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-[#356DA4] text-xs font-bold border border-blue-100">
+                                                {cert}
+                                                <button type="button" onClick={() => removeCertification(cert)} className="hover:text-red-500">×</button>
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

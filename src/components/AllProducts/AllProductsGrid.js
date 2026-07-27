@@ -14,10 +14,19 @@ function AllProductsGrid() {
         fetch("/api/admin/products")
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
+                if (Array.isArray(data)) {
+                    setProducts(data);
+                } else {
+                    console.error("Products API error:", data);
+                    setProducts([]);
+                }
                 setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(err => {
+                console.error("Fetch error:", err);
+                setProducts([]);
+                setLoading(false);
+            });
     }, []);
 
     const scrollRight = () => {
@@ -52,8 +61,8 @@ function AllProductsGrid() {
                             <div key={p.id} className="shrink-0 w-[280px] text-center">
                                 <div className="bg-white rounded-[16px] p-5 shadow-sm">
                                     <div className="relative w-full h-[260px] overflow-hidden rounded-[12px] group">
-                                        <div className="absolute top-2 right-2 z-10 bg-gray-400/10 backdrop-blur-xl text-[#3A3A3A] text-[12px] px-3 py-1 rounded-full">
-                                            {p.category?.name || 'Product'}
+                                        <div className="absolute top-2 right-2 z-10 bg-gray-400/20 backdrop-blur-xl text-[#3A3A3A] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                            {p.categories && p.categories.length > 0 ? p.categories[0].name : 'Product'}
                                         </div>
                                         {p.mainImage && (
                                             <Link href={`/productdetail/${p.id}`}>

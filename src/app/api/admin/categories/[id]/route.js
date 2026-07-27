@@ -2,13 +2,22 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+function slugify(name) {
+    return name
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+}
+
 export async function PUT(request, { params }) {
     try {
         const { id } = await params;
-        const { name } = await request.json();
+        const { name, description } = await request.json();
         const updated = await prisma.category.update({
             where: { id: parseInt(id) },
-            data: { name }
+            data: { name, slug: slugify(name), description: description !== undefined ? description : undefined }
         });
         return NextResponse.json(updated);
     } catch (error) {
@@ -20,7 +29,7 @@ export async function DELETE(request, { params }) {
     try {
         const { id } = await params;
         // Check if products exist
-        const productsCount = await prisma.product.count({ where: { categoryId: parseInt(id) } });
+        const productsCount = await prisma.product.count({ where: { categories: { some: { id: parseInt(id) } } } });
         if (productsCount > 0) {
             return NextResponse.json({ error: "Cannot delete category with existing products" }, { status: 400 });
         }

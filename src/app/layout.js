@@ -3,6 +3,7 @@ import './globals.css';
 import FooterToggle from '@/components/FooterToggle';
 // import HeaderToggle from '.HeaderToggle/components/HeaderToggle';
 import HeaderToggle from '@/components/HeaderToggle';
+import { SITE_URL } from '@/lib/siteConfig';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -12,6 +13,7 @@ const manrope = Manrope({
 });
 
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Global Business Tech',
   description: 'Global Business Tech - Building the Future of Technology',
   icons: {

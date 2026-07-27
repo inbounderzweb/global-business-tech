@@ -4,10 +4,13 @@
 import React, { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 
+const PLATFORM_OPTIONS = ['Microsoft Teams', 'Zoom', 'Google Meet', 'Any Platform'];
+
 export default function EditProductPage({ params: paramsPromise }) {
     const params = use(paramsPromise);
     const router = useRouter();
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(null);
     const [error, setError] = useState("");
@@ -16,7 +19,11 @@ export default function EditProductPage({ params: paramsPromise }) {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [categoryId, setCategoryId] = useState('');
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
+    const [brandId, setBrandId] = useState('');
+    const [platforms, setPlatforms] = useState([]);
+    const [certifications, setCertifications] = useState([]);
+    const [certInput, setCertInput] = useState('');
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -26,24 +33,34 @@ export default function EditProductPage({ params: paramsPromise }) {
     const [hasVariants, setHasVariants] = useState(false);
     const [variants, setVariants] = useState([{ name: '', price: '', image: '' }]);
 
+    // FAQ states
+    const [faqs, setFaqs] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [catsRes, prodRes] = await Promise.all([
+                const [catsRes, brandsRes, prodRes] = await Promise.all([
                     fetch("/api/admin/categories"),
+                    fetch("/api/admin/brands"),
                     fetch(`/api/admin/products/${params.id}`)
                 ]);
 
                 const catsData = await catsRes.json();
+                const brandsData = await brandsRes.json();
                 const prodData = await prodRes.json();
 
                 setCategories(Array.isArray(catsData) ? catsData : []);
+                setBrands(Array.isArray(brandsData) ? brandsData : []);
 
                 if (prodData) {
                     setProductName(prodData.name || '');
                     setDescription(prodData.description || '');
                     setPrice(prodData.price || '');
-                    setCategoryId(prodData.categoryId || '');
+                    setSelectedCategoryIds(prodData.categories ? prodData.categories.map(c => c.id.toString()) : []);
+                    setBrandId(prodData.brandId ? prodData.brandId.toString() : '');
+                    setPlatforms(prodData.platforms ? JSON.parse(prodData.platforms) : []);
+                    setCertifications(prodData.certifications ? JSON.parse(prodData.certifications) : []);
+                    setFaqs(prodData.faqs ? JSON.parse(prodData.faqs) : []);
                     setMainImage(prodData.mainImage || '');
                     setGallery(JSON.parse(prodData.gallery || "[]"));
 
@@ -66,6 +83,25 @@ export default function EditProductPage({ params: paramsPromise }) {
 
         fetchData();
     }, [params.id]);
+
+    const togglePlatform = (platform) => {
+        setPlatforms((prev) =>
+            prev.includes(platform) ? prev.filter((p) => p !== platform) : [...prev, platform]
+        );
+    };
+
+    const addCertification = (e) => {
+        e.preventDefault();
+        const value = certInput.trim();
+        if (value && !certifications.includes(value)) {
+            setCertifications([...certifications, value]);
+        }
+        setCertInput('');
+    };
+
+    const removeCertification = (value) => {
+        setCertifications(certifications.filter((c) => c !== value));
+    };
 
     const uploadFile = async (file, fieldId) => {
         if (!file) return null;
@@ -122,12 +158,20 @@ export default function EditProductPage({ params: paramsPromise }) {
     const removeVariant = (index) => setVariants(variants.filter((_, i) => i !== index));
     const removeGalleryItem = (index) => setGallery(gallery.filter((_, i) => i !== index));
 
+    const addFaq = () => setFaqs([...faqs, { question: '', answer: '' }]);
+    const removeFaq = (index) => setFaqs(faqs.filter((_, i) => i !== index));
+    const handleFaqChange = (index, field, value) => {
+        const newFaqs = [...faqs];
+        newFaqs[index][field] = value;
+        setFaqs(newFaqs);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
 
-        if (!categoryId) {
-            setError("Please select a category");
+        if (selectedCategoryIds.length === 0) {
+            setError("Please select at least one category");
             return;
         }
 
@@ -135,7 +179,11 @@ export default function EditProductPage({ params: paramsPromise }) {
             name: productName,
             description,
             price,
-            categoryId,
+            categoryIds: selectedCategoryIds,
+            brandId: brandId || null,
+            platforms,
+            certifications,
+            faqs: faqs.filter(f => f.question && f.answer),
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -149,7 +197,10 @@ export default function EditProductPage({ params: paramsPromise }) {
                 body: JSON.stringify(formData),
             });
 
-            if (!res.ok) throw new Error("Could not update product");
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || "Could not update product");
+            }
 
             router.push("/admin/products");
             router.refresh();
@@ -352,6 +403,49 @@ export default function EditProductPage({ params: paramsPromise }) {
                             </div>
                         )}
                     </div>
+
+                    {/* FAQ Management */}
+                    <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-8">
+                        <h2 className="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
+
+                        <div className="space-y-6">
+                            {faqs.map((faq, index) => (
+                                <div key={index} className="flex flex-col gap-4 p-6 rounded-[30px] bg-slate-50/50 border border-slate-100">
+                                    <div className="flex items-center justify-between gap-4">
+                                        <input
+                                            type="text"
+                                            value={faq.question}
+                                            onChange={(e) => handleFaqChange(index, 'question', e.target.value)}
+                                            placeholder="Question"
+                                            className="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold outline-none focus:border-blue-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => removeFaq(index)}
+                                            className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition"
+                                        >
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                                        </button>
+                                    </div>
+                                    <textarea
+                                        value={faq.answer}
+                                        onChange={(e) => handleFaqChange(index, 'answer', e.target.value)}
+                                        placeholder="Answer"
+                                        rows={2}
+                                        className="w-full bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium outline-none focus:border-blue-500 resize-none"
+                                    />
+                                </div>
+                            ))}
+                            <button
+                                type="button"
+                                onClick={addFaq}
+                                className="w-full py-5 border-2 border-dashed border-slate-200 rounded-[30px] text-sm font-extrabold text-slate-400 hover:border-blue-400 hover:text-blue-600 transition-all flex items-center justify-center gap-2 bg-slate-50/20"
+                            >
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 5v14M5 12h14" /></svg>
+                                Add FAQ
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Column */}
@@ -376,18 +470,94 @@ export default function EditProductPage({ params: paramsPromise }) {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Category</label>
-                                <select
-                                    value={categoryId}
-                                    onChange={(e) => setCategoryId(e.target.value)}
-                                    className="w-full appearance-none rounded-[24px] border border-slate-200 bg-slate-50/50 px-6 py-5 outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-8 focus:ring-blue-50/50 cursor-pointer text-base font-bold text-slate-700"
-                                    required
-                                >
-                                    <option value="" disabled>Select Category</option>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Categories</label>
+                                <div className="space-y-3 max-h-60 overflow-y-auto p-4 rounded-[24px] border border-slate-200 bg-slate-50/50 transition-all focus-within:ring-8 focus-within:ring-blue-50/50">
                                     {categories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        <div key={cat.id} className="flex items-center gap-3 group">
+                                            <label className="relative flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedCategoryIds.includes(cat.id.toString())}
+                                                    onChange={(e) => {
+                                                        const id = cat.id.toString();
+                                                        if (e.target.checked) {
+                                                            setSelectedCategoryIds([...selectedCategoryIds, id]);
+                                                        } else {
+                                                            setSelectedCategoryIds(selectedCategoryIds.filter(v => v !== id));
+                                                        }
+                                                    }}
+                                                    className="peer h-6 w-6 cursor-pointer appearance-none rounded-md border-2 border-slate-200 bg-white transition-all checked:border-[#356DA4] checked:bg-[#356DA4]"
+                                                />
+                                                <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
+                                                </span>
+                                            </label>
+                                            <span className="text-slate-700 font-bold text-sm tracking-tight group-hover:text-slate-950 transition-colors uppercase">{cat.name}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <p className="mt-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center italic">Select one or more categories</p>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Brand</label>
+                                <select
+                                    value={brandId}
+                                    onChange={(e) => setBrandId(e.target.value)}
+                                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                >
+                                    <option value="">No brand</option>
+                                    {brands.map((b) => (
+                                        <option key={b.id} value={b.id}>{b.name}</option>
                                     ))}
                                 </select>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Platform Support</label>
+                                <div className="flex flex-wrap gap-2">
+                                    {PLATFORM_OPTIONS.map((platform) => (
+                                        <button
+                                            key={platform}
+                                            type="button"
+                                            onClick={() => togglePlatform(platform)}
+                                            className={`px-4 py-2 rounded-full text-xs font-bold border transition-all ${platforms.includes(platform) ? 'bg-[#356DA4] text-white border-[#356DA4]' : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'}`}
+                                        >
+                                            {platform}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Certifications</label>
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        value={certInput}
+                                        onChange={(e) => setCertInput(e.target.value)}
+                                        onKeyDown={(e) => { if (e.key === 'Enter') addCertification(e); }}
+                                        placeholder="e.g. ISO 9001"
+                                        className="flex-1 rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-3 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={addCertification}
+                                        className="px-5 rounded-2xl bg-slate-900 text-white text-sm font-bold hover:brightness-110 transition"
+                                    >
+                                        Add
+                                    </button>
+                                </div>
+                                {certifications.length > 0 && (
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        {certifications.map((cert) => (
+                                            <span key={cert} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-[#356DA4] text-xs font-bold border border-blue-100">
+                                                {cert}
+                                                <button type="button" onClick={() => removeCertification(cert)} className="hover:text-red-500">×</button>
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

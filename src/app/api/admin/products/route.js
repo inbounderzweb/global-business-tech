@@ -1,27 +1,27 @@
-// src/app/api/admin/products/route.js
+// src/app/api/admin/products/route.js - Last update: 2026-03-31T12:00:00Z
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET() {
     try {
         const products = await prisma.product.findMany({
-            include: { category: true, variants: true },
+            include: { categories: true, variants: true, brand: true },
             orderBy: { createdAt: "desc" },
         });
         return NextResponse.json(products);
     } catch (error) {
         console.error("Error fetching products:", error);
-        return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+        return NextResponse.json({ error: error.message || "Failed to fetch products" }, { status: 500 });
     }
 }
 
 export async function POST(request) {
     try {
         const data = await request.json();
-        const { name, description, price, categoryId, variants, mainImage, gallery } = data;
+        const { name, description, price, categoryIds, variants, mainImage, gallery, brandId, platforms, certifications, faqs } = data;
 
-        if (!name || !price || !categoryId) {
-            return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+        if (!name || !price || !categoryIds || !Array.isArray(categoryIds)) {
+            return NextResponse.json({ error: "Missing required fields or categoryIds is not an array" }, { status: 400 });
         }
 
         const newProduct = await prisma.product.create({
@@ -29,7 +29,13 @@ export async function POST(request) {
                 name,
                 description: description || "",
                 price: parseFloat(price),
-                categoryId: parseInt(categoryId),
+                categories: {
+                    connect: categoryIds.map(id => ({ id: parseInt(id) }))
+                },
+                brandId: brandId ? parseInt(brandId) : null,
+                platforms: Array.isArray(platforms) ? JSON.stringify(platforms) : null,
+                certifications: Array.isArray(certifications) ? JSON.stringify(certifications) : null,
+                faqs: Array.isArray(faqs) ? JSON.stringify(faqs) : null,
                 mainImage: mainImage || "",
                 gallery: Array.isArray(gallery) ? JSON.stringify(gallery) : (gallery || ""),
                 variants: variants && variants.length > 0 ? {
@@ -41,12 +47,13 @@ export async function POST(request) {
                 } : undefined
             },
             include: {
-                variants: true
+                variants: true,
+                categories: true
             }
         });
         return NextResponse.json(newProduct, { status: 201 });
     } catch (error) {
         console.error("Error creating product:", error);
-        return NextResponse.json({ error: "Failed to create product" }, { status: 500 });
+        return NextResponse.json({ error: error.message || "Failed to create product" }, { status: 500 });
     }
 }

@@ -12,6 +12,7 @@ const sections = [
     { name: "Blogs", href: "/admin/blogs", key: "blogs" },
     { name: "Orders", href: "/admin/orders", key: "orders" },
     { name: "Categories", href: "/admin/categories", key: "categories" },
+    { name: "Brands", href: "/admin/brands", key: "brands" },
     { name: "Enquiries", href: "/admin/enquiries", key: "enquiries" },
 ];
 

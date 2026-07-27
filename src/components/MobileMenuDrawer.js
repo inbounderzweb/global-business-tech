@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import logo from '../assets/logo.svg';
+import { NAV_CATEGORIES } from '../lib/navCategories';
 
 export default function MobileMenuDrawer({ open, onClose }) {
   const [productsOpen, setProductsOpen] = useState(false);
@@ -15,23 +16,15 @@ export default function MobileMenuDrawer({ open, onClose }) {
 
   const NAV = useMemo(
     () => ({
-      products: [
-        { label: 'Poly', href: '/products/poly' },
-        { label: 'Yamaha', href: '/products/yamaha' },
-        { label: 'Logitech', href: '/products/logitech' },
-        { label: 'Knoftel', href: '/products/knoftel' },
-        { label: 'Cisco', href: '/products/cisco' },
-        { label: 'Accutone', href: '/products/accutone' },
-        { label: 'Logic', href: '/products/logic' },
-      ],
+      products: NAV_CATEGORIES,
       solutions: [
-        { label: 'Video Conferencing', href: '/solutions/video-conferencing' },
-        { label: 'Headsets', href: '/solutions/headsets' },
-        { label: 'Speakerphones', href: '/solutions/speakerphones' },
-        { label: 'Cameras', href: '/solutions/cameras' },
-        { label: 'Meeting Rooms', href: '/solutions/meeting-rooms' },
-        { label: 'Work From Home', href: '/solutions/work-from-home' },
-        { label: 'Training Rooms', href: '/solutions/training-rooms' },
+        { label: 'Video Conferencing', href: '/productdetails' },
+        { label: 'Headsets', href: '/productdetails' },
+        { label: 'Speakerphones', href: '/productdetails' },
+        { label: 'Cameras', href: '/productdetails' },
+        { label: 'Meeting Rooms', href: '/productdetails' },
+        { label: 'Work From Home', href: '/productdetails' },
+        { label: 'Training Rooms', href: '/productdetails' },
       ],
     }),
     []
@@ -72,7 +65,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
       {/* Backdrop */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-[9998] bg-black/30 transition-opacity duration-300 ${
+        className={`fixed inset-0 z-9998 bg-black/30 transition-opacity duration-300 ${
           open
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
@@ -82,7 +75,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
       {/* Drawer wrapper (centered on screen) */}
       <aside
         className={`
-          fixed inset-0 z-[9999]
+          fixed inset-0 z-9999
           flex items-start justify-center
           pt-4
           transition-transform duration-300 ease-out
@@ -136,7 +129,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
               >
                 Home
               </Link>
-              <div className="h-[1px] bg-[#cbd5e1]" />
+              <div className="h-px bg-[#cbd5e1]" />
 
               <Link
                 href="/about"
@@ -145,7 +138,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
               >
                 About Us
               </Link>
-              <div className="h-[1px] bg-[#cbd5e1]" />
+              <div className="h-px bg-[#cbd5e1]" />
 
               {/* Products */}
               <button
@@ -161,7 +154,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
                   ▾
                 </span>
               </button>
-              <div className="h-[1px] bg-[#cbd5e1]" />
+              <div className="h-px bg-[#cbd5e1]" />
 
               {productsOpen && (
                 <div className="py-2 space-y-2">
@@ -192,7 +185,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
                   ▾
                 </span>
               </button>
-              <div className="h-[1px] bg-[#cbd5e1]" />
+              <div className="h-px bg-[#cbd5e1]" />
 
               {solutionsOpen && (
                 <div className="py-2 space-y-2">
@@ -216,7 +209,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
               >
                 Blog
               </Link>
-              <div className="h-[1px] bg-[#cbd5e1]" />
+              <div className="h-px bg-[#cbd5e1]" />
 
               <Link
                 href="/contact"
@@ -228,8 +221,9 @@ export default function MobileMenuDrawer({ open, onClose }) {
 
               {/* Button */}
               <div className="pt-5 pb-2 flex justify-center">
-                <Link
-                  href="/profile"
+                <a
+                  href="/documents/GBTPL PROFILE-1.pdf"
+                  download="GBTPL_PROFILE.pdf"
                   onClick={go}
                   className="
                     inline-flex items-center justify-center
@@ -240,7 +234,7 @@ export default function MobileMenuDrawer({ open, onClose }) {
                   "
                 >
                   Download Profile
-                </Link>
+                </a>
               </div>
             </div>
           </div>

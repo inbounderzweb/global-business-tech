@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import downarrow from '../assets/icons/Vector.svg';
+import { NAV_CATEGORIES } from '../lib/navCategories';
 
 function Navigation() {
   const [open, setOpen] = useState(false); // Products
@@ -24,27 +25,18 @@ function Navigation() {
     { label: 'Contact Us', type: 'link', href: '/contact' },
   ];
 
-  const PRODUCT_ITEMS_LEFT = [
-    { label: 'Poly', href: '/products/poly' },
-    { label: 'Yamaha', href: '/products/yamaha' },
-    { label: 'Logitech', href: '/products/logitech' },
-    { label: 'Knoftel', href: '/products/knoftel' },
-  ];
-  const PRODUCT_ITEMS_RIGHT = [
-    { label: 'Cisco', href: '/products/cisco' },
-    { label: 'Accutone', href: '/products/accutone' },
-    { label: 'Logic', href: '/products/logic' },
-  ];
+  const PRODUCT_ITEMS_LEFT = NAV_CATEGORIES.slice(0, 6);
+  const PRODUCT_ITEMS_RIGHT = NAV_CATEGORIES.slice(6);
 
   const SOLUTIONS_LEFT = [
-    { label: 'Networking', href: '/networking' },
-    { label: 'Video Wall Solutions', href: '/videowallsolutions' },
-    { label: 'Virtualization', href: '/virtualization' },
+    { label: 'Networking', href: '/productdetails' },
+    { label: 'Video Wall Solutions', href: '/productdetails' },
+    { label: 'Virtualization', href: '/productdetails' },
 
   ];
   const SOLUTIONS_RIGHT = [
-    { label: 'Cyber Security', href: '/cybersecurity' },
-    { label: 'Board Rooms', href: '/boardroom' },
+    { label: 'Cyber Security', href: '/productdetails' },
+    { label: 'Board Rooms', href: '/productdetails' },
   ];
 
   useEffect(() => {
@@ -340,12 +332,13 @@ function Navigation() {
           })}
         </ul>
 
-        <Link
-          href="/profile"
+        <a
+          href="/documents/GBTPL PROFILE-1.pdf"
+          download="GBTPL_PROFILE.pdf"
           className="bg-[#356DA4] text-white px-4 py-2 rounded-[50px] xl:w-[172px] h-[40px] border border-[#356DA4] font-[manrope] text-[16px] font-thin flex items-center justify-center transform transition-transform hover:scale-105 active:scale-95 shadow-sm hover:shadow-md"
         >
           Download Profile
-        </Link>
+        </a>
       </div>
     </nav>
   );

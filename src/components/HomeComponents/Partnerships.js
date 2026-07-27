@@ -5,6 +5,7 @@
 
 import React, { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 // LOGO IMPORTS
 // Networking
 import networking_0 from '../../assets/clientlogos/Networking/Networking.png';
@@ -81,6 +82,13 @@ import enterprise_software_3 from '../../assets/clientlogos/enterprisesoftware/E
 import enterprise_software_4 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-4.png';
 import enterprise_software_5 from '../../assets/clientlogos/enterprisesoftware/Enterprise Software-5.png';
 
+
+
+//AIDS Solutions
+import honeywell from '../../assets/clientlogos/AIDCSolution/honeywell.png';
+import zebra from '../../assets/clientlogos/AIDCSolution/zebra.png';
+
+
 function Partnerships() {
   const filterScrollerRef = useRef(null);
 
@@ -95,7 +103,8 @@ function Partnerships() {
       'Surveillance',
       'Enterprise Security',
       'Display Solution',
-      'Enterprise Software'
+      'Enterprise Software',
+      'AIDC Solution',
     ],
     []
   );
@@ -175,7 +184,11 @@ function Partnerships() {
       { id: "esw2", name: "Enterprise Software 2", logoSrc: enterprise_software_2, categories: ["Enterprise Software"] },
       { id: "esw3", name: "Enterprise Software 3", logoSrc: enterprise_software_3, categories: ["Enterprise Software"] },
       { id: "esw4", name: "Enterprise Software 4", logoSrc: enterprise_software_4, categories: ["Enterprise Software"] },
-      { id: "esw5", name: "Enterprise Software 5", logoSrc: enterprise_software_5, categories: ["Enterprise Software"] }
+      { id: "esw5", name: "Enterprise Software 5", logoSrc: enterprise_software_5, categories: ["Enterprise Software"] },
+
+      // AIDC Solution
+      { id: "aidc0", name: "Honeywell", logoSrc: honeywell, categories: ["AIDC Solution"] },
+      { id: "aidc1", name: "Zebra", logoSrc: zebra, categories: ["AIDC Solution"] }
     ],
     []
   );
@@ -296,9 +309,10 @@ function Partnerships() {
             `}
           >
             {filteredPartners.map((p) => (
-              <div
+              <Link
                 key={p.id}
-                className="bg-white rounded-xl shadow-sm px-8 py-5 flex items-center justify-center min-w-[180px]"
+                href="/productdetails"
+                className="bg-white rounded-xl shadow-sm px-8 py-5 flex items-center justify-center min-w-[180px] hover:shadow-md transition-shadow"
               >
                 <Image
                   src={p.logoSrc}
@@ -307,7 +321,7 @@ function Partnerships() {
                   height={50}
                   className="object-contain"
                 />
-              </div>
+              </Link>
             ))}
 
             {filteredPartners.length === 0 && (
@@ -346,8 +360,9 @@ function Partnerships() {
                           className="shrink-0 w-[260px] flex flex-col gap-4"
                         >
                           {[first, second].filter(Boolean).map((p) => (
-                            <div
+                            <Link
                               key={p.id}
+                              href="/productdetails"
                               className="bg-white rounded-xl shadow-sm px-6 py-5 flex items-center justify-center w-full"
                             >
                               <Image
@@ -357,7 +372,7 @@ function Partnerships() {
                                 height={50}
                                 className="object-contain"
                               />
-                            </div>
+                            </Link>
                           ))}
                         </div>
                       );

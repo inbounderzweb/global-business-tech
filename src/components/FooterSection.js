@@ -6,7 +6,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 /**
  * ✅ Replace these imports with your exported Figma assets
@@ -14,21 +14,14 @@ import Link from "next/link";
  */
 import logo from "../assets/footer/logo.svg";
 import indiaFlag from "../assets/footer/india.svg";
-import meFlag from "../assets/footer/me.svg";
 
 export default function FooterSection() {
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Products", href: "/products" },
-    { label: "Solutions", href: "/solutions" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact us", href: "/contact" },
-  ];
+
 
   const indiaLocations = [
     {
       city: "Bangalore",
+      isCorporateOffice: true,
       lines: [
         "1, 9th Cross Road,",
         "Swimming Pool Extension, HN Layout,",
@@ -62,10 +55,6 @@ export default function FooterSection() {
     },
   ];
 
-  const middleEast = {
-    title: "MIDDLE EAST",
-    lines: ["No 302, BaldhiyaBuilding,", "Freej Almurar,", "Deira Dubai UAE-241868"],
-  };
 
   return (
     <footer className="w-full bg-[#163A55] text-white">
@@ -83,7 +72,7 @@ export default function FooterSection() {
           </div>
 
           {/* Col 2-6: India (improved as scrollable list with cards) */}
-          <div className="col-span-5">
+          <div className="col-span-6">
             <SectionHeader
               flag={indiaFlag}
               flagAlt="India"
@@ -94,21 +83,18 @@ export default function FooterSection() {
             {/* Two-column cards inside India for better density */}
             <div className="mt-4 grid grid-cols-2 gap-4">
               {indiaLocations.map((loc) => (
-                <AddressCard key={loc.city} title={loc.city} lines={loc.lines} />
+                <AddressCard 
+                  key={loc.city} 
+                  title={loc.city} 
+                  lines={loc.lines} 
+                  isCorporateOffice={loc.isCorporateOffice} 
+                />
               ))}
             </div>
           </div>
 
-          {/* Col 7-9: Middle East */}
-          <div className="col-span-2">
-            <SectionHeader flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
-            <div className="mt-4">
-              <AddressCard title={null} lines={middleEast.lines} compact />
-            </div>
-          </div>
-
           {/* Col 10-12: Contact */}
-          <div className="col-span-2">
+          <div className="col-span-3">
             <div className="text-[14px] font-medium mb-4 text-[rgba(255,255,255,0.9)]">
               CONTACT DETAILS
             </div>
@@ -135,25 +121,13 @@ export default function FooterSection() {
             <SectionHeaderMobile flag={indiaFlag} flagAlt="India" title="INDIA (Head Quarter)" />
             <div className="mt-4 space-y-3">
               {indiaLocations.map((loc) => (
-                <AccordionAddress key={loc.city} title={loc.city} lines={loc.lines} />
+                <AccordionAddress 
+                  key={loc.city} 
+                  title={loc.city} 
+                  lines={loc.lines} 
+                  isCorporateOffice={loc.isCorporateOffice} 
+                />
               ))}
-            </div>
-          </div>
-
-          {/* Middle East */}
-          <div className="mt-8">
-            <SectionHeaderMobile flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
-            <div className="mt-4">
-              <div className="mx-auto max-w-[340px] rounded-[14px] bg-[rgba(255,255,255,0.08)] p-4 text-left">
-                <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
-                  {middleEast.lines.map((l, idx) => (
-                    <React.Fragment key={idx}>
-                      {l}
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </p>
-              </div>
             </div>
           </div>
 
@@ -172,25 +146,7 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Nav Pills */}
-        <div className="mt-10 md:mt-12 flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="
-                px-5 md:px-6 py-2.5 rounded-[10px]
-                bg-[rgba(255,255,255,0.08)]
-                text-[14px] font-medium
-                text-[rgba(255,255,255,0.9)]
-                hover:bg-[rgba(255,255,255,0.14)]
-                transition
-              "
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
+
 
         {/* Social Icons */}
         <div className="mt-8 flex items-center gap-6 justify-center md:justify-end">
@@ -240,18 +196,27 @@ function SectionHeaderMobile({ flag, flagAlt, title }) {
     </div>
   );
 }
-
-function AddressCard({ title, lines, compact = false }) {
+function AddressCard({ title, lines, isCorporateOffice = false }) {
   return (
     <div
-      className={[
-        "rounded-[14px] bg-[rgba(255,255,255,0.08)]",
-        compact ? "p-4" : "p-4",
-        "backdrop-blur-[1px]",
-      ].join(" ")}
+      className="rounded-[14px] bg-[rgba(255,255,255,0.08)] p-4 backdrop-blur-[1px]"
     >
       {title ? (
-        <p className="text-white text-[14px] font-semibold mb-2">{title}</p>
+        <div className="flex items-center gap-2 mb-2">
+          {!isCorporateOffice && (
+            <span className="text-[rgba(255,255,255,0.6)]">
+              <MapPinIcon size={14} />
+            </span>
+          )}
+          <p className="text-white text-[14px] font-semibold">
+            {title}
+            {isCorporateOffice && (
+              <span className="ml-2 text-[9px] font-bold uppercase tracking-wider bg-[rgba(255,255,255,0.15)] px-1.5 py-0.5 rounded-[4px] text-white">
+                Corporate Office
+              </span>
+            )}
+          </p>
+        </div>
       ) : null}
       <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
         {lines.map((l, idx) => (
@@ -265,7 +230,7 @@ function AddressCard({ title, lines, compact = false }) {
   );
 }
 
-function AccordionAddress({ title, lines }) {
+function AccordionAddress({ title, lines, isCorporateOffice = false }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -275,7 +240,21 @@ function AccordionAddress({ title, lines }) {
         onClick={() => setOpen((s) => !s)}
         className="w-full flex items-center justify-between px-4 py-3 text-left"
       >
-        <span className="text-[14px] font-semibold text-white">{title}</span>
+        <div className="flex items-center gap-2">
+          {!isCorporateOffice && (
+            <span className="text-[rgba(255,255,255,0.6)]">
+              <MapPinIcon size={14} />
+            </span>
+          )}
+          <span className="text-[14px] font-semibold text-white">
+            {title}
+            {isCorporateOffice && (
+              <span className="ml-2 text-[9px] font-bold uppercase tracking-wider bg-[rgba(255,255,255,0.15)] px-1.5 py-0.5 rounded-[4px] text-white">
+                Corporate Office
+              </span>
+            )}
+          </span>
+        </div>
         <span
           className={[
             "transition-transform duration-200 text-[rgba(255,255,255,0.85)]",
@@ -426,6 +405,29 @@ function WhatsappIcon() {
 }
 
 /* Social Icons */
+function MapPinIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="12"
+        cy="10"
+        r="3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function FacebookIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

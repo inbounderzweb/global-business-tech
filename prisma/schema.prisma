@@ -8,28 +8,44 @@ datasource db {
 }
 
 model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  slug        String?   @unique
+  description String?   @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[] @relation("CategoryToProduct")
+}
+
+model Brand {
   id        Int       @id @default(autoincrement())
   name      String    @unique
+  slug      String    @unique
+  logoUrl   String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   products  Product[]
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?   @db.Text
-  price       Float
-  categoryId  Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  gallery     String?   @db.Text
-  mainImage   String?
-  orders      Order[]
-  category    Category  @relation(fields: [categoryId], references: [id])
-  variants    Variant[]
+  id             Int        @id @default(autoincrement())
+  name           String
+  description    String?    @db.Text
+  price          Float
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  gallery        String?    @db.Text
+  mainImage      String?
+  brandId        Int?
+  platforms      String?    @db.Text
+  certifications String?    @db.Text
+  faqs           String?    @db.Text
+  brand          Brand?     @relation(fields: [brandId], references: [id])
+  orders         Order[]
+  variants       Variant[]
+  categories     Category[] @relation("CategoryToProduct")
 
-  @@index([categoryId], map: "Product_categoryId_fkey")
+  @@index([brandId])
 }
 
 model Variant {
@@ -48,13 +64,13 @@ model Variant {
 model Blog {
   id               Int      @id @default(autoincrement())
   title            String
-  shortDescription String?  @db.Text
   description      String   @db.Text
-  image            String?
   author           String
   date             DateTime @default(now())
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  image            String?
+  shortDescription String?  @db.Text
 }
 
 model Enquiry {

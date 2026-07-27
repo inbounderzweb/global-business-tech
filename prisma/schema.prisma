@@ -12,24 +12,21 @@ model Category {
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  products  Product[]
+  products  Product[] @relation("CategoryToProduct")
 }
 
 model Product {
-  id          Int       @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   name        String
-  description String?   @db.Text
+  description String?    @db.Text
   price       Float
-  categoryId  Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  gallery     String?   @db.Text
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  gallery     String?    @db.Text
   mainImage   String?
   orders      Order[]
-  category    Category  @relation(fields: [categoryId], references: [id])
   variants    Variant[]
-
-  @@index([categoryId], map: "Product_categoryId_fkey")
+  categories  Category[] @relation("CategoryToProduct")
 }
 
 model Variant {
@@ -46,13 +43,15 @@ model Variant {
 }
 
 model Blog {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String   @db.Text
-  author      String
-  date        DateTime @default(now())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  title            String
+  description      String   @db.Text
+  author           String
+  date             DateTime @default(now())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  image            String?
+  shortDescription String?  @db.Text
 }
 
 model Enquiry {

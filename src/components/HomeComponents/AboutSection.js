@@ -6,6 +6,7 @@
 import React from "react";
 import Image from "next/image";
 import abtimg from '../../assets/aboutimg.jpg'
+import Link from "next/link";
 
 // ✅ Replace this with your real image import later
 // import aboutImg from "../assets/about/about.png";
@@ -18,12 +19,7 @@ We help businesses design, deploy, and manage robust technology ecosystems. From
 With 200+ satisfied clients, 100+ turnkey projects, and 20+ certifications, we combine technical excellence with reliable service support.`,
   buttonText = "Read more",
   onButtonClick,
-})
-
-
-
-
-{
+}) {
   return (
     <section className="w-full bg-[#EEF3F8] py-10">
       <div className="w-full xl:w-[90%] mx-auto px-2">
@@ -48,14 +44,15 @@ With 200+ satisfied clients, 100+ turnkey projects, and 20+ certifications, we c
             <p className="text-[#3A3A3A] mt-4 text-[14px] sm:text-[16px] leading-relaxed max-w-[620px]">
               {description}
             </p>
-
-            <button
-              type="button"
-              onClick={onButtonClick}
-              className="mt-8 bg-[#356DA4] hover:bg-[#2d5c8b] transition text-white px-10 py-3 rounded-full text-[16px]"
-            >
-              {buttonText}
-            </button>
+            <Link href="/about">
+              <button
+                type="button"
+                onClick={onButtonClick}
+                className="mt-8 bg-[#356DA4] hover:bg-[#2d5c8b] transition text-white px-10 py-3 rounded-full text-[16px]"
+              >
+                {buttonText}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

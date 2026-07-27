@@ -9,16 +9,40 @@ function ProductsGrid() {
   const scrollerRef = useRef(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('Business Headsets');
+
+  const categories = [
+    'Business Headsets',
+    'Video & Voice Solution',
+    'Commercial Displays',
+    'AV Accessories',
+  ];
 
   useEffect(() => {
     fetch("/api/admin/products")
       .then(res => res.json())
       .then(data => {
-        setProducts(data);
+        if (Array.isArray(data)) {
+          setProducts(data);
+        } else {
+          console.error("Products API error:", data);
+          setProducts([]);
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(err => {
+        console.error("Fetch error:", err);
+        setProducts([]);
+        setLoading(false);
+      });
   }, []);
+
+  const filteredProducts = products.filter(p => {
+    if (activeTab === 'All') return true;
+    return p.categories?.some(c => c.name === activeTab);
+  });
+
+  const displayProducts = filteredProducts;
 
   const scrollRight = () => {
     if (!scrollerRef.current) return;
@@ -38,46 +62,76 @@ function ProductsGrid() {
             Our Premium Products
           </h2>
           <p className="text-[#3A3A3A] text-[14px] sm:text-[16px] mt-3 leading-relaxed">
-            Discover our wide range of business technology solutions tailored for your enterprise needs.
+            We offer a wide portfolio of industry-leading products from trusted global brands. Each product is carefully selected to ensure performance, durability, and seamless integration with your business infrastructure.
           </p>
+        </div>
+
+        {/* Category Tabs */}
+        <div className="mt-10 flex flex-wrap justify-center gap-3 md:gap-6">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveTab(cat)}
+              className={`
+                px-6 py-2 rounded-full text-[14px] font-bold transition-all duration-300
+                ${activeTab === cat 
+                  ? 'bg-[#356DA4] text-white shadow-lg scale-105' 
+                  : 'bg-white text-[#565656] hover:bg-slate-100 shadow-sm'
+                }
+              `}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         {/* MOBILE SLIDER */}
         <div className="mt-10 relative sm:hidden">
-          <div
-            ref={scrollerRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pl-8 pr-6"
-          >
-            {products.map((p) => (
-              <div key={p.id} className="shrink-0 w-[280px] text-center">
-                <div className="bg-white rounded-[16px] p-5 shadow-sm">
-                  <div className="relative w-full h-[260px] overflow-hidden rounded-[12px] group">
-                    <div className="absolute top-2 right-2 z-10 bg-gray-400/10 backdrop-blur-xl text-[#3A3A3A] text-[12px] px-3 py-1 rounded-full">
-                      {p.category?.name || 'Product'}
+          {displayProducts.length > 0 ? (
+            <div
+              ref={scrollerRef}
+              className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pl-8 pr-6"
+            >
+              {displayProducts.map((p) => (
+                <div key={p.id} className="shrink-0 w-[280px] text-center">
+                  <div className="bg-white rounded-[16px] p-5 shadow-sm">
+                    <div className="relative w-full h-[260px] overflow-hidden rounded-[12px] group">
+                      <div className="absolute top-2 right-2 z-10 bg-gray-400/20 backdrop-blur-xl text-[#3A3A3A] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                        {p.categories && p.categories.length > 0 ? p.categories[0].name : 'Product'}
+                      </div>
+                      {p.mainImage && (
+                        <Link href={`/productdetail/${p.id}`}>
+                          <Image
+                            src={p.mainImage}
+                            alt={p.name}
+                            fill
+                            className="object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
+                            sizes="80vw"
+                          />
+                        </Link>
+
+                      )}
                     </div>
-                    {p.mainImage && (
-                      <Image
-                        src={p.mainImage}
-                        alt={p.name}
-                        fill
-                        className="object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
-                        sizes="80vw"
-                      />
-                    )}
                   </div>
+                  <Link href={`/productdetail/${p.id}`}>
+                    <h3 className="mt-4 text-[#3A3A3A] text-[20px] font-semibold truncate px-2 hover:text-[#356DA4] transition-colors">
+                      {p.name}
+                    </h3>
+                  </Link>
+                  <Link
+                    href={`/productdetail/${p.id}`}
+                    className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-10 py-3 rounded-full text-[18px] hover:bg-[#2d5c8b] transition font-bold shadow-lg"
+                  >
+                    View Details
+                  </Link>
                 </div>
-                <h3 className="mt-4 text-[#3A3A3A] text-[20px] font-semibold truncate px-2">
-                  {p.name}
-                </h3>
-                <Link
-                  href={`/productdetail/${p.id}`}
-                  className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-10 py-3 rounded-full text-[18px] hover:bg-[#2d5c8b] transition font-bold shadow-lg"
-                >
-                  View Details
-                </Link>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 text-slate-500 font-bold tracking-wide italic">
+              No products found in "{activeTab}". Coming soon.
+            </div>
+          )}
           <button
             type="button"
             onClick={scrollRight}
@@ -88,37 +142,44 @@ function ProductsGrid() {
         </div>
 
         {/* DESKTOP GRID */}
-        <div className="mt-10 hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
-          {products.map((p) => (
-            <div key={p.id} className="text-center group">
-              <div className="bg-white rounded-[16px] p-5 shadow-sm w-full max-w-[270px] mx-auto transition-transform hover:-translate-y-1">
-                <div className="relative w-full h-[220px] overflow-hidden rounded-[12px]">
-                  <div className="absolute top-2 right-2 z-10 bg-slate-100 text-[#3A3A3A] text-[10px] uppercase font-black px-3 py-1 rounded-full ring-1 ring-slate-200">
-                    {p.category?.name}
-                  </div>
-                  {p.mainImage && (
-                    <Image
-                      src={p.mainImage}
-                      alt={p.name}
-                      fill
-                      className="object-contain transition-transform duration-500 group-hover:scale-110"
-                      sizes="(max-width:1024px) 40vw, 25vw"
-                    />
-                  )}
+        {displayProducts.length > 0 ? (
+          <div className="mt-10 hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
+            {displayProducts.map((p) => (
+              <div key={p.id} className="text-center group">
+                <div className="bg-white rounded-[16px] p-5 shadow-sm w-full max-w-[270px] mx-auto transition-all hover:shadow-md hover:-translate-y-1">
+                  <Link href={`/productdetail/${p.id}`}>
+                    <div className="relative w-full h-[220px] overflow-hidden rounded-[12px]">
+                      {p.mainImage && (
+                        <Image
+                          src={p.mainImage}
+                          alt={p.name}
+                          fill
+                          className="object-contain transition-transform duration-500 group-hover:scale-110"
+                          sizes="(max-width:1024px) 40vw, 25vw"
+                        />
+                      )}
+                    </div>
+                  </Link>
                 </div>
+                <Link href={`/productdetail/${p.id}`}>
+                  <h3 className="mt-4 text-[#3A3A3A] text-[18px] font-bold truncate px-2 hover:text-[#356DA4] transition-colors">
+                    {p.name}
+                  </h3>
+                </Link>
+                <Link
+                  href={`/productdetail/${p.id}`}
+                  className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-8 py-2.5 rounded-full text-[14px] font-bold hover:bg-[#2d5c8b] transition shadow-md"
+                >
+                  View Details
+                </Link>
               </div>
-              <h3 className="mt-4 text-[#3A3A3A] text-[18px] font-bold truncate px-2">
-                {p.name}
-              </h3>
-              <Link
-                href={`/productdetail/${p.id}`}
-                className="inline-flex items-center justify-center mt-3 bg-[#356DA4] text-white px-8 py-2.5 rounded-full text-[14px] font-bold hover:bg-[#2d5c8b] transition shadow-md"
-              >
-                View Details
-              </Link>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="hidden sm:block text-center py-20 text-slate-500 font-bold tracking-wide italic">
+             No products found in "{activeTab}". Coming soon.
+          </div>
+        )}
 
         <div className="flex justify-center mt-12">
           <Link href={'/productdetails'}>

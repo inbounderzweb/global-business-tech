@@ -6,7 +6,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 /**
  * ✅ Replace these imports with your exported Figma assets
@@ -14,21 +14,14 @@ import Link from "next/link";
  */
 import logo from "../assets/footer/logo.svg";
 import indiaFlag from "../assets/footer/india.svg";
-import meFlag from "../assets/footer/me.svg";
 
 export default function FooterSection() {
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
-    { label: "Products", href: "/products" },
-    { label: "Solutions", href: "/solutions" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact us", href: "/contact" },
-  ];
+
 
   const indiaLocations = [
     {
       city: "Bangalore",
+      isCorporateOffice: true,
       lines: [
         "1, 9th Cross Road,",
         "Swimming Pool Extension, HN Layout,",
@@ -62,10 +55,6 @@ export default function FooterSection() {
     },
   ];
 
-  const middleEast = {
-    title: "MIDDLE EAST",
-    lines: ["No 302, BaldhiyaBuilding,", "Freej Almurar,", "Deira Dubai UAE-241868"],
-  };
 
   return (
     <footer className="w-full bg-[#163A55] text-white">
@@ -76,14 +65,14 @@ export default function FooterSection() {
           {/* Col 1: Logo */}
           <div className="col-span-3">
             <div className="flex items-start gap-4">
-              <div className="relative w-[180px] h-[180px] shrink-0">
+              <div className="relative w-[240px] h-[240px] shrink-0">
                 <Image src={logo} alt="Global Business Tech" fill className="object-contain" />
               </div>
             </div>
           </div>
 
           {/* Col 2-6: India (improved as scrollable list with cards) */}
-          <div className="col-span-5">
+          <div className="col-span-6">
             <SectionHeader
               flag={indiaFlag}
               flagAlt="India"
@@ -94,27 +83,24 @@ export default function FooterSection() {
             {/* Two-column cards inside India for better density */}
             <div className="mt-4 grid grid-cols-2 gap-4">
               {indiaLocations.map((loc) => (
-                <AddressCard key={loc.city} title={loc.city} lines={loc.lines} />
+                <AddressCard 
+                  key={loc.city} 
+                  title={loc.city} 
+                  lines={loc.lines} 
+                  isCorporateOffice={loc.isCorporateOffice} 
+                />
               ))}
             </div>
           </div>
 
-          {/* Col 7-9: Middle East */}
-          <div className="col-span-2">
-            <SectionHeader flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
-            <div className="mt-4">
-              <AddressCard title={null} lines={middleEast.lines} compact />
-            </div>
-          </div>
-
           {/* Col 10-12: Contact */}
-          <div className="col-span-2">
+          <div className="col-span-3">
             <div className="text-[14px] font-medium mb-4 text-[rgba(255,255,255,0.9)]">
               CONTACT DETAILS
             </div>
 
             <div className="space-y-3 text-[13px] text-[rgba(255,255,255,0.78)]">
-              <Row icon={<PhoneIcon />} text="+91 80 35493772" />
+              <Row icon={<PhoneIcon />} text="+91 80 23660415" />
               <Row icon={<MobileIcon />} text="+91 8904341299 | +91 9739919398" />
               <Row icon={<MailIcon />} text="Info@globalbusinesstech.in" />
               <Row icon={<WhatsappIcon />} text="+91 8904341299" />
@@ -135,25 +121,13 @@ export default function FooterSection() {
             <SectionHeaderMobile flag={indiaFlag} flagAlt="India" title="INDIA (Head Quarter)" />
             <div className="mt-4 space-y-3">
               {indiaLocations.map((loc) => (
-                <AccordionAddress key={loc.city} title={loc.city} lines={loc.lines} />
+                <AccordionAddress 
+                  key={loc.city} 
+                  title={loc.city} 
+                  lines={loc.lines} 
+                  isCorporateOffice={loc.isCorporateOffice} 
+                />
               ))}
-            </div>
-          </div>
-
-          {/* Middle East */}
-          <div className="mt-8">
-            <SectionHeaderMobile flag={meFlag} flagAlt="Middle East" title="MIDDLE EAST" />
-            <div className="mt-4">
-              <div className="mx-auto max-w-[340px] rounded-[14px] bg-[rgba(255,255,255,0.08)] p-4 text-left">
-                <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
-                  {middleEast.lines.map((l, idx) => (
-                    <React.Fragment key={idx}>
-                      {l}
-                      <br />
-                    </React.Fragment>
-                  ))}
-                </p>
-              </div>
             </div>
           </div>
 
@@ -172,32 +146,12 @@ export default function FooterSection() {
           </div>
         </div>
 
-        {/* Nav Pills */}
-        <div className="mt-10 md:mt-12 flex flex-wrap gap-3 md:gap-4 justify-center md:justify-start">
-          {navLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="
-                px-5 md:px-6 py-2.5 rounded-[10px]
-                bg-[rgba(255,255,255,0.08)]
-                text-[14px] font-medium
-                text-[rgba(255,255,255,0.9)]
-                hover:bg-[rgba(255,255,255,0.14)]
-                transition
-              "
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
+
 
         {/* Social Icons */}
         <div className="mt-8 flex items-center gap-6 justify-center md:justify-end">
-          <SocialCircle href="#" label="Facebook" icon={<FacebookIcon />} />
-          <SocialCircle href="#" label="Instagram" icon={<InstagramIcon />} />
-          <SocialCircle href="#" label="LinkedIn" icon={<LinkedInIcon />} />
-          <SocialCircle href="#" label="X" icon={<XIcon />} />
+          <SocialCircle href="https://www.facebook.com/globalbusinesstech1/" label="Facebook" icon={<FacebookIcon />} />
+          <SocialCircle href="https://www.linkedin.com/company/global-business-tech-pvt-ltd?originalSubdomain=in" label="LinkedIn" icon={<LinkedInIcon />} />
         </div>
       </div>
 
@@ -242,18 +196,27 @@ function SectionHeaderMobile({ flag, flagAlt, title }) {
     </div>
   );
 }
-
-function AddressCard({ title, lines, compact = false }) {
+function AddressCard({ title, lines, isCorporateOffice = false }) {
   return (
     <div
-      className={[
-        "rounded-[14px] bg-[rgba(255,255,255,0.08)]",
-        compact ? "p-4" : "p-4",
-        "backdrop-blur-[1px]",
-      ].join(" ")}
+      className="rounded-[14px] bg-[rgba(255,255,255,0.08)] p-4 backdrop-blur-[1px]"
     >
       {title ? (
-        <p className="text-white text-[14px] font-semibold mb-2">{title}</p>
+        <div className="flex items-center gap-2 mb-2">
+          {!isCorporateOffice && (
+            <span className="text-[rgba(255,255,255,0.6)]">
+              <MapPinIcon size={14} />
+            </span>
+          )}
+          <p className="text-white text-[14px] font-semibold">
+            {title}
+            {isCorporateOffice && (
+              <span className="ml-2 text-[9px] font-bold uppercase tracking-wider bg-[rgba(255,255,255,0.15)] px-1.5 py-0.5 rounded-[4px] text-white">
+                Corporate Office
+              </span>
+            )}
+          </p>
+        </div>
       ) : null}
       <p className="text-[13px] leading-relaxed text-[rgba(255,255,255,0.78)]">
         {lines.map((l, idx) => (
@@ -267,7 +230,7 @@ function AddressCard({ title, lines, compact = false }) {
   );
 }
 
-function AccordionAddress({ title, lines }) {
+function AccordionAddress({ title, lines, isCorporateOffice = false }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -277,7 +240,21 @@ function AccordionAddress({ title, lines }) {
         onClick={() => setOpen((s) => !s)}
         className="w-full flex items-center justify-between px-4 py-3 text-left"
       >
-        <span className="text-[14px] font-semibold text-white">{title}</span>
+        <div className="flex items-center gap-2">
+          {!isCorporateOffice && (
+            <span className="text-[rgba(255,255,255,0.6)]">
+              <MapPinIcon size={14} />
+            </span>
+          )}
+          <span className="text-[14px] font-semibold text-white">
+            {title}
+            {isCorporateOffice && (
+              <span className="ml-2 text-[9px] font-bold uppercase tracking-wider bg-[rgba(255,255,255,0.15)] px-1.5 py-0.5 rounded-[4px] text-white">
+                Corporate Office
+              </span>
+            )}
+          </span>
+        </div>
         <span
           className={[
             "transition-transform duration-200 text-[rgba(255,255,255,0.85)]",
@@ -428,6 +405,29 @@ function WhatsappIcon() {
 }
 
 /* Social Icons */
+function MapPinIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path
+        d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="12"
+        cy="10"
+        r="3"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function FacebookIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -436,45 +436,10 @@ function FacebookIcon() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <rect
-        x="7"
-        y="7"
-        width="10"
-        height="10"
-        rx="3"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M9 7h6a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-6a4 4 0 0 1 4-4Z"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <path
-        d="M16.5 7.7h.01"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function LinkedInIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M6.5 9H3.8v11h2.7V9Zm-.1-3.4a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0ZM10 9h2.6v1.5h.1c.4-.8 1.5-1.7 3.1-1.7 3.3 0 3.9 2.1 3.9 4.9V20h-2.7v-5.4c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V20H10V9Z" />
-    </svg>
-  );
-}
-
-function XIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.9 2H22l-7.2 8.3L23 22h-6.6l-5.1-6.7L5.7 22H2.6l7.8-9-7.8-11H9.4l4.6 6.1L18.9 2Zm-1.2 18h1.7L8.2 3.9H6.4L17.7 20Z" />
     </svg>
   );
 }

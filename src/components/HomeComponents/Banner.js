@@ -26,9 +26,9 @@ function Banner() {
       id: 2,
       imageUrl: bannerDesktop,        // ✅ Desktop image
       mobileImageUrl: bannerMobile,   // ✅ Mobile image
-      title: "Lorem ipsum dolor sit amet, consectetuer",
+      title: "Smart Technology Solutions For Modern Workspaces",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy volutpat.",
+        "Transform your business with cutting-edge AV and IT solutions that enhance collaboration and productivity.",
       primaryBtn: "Know More",
       secondaryBtn: "Get In Touch",
     },

@@ -9,17 +9,18 @@ import headset from "../../assets/icons/headset.svg";
 import laptop from "../../assets/icons/laptop.svg";
 import server from "../../assets/icons/server.svg";
 import viewmore from "../../assets/icons/more.svg";
+import Link from "next/link";
 
 function CategoryStrip() {
   const scrollerRef = useRef(null);
 
   const ITEMS = [
-    { label: "Technology", icon: audioicon },
-    { label: "Business Solutions", icon: videoconf },
-    { label: "Global Presence", icon: headset },
-    { label: "Innovation", icon: laptop },
+    { label: "Technology", href: "/productdetails", icon: audioicon },
+    { label: "Business Solutions", href: "/productdetails", icon: videoconf },
+    { label: "Global Presence", href: "/productdetails", icon: headset },
+    { label: "Innovation", href: "/productdetails", icon: laptop },
     // { label: "Servers", icon: server },
-    { label: "View More", icon: viewmore },
+    { label: "View More", href: "/productdetails", icon: viewmore },
   ];
 
   const scrollRight = () => {
@@ -30,19 +31,21 @@ function CategoryStrip() {
   return (
     <div className="w-full bg-[#EEF3F8]">
       <div className="w-full xl:w-[80%] mx-auto px-2 pt-8">
-        <div className="border-t border-[#B9D0E6] border-b border-[#B9D0E6] py-5 relative">
+        <div className="border-y border-[#B9D0E6] py-5 relative">
           {/* Desktop */}
           <div className="hidden md:flex items-center justify-center gap-8">
             {ITEMS.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-4">
-                <div className="w-[56px] h-[56px] rounded-full bg-[#356DA4] flex items-center justify-center shrink-0">
-                  <Image src={item.icon} alt="service-icons" />
-                </div>
+              <Link key={idx} href={item.href || "#"}>
+                <div className="flex items-center gap-4 cursor-pointer">
+                  <div className="w-[56px] h-[56px] rounded-full bg-[#356DA4] flex items-center justify-center shrink-0">
+                    <Image src={item.icon} alt="service-icons" />
+                  </div>
 
-                <p className="text-[#2C5C8F] text-[16px] leading-tight">
-                  {item.label}
-                </p>
-              </div>
+                  <p className="text-[#2C5C8F] text-[16px] leading-tight">
+                    {item.label}
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
 
@@ -58,8 +61,9 @@ function CategoryStrip() {
               "
             >
               {ITEMS.map((item, idx) => (
-                <div
+                <Link
                   key={idx}
+                  href={item.href || "#"}
                   className="flex items-center gap-4 shrink-0 snap-start"
                 >
                   <div className="w-[56px] h-[56px] rounded-full bg-[#356DA4] flex items-center justify-center shrink-0">
@@ -69,7 +73,7 @@ function CategoryStrip() {
                   <p className="text-[#2C5C8F] text-[16px] leading-tight whitespace-nowrap">
                     {item.label}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
 

@@ -8,7 +8,7 @@ export async function GET(request, { params: paramsPromise }) {
         const { id } = params;
         const product = await prisma.product.findUnique({
             where: { id: parseInt(id) },
-            include: { variants: true }
+            include: { variants: true, categories: true }
         });
         if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
         return NextResponse.json(product);
@@ -22,7 +22,7 @@ export async function PUT(request, { params: paramsPromise }) {
         const params = await paramsPromise;
         const { id } = params;
         const data = await request.json();
-        const { name, description, price, categoryId, variants, mainImage, gallery } = data;
+        const { name, description, price, categoryIds, variants, mainImage, gallery } = data;
 
         // Delete existing variants first for a clean update
         await prisma.variant.deleteMany({ where: { productId: parseInt(id) } });
@@ -33,7 +33,9 @@ export async function PUT(request, { params: paramsPromise }) {
                 name,
                 description,
                 price: parseFloat(price),
-                categoryId: parseInt(categoryId),
+                categories: {
+                    set: categoryIds ? categoryIds.map(id => ({ id: parseInt(id) })) : []
+                },
                 mainImage,
                 gallery: Array.isArray(gallery) ? JSON.stringify(gallery) : gallery,
                 variants: variants && variants.length > 0 ? {
@@ -47,7 +49,7 @@ export async function PUT(request, { params: paramsPromise }) {
         });
         return NextResponse.json(updatedProduct);
     } catch (error) {
-        return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+        return NextResponse.json({ error: error.message || "Failed to update product" }, { status: 500 });
     }
 }
 

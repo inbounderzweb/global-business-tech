@@ -106,8 +106,8 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveImage(img)}
-                                        className={`relative shrink-0 h-24 w-32 rounded-2xl overflow-hidden bg-white border-2 transition-all
-                                            ${activeImage === img ? 'border-[#356DA4] scale-105 shadow-md' : 'border-transparent opacity-70'}
+                                        className={`relative shrink-0 h-24 w-32 overflow-hidden bg-white transition-all
+                                            ${activeImage === img ? 'scale-105 shadow-md' : ''}
                                         `}
                                     >
                                         <Image src={img} alt="" fill className="object-contain p-2" />
@@ -120,20 +120,22 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
                         <div className="bg-white rounded-[40px] p-10 shadow-sm space-y-8">
                             <div>
                                 <h1 className="text-4xl md:text-5xl font-black text-[#2E6EA5] leading-tight mb-4">{product.name}</h1>
-                                <div className="flex items-center gap-2">
-                                    <span className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100">
-                                        {product.category?.name}
-                                    </span>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    {product.categories && product.categories.map((cat, idx) => (
+                                        <span key={idx} className="bg-blue-50 text-[#356DA4] text-[10px] uppercase font-black px-4 py-1.5 rounded-full ring-1 ring-blue-100 shadow-sm">
+                                            {cat.name}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
 
-                            <div className="h-px bg-slate-100 w-full"></div>
+                            {/* <div className="h-px bg-slate-100 w-full"></div> */}
 
                             <div className="space-y-6">
-                                <p className="text-slate-600 leading-relaxed text-lg italic ">{product.description}</p>
-                                <div className="text-5xl font-black text-slate-900 tracking-tighter">
+                                <p className="text-slate-600 leading-relaxed text-lg">{product.description}</p>
+                                {/* <div className="text-5xl font-black text-slate-900 tracking-tighter">
                                     ₹{product.price.toLocaleString()}
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="pt-6">
@@ -156,57 +158,59 @@ export default function DynamicProductDetail({ params: paramsPromise }) {
 
             {/* MODAL */}
             {showModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-[#0B1F3A]/80 backdrop-blur-md" onClick={() => setShowModal(false)}></div>
-                    <div className="relative bg-white w-full max-w-xl rounded-[48px] p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-4">
+                    <div className="fixed inset-0 bg-[#0B1F3A]/80 backdrop-blur-md" onClick={() => setShowModal(false)}></div>
+                    <div className="relative bg-white w-full max-w-xl rounded-[24px] md:rounded-[48px] p-5 md:p-12 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
                         {success ? (
-                            <div className="text-center py-12">
-                                <div className="h-24 w-24 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
+                            <div className="text-center py-6 md:py-12">
+                                <div className="h-14 w-14 md:h-24 md:w-24 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                                    <svg width="28" height="28" className="md:w-[48px] md:h-[48px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
                                 </div>
-                                <h2 className="text-3xl font-black text-slate-900 mb-2">Inquiry Sent!</h2>
-                                <p className="text-slate-500 font-bold">Our representative will contact you shortly.</p>
+                                <h2 className="text-xl md:text-3xl font-black text-slate-900 mb-1 md:mb-2">Inquiry Sent!</h2>
+                                <p className="text-slate-500 font-bold text-xs md:text-base">We'll contact you shortly.</p>
                             </div>
                         ) : (
                             <>
-                                <div className="mb-8">
-                                    <h2 className="text-3xl font-black text-[#2E6EA5]">Enquire for {product.name}</h2>
-                                    <p className="text-slate-500 font-bold mt-1">Fill the details and we will reach back with the best quote.</p>
+                                <div className="mb-4 md:mb-8">
+                                    <h2 className="text-xl md:text-3xl font-black text-[#2E6EA5] leading-tight">Enquiry</h2>
+                                    <p className="text-slate-500 font-bold mt-0.5 text-[10px] md:text-base">Fill details for the best quote.</p>
                                 </div>
 
                                 {error && (
-                                    <div className="mb-6 p-4 bg-rose-50 border border-rose-100 text-rose-600 rounded-2xl text-sm font-bold flex items-center gap-3 animate-pulse">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" /></svg>
+                                    <div className="mb-3 p-2 bg-rose-50 border border-rose-100 text-rose-600 rounded-xl text-[10px] font-bold flex items-center gap-2 animate-pulse">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01" /></svg>
                                         {error}
                                     </div>
                                 )}
-                                <form onSubmit={handleEnquiry} className="space-y-5">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] uppercase font-black text-slate-400 ml-4">Full Name*</label>
-                                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" placeholder="Your Name" className="w-full bg-slate-50 border-0 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-blue-500/20" />
+                                <form onSubmit={handleEnquiry} className="space-y-3 md:space-y-5">
+                                    <div className="grid grid-cols-2 gap-3 md:gap-5">
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] uppercase font-black text-slate-400 ml-2">Name*</label>
+                                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} type="text" placeholder="Name" className="w-full bg-slate-50 border-0 rounded-xl px-3 py-2 md:px-6 md:py-4 text-xs md:text-base outline-none focus:ring-2 ring-blue-500/20" />
                                         </div>
-                                        <div className="space-y-1.5">
-                                            <label className="text-[10px] uppercase font-black text-slate-400 ml-4">Email ID*</label>
-                                            <input required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" placeholder="example@mail.com" className="w-full bg-slate-50 border-0 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-blue-500/20" />
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] uppercase font-black text-slate-400 ml-2">Email*</label>
+                                            <input required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} type="email" placeholder="Email" className="w-full bg-slate-50 border-0 rounded-xl px-3 py-2 md:px-6 md:py-4 text-xs md:text-base outline-none focus:ring-2 ring-blue-500/20" />
                                         </div>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label className="text-[10px] uppercase font-black text-slate-400 ml-4">Phone Number*</label>
-                                        <input required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" placeholder="+91 XXX XXX XXXX" className="w-full bg-slate-50 border-0 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-blue-500/20" />
+                                    <div className="grid grid-cols-2 gap-3 md:gap-5">
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] uppercase font-black text-slate-400 ml-2">Phone*</label>
+                                            <input required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} type="tel" placeholder="Phone" className="w-full bg-slate-50 border-0 rounded-xl px-3 py-2 md:px-6 md:py-4 text-xs md:text-base outline-none focus:ring-2 ring-blue-500/20" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] uppercase font-black text-slate-400 ml-2">Location/Address*</label>
+                                            <input required value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} type="text" placeholder="Address" className="w-full bg-slate-50 border-0 rounded-xl px-3 py-2 md:px-6 md:py-4 text-xs md:text-base outline-none focus:ring-2 ring-blue-500/20" />
+                                        </div>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label className="text-[10px] uppercase font-black text-slate-400 ml-4">Office/Home Address*</label>
-                                        <textarea required value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} rows={2} placeholder="Enter your full address" className="w-full bg-slate-50 border-0 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-blue-500/20 resize-none" />
-                                    </div>
-                                    <div className="space-y-1.5">
-                                        <label className="text-[10px] uppercase font-black text-slate-400 ml-4">Message (Optional)</label>
-                                        <textarea value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} rows={3} placeholder="Tell us more about your requirement" className="w-full bg-slate-50 border-0 rounded-2xl px-6 py-4 outline-none focus:ring-2 ring-blue-500/20 resize-none" />
+                                    <div className="space-y-1">
+                                        <label className="text-[9px] uppercase font-black text-slate-400 ml-2">Message (Optional)</label>
+                                        <textarea value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })} rows={2} placeholder="Requirements" className="w-full bg-slate-50 border-0 rounded-xl px-3 py-2 md:px-6 md:py-4 text-xs md:text-base outline-none focus:ring-2 ring-blue-500/20 resize-none" />
                                     </div>
                                     <button
                                         disabled={sending}
                                         type="submit"
-                                        className="w-full bg-[#356DA4] text-white py-5 rounded-2xl text-lg font-black shadow-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center"
+                                        className="w-full bg-[#356DA4] text-white py-3 md:py-5 rounded-xl text-sm md:text-lg font-black shadow-lg hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer"
                                     >
                                         {sending ? "Processing..." : "Submit Inquiry"}
                                     </button>

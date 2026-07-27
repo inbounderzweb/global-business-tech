@@ -9,24 +9,32 @@ import Image from "next/image";
 // ✅ Replace with your real thumbnail later (local image recommended)
 import videoThumb from "../../assets/banner/banner.png"; // change path
 
+// ✅ Icons for USPS
+import endToEndIcon from "../../assets/icons/end-to-end.png";
+import expertiseIcon from "../../assets/icons/expertise.png";
+import oemIcon from "../../assets/icons/oem.png";
+
 function VideoSection() {
   // ✅ Replace icons later
   const USPS = useMemo(
     () => [
       {
         id: 1,
-        title: "USP 1",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "End-to-End Solutions",
+        desc: " Complete AV and IT solutions delivered under one roof.",
+        icon: endToEndIcon,
       },
       {
         id: 2,
-        title: "USP 2",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "Proven Expertise",
+        desc: "10+ years of experience with 200+ satisfied clients.",
+        icon: expertiseIcon,
       },
       {
         id: 3,
-        title: "USP 3",
-        desc: "Lorem ipsum dolor sit amet, consectetuer adipiscing .",
+        title: "Trusted OEM Partnerships",
+        desc: "Strong alliances with leading global technology brands.",
+        icon: oemIcon,
       },
     ],
     []
@@ -90,22 +98,22 @@ function VideoSection() {
             </h2>
 
             <div className="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-white/80 text-center lg:text-left">
-           <b>Proven Expertise. Trusted Execution.</b>
-           <div className="flex gap-12 mt-2 items-center">
-            <div>
-            <ul className="list-disc">
-            <li>10+ Years of Industry Experience </li>
-            <li>Presence Across Major Metro Cities</li>
-           </ul>
-            </div>
-              <div>
-            <ul className="list-disc">
-            <li>10+ Years of Industry Experience </li>
-            <li>Presence Across Major Metro Cities</li>
-           </ul>
-            </div>
-           </div>
-          
+              <b>Proven Expertise. Trusted Execution.</b>
+              <div className="flex gap-12 mt-2 items-center text-left md:text-center">
+                <div>
+                  <ul className="list-disc">
+                    <li>10+ Years of Industry Experience </li>
+                    <li>Presence Across Major Metro Cities</li>
+                  </ul>
+                </div>
+                <div>
+                  <ul className="list-disc">
+                    <li>10+ Years of Industry Experience </li>
+                    <li>Presence Across Major Metro Cities</li>
+                  </ul>
+                </div>
+              </div>
+
 
             </div>
           </div>
@@ -117,8 +125,8 @@ function VideoSection() {
           <div className="hidden lg:grid grid-cols-3 items-center">
             {USPS.map((u, idx) => (
               <div key={u.id} className="flex items-center gap-5 px-2">
-                <div className="w-[80px] h-[65px] rounded-full bg-white/15 flex items-center justify-center text-white/80">
-                  <span className="text-[14px]">Icon</span>
+                <div className="w-[80px] h-[65px] rounded-full bg-white/15 flex items-center justify-center text-white/80 overflow-hidden p-2">
+                  <Image src={u.icon} alt={u.title} className="object-contain" />
                 </div>
 
                 <div>
@@ -143,8 +151,8 @@ function VideoSection() {
             {USPS.map((u, idx) => (
               <div key={u.id}>
                 <div className="flex items-center gap-5 py-6">
-                  <div className="w-[70px] h-[75px] rounded-full bg-white/15 flex items-center justify-center text-white/80 shrink-0">
-                    <span className="text-[14px]">Icon</span>
+                  <div className="w-[70px] h-[75px] rounded-full bg-white/15 flex items-center justify-center text-white/80 shrink-0 overflow-hidden p-2">
+                    <Image src={u.icon} alt={u.title} className="object-contain" />
                   </div>
 
                   <div>

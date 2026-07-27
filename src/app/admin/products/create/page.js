@@ -15,7 +15,7 @@ export default function AddProductPage() {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [categoryId, setCategoryId] = useState('');
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -95,8 +95,8 @@ export default function AddProductPage() {
         e.preventDefault();
         setError("");
 
-        if (!categoryId) {
-            setError("Please select a category");
+        if (selectedCategoryIds.length === 0) {
+            setError("Please select at least one category");
             return;
         }
 
@@ -104,7 +104,7 @@ export default function AddProductPage() {
             name: productName,
             description,
             price,
-            categoryId,
+            categoryIds: selectedCategoryIds,
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -118,7 +118,10 @@ export default function AddProductPage() {
                 body: JSON.stringify(formData),
             });
 
-            if (!res.ok) throw new Error("Could not add product");
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.error || "Could not add product");
+            }
 
             router.push("/admin/products");
             router.refresh();
@@ -346,18 +349,33 @@ export default function AddProductPage() {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Category</label>
-                                <select
-                                    value={categoryId}
-                                    onChange={(e) => setCategoryId(e.target.value)}
-                                    className="w-full appearance-none rounded-[24px] border border-slate-200 bg-slate-50/50 px-6 py-5 outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-8 focus:ring-blue-50/50 cursor-pointer text-base font-bold text-slate-700"
-                                    required
-                                >
-                                    <option value="" disabled>Select Category</option>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Categories</label>
+                                <div className="space-y-3 max-h-60 overflow-y-auto p-4 rounded-[24px] border border-slate-200 bg-slate-50/50 transition-all focus-within:ring-8 focus-within:ring-blue-50/50">
                                     {categories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        <div key={cat.id} className="flex items-center gap-3 group">
+                                            <label className="relative flex items-center cursor-pointer">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedCategoryIds.includes(cat.id.toString())}
+                                                    onChange={(e) => {
+                                                        const id = cat.id.toString();
+                                                        if (e.target.checked) {
+                                                            setSelectedCategoryIds([...selectedCategoryIds, id]);
+                                                        } else {
+                                                            setSelectedCategoryIds(selectedCategoryIds.filter(v => v !== id));
+                                                        }
+                                                    }}
+                                                    className="peer h-6 w-6 cursor-pointer appearance-none rounded-md border-2 border-slate-200 bg-white transition-all checked:border-[#356DA4] checked:bg-[#356DA4]"
+                                                />
+                                                <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><polyline points="20 6 9 17 4 12"/></svg>
+                                                </span>
+                                            </label>
+                                            <span className="text-slate-700 font-bold text-sm tracking-tight group-hover:text-slate-950 transition-colors uppercase">{cat.name}</span>
+                                        </div>
                                     ))}
-                                </select>
+                                </div>
+                                <p className="mt-2 text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center italic">Select one or more categories</p>
                             </div>
                         </div>
                     </div>

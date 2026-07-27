@@ -13,7 +13,7 @@ import service2 from '../../assets/services/service2.jpg';
 import service3 from '../../assets/services/service3.jpg';
 import service4 from '../../assets/services/service4.jpg';
 import service5 from '../../assets/services/service5.jpg';
-
+import Link from "next/link";
 
 export default function ServicesSection() {
   const SERVICES = useMemo(
@@ -23,35 +23,35 @@ export default function ServicesSection() {
         title: "Networking & Infrastructure",
         desc: "Reliable, scalable network architecture built for performance, speed, and future growth.",
         imageUrl: service1,
-        href: "#",
+        href: "/solutions",
       },
       {
         id: 2,
         title: "Access Control Systems",
         desc: "Secure access management solutions to protect people, data, and physical assets.",
         imageUrl: service2,
-        href: "#",
+        href: "/solutions",
       },
       {
         id: 3,
         title: "Network Storage Solutions",
         desc: "Efficient data storage systems ensure security, high performance, and uninterrupted business continuity..",
         imageUrl: service3,
-        href: "#",
+        href: "/solutions",
       },
       {
         id: 4,
         title: "Professional Headsets",
         desc: "Comfortable, high-quality audio solutions designed for professional calling and conferencing environments.",
         imageUrl: service4,
-        href: "#",
+        href: "/solutions",
       },
       {
         id: 5,
-        title: "Highlighted Service",
-        desc: "Video & Audio Conferencing Solutions – Our flagship offering delivers seamless business communication experiences.",
+        title: "Video & Audio Conferencing",
+        desc: "Our flagship offering delivers seamless business communication experiences through high-definition AV systems.",
         imageUrl: service5,
-        href: "#",
+        href: "/solutions",
       },
     ],
     []
@@ -158,12 +158,14 @@ export default function ServicesSection() {
           </div>
 
           <div className="flex justify-center mt-10">
-            <button
-              type="button"
-              className="border border-[#356DA4] text-[#356DA4] px-12 py-2 rounded-full hover:bg-white/60 transition"
-            >
-              Show all services
-            </button>
+            <Link href="/solutions">
+              <button
+                type="button"
+                className="border border-[#356DA4] text-[#356DA4] px-12 py-2 rounded-full hover:bg-white/60 transition"
+              >
+                Show all services
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -207,12 +209,12 @@ export default function ServicesSection() {
                       {s.desc}
                     </p>
 
-                    <a
+                    <Link
                       href={s.href}
                       className="inline-flex items-center justify-center mt-4 bg-[#356DA4] text-white px-12 py-3 rounded-full text-[14px] hover:bg-[#2d5c8b] transition"
                     >
                       Read more
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -235,11 +237,10 @@ export default function ServicesSection() {
                     type="button"
                     onClick={() => scrollToIndex(i)}
                     aria-label={`Go to service ${i + 1}`}
-                    className={`transition-all duration-300 ${
-                      i === active
-                        ? "w-10 h-2 bg-[#356DA4] rounded-full"
-                        : "w-2 h-2 bg-[#cbd5e1] rounded-full"
-                    }`}
+                    className={`transition-all duration-300 ${i === active
+                      ? "w-10 h-2 bg-[#356DA4] rounded-full"
+                      : "w-2 h-2 bg-[#cbd5e1] rounded-full"
+                      }`}
                   />
                 ))}
               </div>
@@ -255,12 +256,14 @@ export default function ServicesSection() {
             </div>
 
             <div className="flex justify-center mt-6">
-              <button
-                type="button"
-                className="border border-[#356DA4] text-[#356DA4] px-12 py-2 rounded-full hover:bg-white/60 transition"
-              >
-                View all services
-              </button>
+              <Link href="/solutions">
+                <button
+                  type="button"
+                  className="border border-[#356DA4] text-[#356DA4] px-12 py-2 rounded-full hover:bg-white/60 transition"
+                >
+                  View all services
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -28,15 +28,15 @@ function Navigation() {
   ];
 
   const PRODUCT_ITEMS_LEFT = [
-    { label: 'Poly', href: '/products/poly' },
-    { label: 'Yamaha', href: '/products/yamaha' },
-    { label: 'Logitech', href: '/products/logitech' },
-    { label: 'Knoftel', href: '/products/knoftel' },
+    { label: 'Poly', href: '/productdetails' },
+    { label: 'Yamaha', href: '/productdetails' },
+    { label: 'Logitech', href: '/productdetails' },
+    { label: 'Knoftel', href: '/productdetails' },
   ];
   const PRODUCT_ITEMS_RIGHT = [
-    { label: 'Cisco', href: '/products/cisco' },
-    { label: 'Accutone', href: '/products/accutone' },
-    { label: 'Logic', href: '/products/logic' },
+    { label: 'Cisco', href: '/productdetails' },
+    { label: 'Accutone', href: '/productdetails' },
+    { label: 'Logic', href: '/productdetails' },
   ];
 
   const SOLUTIONS_LEFT = [

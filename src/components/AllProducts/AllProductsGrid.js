@@ -14,7 +14,7 @@ function AllProductsGrid() {
         fetch("/api/admin/products")
             .then(res => res.json())
             .then(data => {
-                setProducts(data);
+                setProducts(Array.isArray(data) ? data : []);
                 setLoading(false);
             })
             .catch(() => setLoading(false));

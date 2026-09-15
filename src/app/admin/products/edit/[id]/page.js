@@ -8,6 +8,7 @@ export default function EditProductPage({ params: paramsPromise }) {
     const params = use(paramsPromise);
     const router = useRouter();
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(null);
     const [error, setError] = useState("");
@@ -17,6 +18,7 @@ export default function EditProductPage({ params: paramsPromise }) {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [categoryIds, setCategoryIds] = useState([]);
+    const [brandId, setBrandId] = useState('');
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -29,21 +31,25 @@ export default function EditProductPage({ params: paramsPromise }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [catsRes, prodRes] = await Promise.all([
+                const [catsRes, brandsRes, prodRes] = await Promise.all([
                     fetch("/api/admin/categories"),
+                    fetch("/api/admin/brands"),
                     fetch(`/api/admin/products/${params.id}`)
                 ]);
 
                 const catsData = await catsRes.json();
+                const brandsData = await brandsRes.json();
                 const prodData = await prodRes.json();
 
                 setCategories(Array.isArray(catsData) ? catsData : []);
+                setBrands(Array.isArray(brandsData) ? brandsData : []);
 
                 if (prodData) {
                     setProductName(prodData.name || '');
                     setDescription(prodData.description || '');
                     setPrice(prodData.price || '');
                     setCategoryIds((prodData.categories || []).map(c => c.id));
+                    setBrandId(prodData.brandId ? String(prodData.brandId) : '');
                     setMainImage(prodData.mainImage || '');
                     setGallery(JSON.parse(prodData.gallery || "[]"));
 
@@ -139,6 +145,7 @@ export default function EditProductPage({ params: paramsPromise }) {
             description,
             price,
             categoryIds,
+            brandId: brandId || null,
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -376,6 +383,20 @@ export default function EditProductPage({ params: paramsPromise }) {
                                         required
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Brand</label>
+                                <select
+                                    value={brandId}
+                                    onChange={(e) => setBrandId(e.target.value)}
+                                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                >
+                                    <option value="">No brand</option>
+                                    {brands.map((b) => (
+                                        <option key={b.id} value={b.id}>{b.name}</option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div>

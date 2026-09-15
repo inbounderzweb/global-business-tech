@@ -16,13 +16,13 @@ export default function MobileMenuDrawer({ open, onClose }) {
   const NAV = useMemo(
     () => ({
       products: [
-        { label: 'Poly', href: '/products/poly' },
-        { label: 'Yamaha', href: '/products/yamaha' },
-        { label: 'Logitech', href: '/products/logitech' },
-        { label: 'Knoftel', href: '/products/knoftel' },
-        { label: 'Cisco', href: '/products/cisco' },
-        { label: 'Accutone', href: '/products/accutone' },
-        { label: 'Logic', href: '/products/logic' },
+        { label: 'Poly', href: '/productdetails' },
+        { label: 'Yamaha', href: '/productdetails' },
+        { label: 'Logitech', href: '/productdetails' },
+        { label: 'Knoftel', href: '/productdetails' },
+        { label: 'Cisco', href: '/productdetails' },
+        { label: 'Accutone', href: '/productdetails' },
+        { label: 'Logic', href: '/productdetails' },
       ],
       solutions: [
         { label: 'Video Conferencing', href: '/solutions/video-conferencing' },

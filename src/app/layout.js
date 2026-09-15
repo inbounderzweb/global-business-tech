@@ -3,6 +3,7 @@ import './globals.css';
 import FooterToggle from '@/components/FooterToggle';
 // import HeaderToggle from '.HeaderToggle/components/HeaderToggle';
 import HeaderToggle from '@/components/HeaderToggle';
+import WhatsappFloatButton from '@/components/WhatsappFloatButton';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
         <HeaderToggle />
         {children}
         <FooterToggle />
+        <WhatsappFloatButton />
       </body>
     </html>
   );

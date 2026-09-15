@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 export default function AddProductPage() {
     const router = useRouter();
     const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(null);
     const [error, setError] = useState("");
@@ -16,6 +17,7 @@ export default function AddProductPage() {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [categoryIds, setCategoryIds] = useState([]);
+    const [brandId, setBrandId] = useState('');
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -27,10 +29,13 @@ export default function AddProductPage() {
 
     useEffect(() => {
         setLoading(true);
-        fetch("/api/admin/categories")
-            .then((res) => res.json())
-            .then((data) => {
-                setCategories(Array.isArray(data) ? data : []);
+        Promise.all([
+            fetch("/api/admin/categories").then((res) => res.json()),
+            fetch("/api/admin/brands").then((res) => res.json()),
+        ])
+            .then(([catsData, brandsData]) => {
+                setCategories(Array.isArray(catsData) ? catsData : []);
+                setBrands(Array.isArray(brandsData) ? brandsData : []);
                 setLoading(false);
             })
             .catch(() => setLoading(false));
@@ -108,6 +113,7 @@ export default function AddProductPage() {
             description,
             price,
             categoryIds,
+            brandId: brandId || null,
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -346,6 +352,20 @@ export default function AddProductPage() {
                                         required
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Brand</label>
+                                <select
+                                    value={brandId}
+                                    onChange={(e) => setBrandId(e.target.value)}
+                                    className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-5 py-4 text-sm font-bold text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50"
+                                >
+                                    <option value="">No brand</option>
+                                    {brands.map((b) => (
+                                        <option key={b.id} value={b.id}>{b.name}</option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div>

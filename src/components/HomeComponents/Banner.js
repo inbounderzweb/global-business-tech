@@ -35,7 +35,7 @@ function Banner() {
   ];
 
   return (
-    <div>
+    <div className="flex-1 min-h-0">
       <BannerSlider slides={slides} autoPlay interval={10000} />
     </div>
   );

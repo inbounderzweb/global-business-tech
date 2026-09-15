@@ -20,7 +20,7 @@ export async function DELETE(request, { params }) {
     try {
         const { id } = await params;
         // Check if products exist
-        const productsCount = await prisma.product.count({ where: { categoryId: parseInt(id) } });
+        const productsCount = await prisma.product.count({ where: { categories: { some: { id: parseInt(id) } } } });
         if (productsCount > 0) {
             return NextResponse.json({ error: "Cannot delete category with existing products" }, { status: 400 });
         }

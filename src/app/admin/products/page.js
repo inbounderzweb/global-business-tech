@@ -105,9 +105,19 @@ export default function ProductsList() {
                                         </div>
                                     </td>
                                     <td className="px-8 py-5">
-                                        <span className="inline-flex items-center rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 ring-1 ring-inset ring-blue-600/10">
-                                            {p.category?.name || "Global"}
-                                        </span>
+                                        <div className="flex flex-wrap gap-1.5 max-w-[220px]">
+                                            {p.categories?.length > 0 ? (
+                                                p.categories.map((cat) => (
+                                                    <span key={cat.id} className="inline-flex items-center rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 ring-1 ring-inset ring-blue-600/10">
+                                                        {cat.name}
+                                                    </span>
+                                                ))
+                                            ) : (
+                                                <span className="inline-flex items-center rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600 ring-1 ring-inset ring-blue-600/10">
+                                                    Global
+                                                </span>
+                                            )}
+                                        </div>
                                     </td>
                                     <td className="px-8 py-5">
                                         <div className="flex flex-col">

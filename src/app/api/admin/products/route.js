@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET() {
     try {
         const products = await prisma.product.findMany({
-            include: { category: true, variants: true },
+            include: { categories: true, variants: true },
             orderBy: { createdAt: "desc" },
         });
         return NextResponse.json(products);
@@ -18,9 +18,9 @@ export async function GET() {
 export async function POST(request) {
     try {
         const data = await request.json();
-        const { name, description, price, categoryId, variants, mainImage, gallery } = data;
+        const { name, description, price, categoryIds, variants, mainImage, gallery } = data;
 
-        if (!name || !price || !categoryId) {
+        if (!name || !price || !categoryIds || categoryIds.length === 0) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
@@ -29,7 +29,7 @@ export async function POST(request) {
                 name,
                 description: description || "",
                 price: parseFloat(price),
-                categoryId: parseInt(categoryId),
+                categories: { connect: categoryIds.map(id => ({ id: parseInt(id) })) },
                 mainImage: mainImage || "",
                 gallery: Array.isArray(gallery) ? JSON.stringify(gallery) : (gallery || ""),
                 variants: variants && variants.length > 0 ? {
@@ -41,6 +41,7 @@ export async function POST(request) {
                 } : undefined
             },
             include: {
+                categories: true,
                 variants: true
             }
         });

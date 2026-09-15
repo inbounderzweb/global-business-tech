@@ -4,10 +4,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import downarrow from '../assets/icons/Vector.svg';
+import logo from '../assets/logo.svg';
+import searchico from '../assets/icons/search.svg';
 
 function Navigation() {
   const [open, setOpen] = useState(false); // Products
   const [solutionsOpen, setSolutionsOpen] = useState(false); // Solutions
+  const [searchOpen, setSearchOpen] = useState(false); // Search icon -> input toggle
 
   const productsWrapRef = useRef(null);
   const solutionsWrapRef = useRef(null);
@@ -123,8 +126,15 @@ function Navigation() {
   };
 
   return (
-    <nav className="bg-linear-to-l from-[#D5E7F7] to-white py-6 w-full float-end hidden xl:block px-2">
-      <div className="flex items-center gap-6 mx-auto justify-end w-[90%]">
+    <nav className="bg-linear-to-l from-[#D5E7F7] to-white py-4 w-full hidden xl:block px-2">
+      <div className="flex items-center justify-between gap-6 mx-auto w-[90%]">
+        {/* ✅ Logo on the navbar left */}
+        <Link href="/" className="shrink-0">
+          <Image src={logo} alt="gbt-logo" className="w-[170px]" priority />
+        </Link>
+
+        <div className="flex items-center gap-5 justify-end">
+        {!searchOpen && (
         <ul className="flex gap-4">
           {NAV_ITEMS.map((item, index) => {
             // -------- NORMAL LINK --------
@@ -339,6 +349,51 @@ function Navigation() {
             return null;
           })}
         </ul>
+        )}
+
+        {/* ✅ Search: icon only, expands to an input on click. Nav links hide
+            while open so the input never pushes Download Profile into a wrap. */}
+        <div className="flex items-center">
+          {searchOpen ? (
+            <div className="relative flex items-center">
+              <input
+                type="search"
+                autoFocus
+                placeholder="Search"
+                onBlur={() => setSearchOpen(false)}
+                className="
+                  w-[260px] h-[36px]
+                  bg-[#EEF3F8]
+                  rounded-full
+                  pl-4 pr-9
+                  text-[14px] text-[#2C5C8F]
+                  placeholder:text-[#7FA1C4]
+                  border-none outline-none
+                  focus:outline-none focus:ring-0
+                  appearance-none
+                "
+              />
+              <button
+                type="button"
+                aria-label="Close search"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => setSearchOpen(false)}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2"
+              >
+                <Image src={searchico} alt="search-icon" className="w-4" />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              aria-label="Open search"
+              onClick={() => setSearchOpen(true)}
+              className="p-2 rounded-full hover:bg-black/5 transition"
+            >
+              <Image src={searchico} alt="search-icon" className="w-5" />
+            </button>
+          )}
+        </div>
 
         <Link
           href="/profile"
@@ -346,6 +401,7 @@ function Navigation() {
         >
           Download Profile
         </Link>
+        </div>
       </div>
     </nav>
   );

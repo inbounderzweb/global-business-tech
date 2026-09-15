@@ -53,7 +53,7 @@ function AllProductsGrid() {
                                 <div className="bg-white rounded-[16px] p-5 shadow-sm">
                                     <div className="relative w-full h-[260px] overflow-hidden rounded-[12px] group">
                                         <div className="absolute top-2 right-2 z-10 bg-gray-400/10 backdrop-blur-xl text-[#3A3A3A] text-[12px] px-3 py-1 rounded-full">
-                                            {p.category?.name || 'Product'}
+                                            {p.categories?.[0]?.name || 'Product'}
                                         </div>
                                         {p.mainImage && (
                                             <Link href={`/productdetail/${p.id}`}>

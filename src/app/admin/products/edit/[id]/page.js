@@ -16,7 +16,7 @@ export default function EditProductPage({ params: paramsPromise }) {
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [categoryId, setCategoryId] = useState('');
+    const [categoryIds, setCategoryIds] = useState([]);
 
     // Image states
     const [mainImage, setMainImage] = useState('');
@@ -43,7 +43,7 @@ export default function EditProductPage({ params: paramsPromise }) {
                     setProductName(prodData.name || '');
                     setDescription(prodData.description || '');
                     setPrice(prodData.price || '');
-                    setCategoryId(prodData.categoryId || '');
+                    setCategoryIds((prodData.categories || []).map(c => c.id));
                     setMainImage(prodData.mainImage || '');
                     setGallery(JSON.parse(prodData.gallery || "[]"));
 
@@ -121,13 +121,16 @@ export default function EditProductPage({ params: paramsPromise }) {
     const addVariant = () => setVariants([...variants, { name: '', price: '', image: '' }]);
     const removeVariant = (index) => setVariants(variants.filter((_, i) => i !== index));
     const removeGalleryItem = (index) => setGallery(gallery.filter((_, i) => i !== index));
+    const toggleCategory = (id) => {
+        setCategoryIds((prev) => prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
 
-        if (!categoryId) {
-            setError("Please select a category");
+        if (categoryIds.length === 0) {
+            setError("Please select at least one category");
             return;
         }
 
@@ -135,7 +138,7 @@ export default function EditProductPage({ params: paramsPromise }) {
             name: productName,
             description,
             price,
-            categoryId,
+            categoryIds,
             mainImage,
             gallery,
             variants: hasVariants ? variants.filter(v => v.name && v.price) : []
@@ -376,18 +379,20 @@ export default function EditProductPage({ params: paramsPromise }) {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Category</label>
-                                <select
-                                    value={categoryId}
-                                    onChange={(e) => setCategoryId(e.target.value)}
-                                    className="w-full appearance-none rounded-[24px] border border-slate-200 bg-slate-50/50 px-6 py-5 outline-none transition-all focus:border-blue-500 focus:bg-white focus:ring-8 focus:ring-blue-50/50 cursor-pointer text-base font-bold text-slate-700"
-                                    required
-                                >
-                                    <option value="" disabled>Select Category</option>
+                                <label className="block text-sm font-bold text-slate-400 mb-2 ml-1 uppercase tracking-wider">Categories</label>
+                                <div className="rounded-[24px] border border-slate-200 bg-slate-50/50 p-4 max-h-64 overflow-y-auto space-y-1">
                                     {categories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        <label key={cat.id} className="flex items-center gap-3 px-2 py-2 rounded-xl hover:bg-white cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={categoryIds.includes(cat.id)}
+                                                onChange={() => toggleCategory(cat.id)}
+                                                className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                            />
+                                            <span className="text-sm font-bold text-slate-700">{cat.name}</span>
+                                        </label>
                                     ))}
-                                </select>
+                                </div>
                             </div>
                         </div>
                     </div>

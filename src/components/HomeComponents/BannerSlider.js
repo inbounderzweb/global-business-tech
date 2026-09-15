@@ -16,9 +16,6 @@ export default function BannerSlider({
 
   const [active, setActive] = useState(0);
 
-  const prev = () => setActive((p) => (p === 0 ? SLIDES.length - 1 : p - 1));
-  const next = () => setActive((p) => (p === SLIDES.length - 1 ? 0 : p + 1));
-
   useEffect(() => {
     if (!autoPlay || SLIDES.length <= 1) return;
     const t = setInterval(() => {
@@ -33,12 +30,12 @@ export default function BannerSlider({
   if (!SLIDES.length) return null;
 
   return (
-    <div className="bg-gradient-to-r from-[#D5E7F7] to-white xl:mt-[10rem] py-1 lg:py-3">
+    <div className="h-full bg-gradient-to-r from-[#D5E7F7] to-white bg-red-400">
       {/* ========================= */}
       {/* Desktop Banner */}
       {/* ========================= */}
-      <div className="w-full xl:w-[90%] mx-auto mt-6 px-2 hidden lg:block">
-        <div className="relative w-full h-[480px] rounded-[20px] overflow-hidden shadow-xl">
+      <div className="w-full h-full mx-auto pt-6 hidden lg:block">
+        <div className="relative w-full h-full overflow-hidden shadow-xl">
           {SLIDES.map((s, idx) => (
             <div
               key={s.id ?? idx}
@@ -60,7 +57,7 @@ export default function BannerSlider({
           ))}
 
           <div className="absolute inset-0 flex items-center">
-            <div className="text-white max-w-[90%] md:max-w-[650px] px-6 md:px-12">
+            <div className="text-white max-w-[90%] md:max-w-[650px] px-6 md:mx-5 md:px-12">
               <h1 className="text-[26px] md:text-[40px] lg:text-[42px] font-semibold leading-tight mb-4">
                 {current?.title}
               </h1>
@@ -84,19 +81,9 @@ export default function BannerSlider({
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-6 mt-2 lg:mt-4">
-          <button
-            onClick={prev}
-            className="text-[#2C5C8F] text-2xl transition"
-            aria-label="Previous slide"
-          >
-            ←
-          </button>
-
-          <div className="flex items-center gap-3">
+          {/* Dot navigation (overlaid, bottom-center of image) */}
+          <div className="absolute bottom-5 inset-x-0 flex items-center justify-center gap-3 z-10">
             {SLIDES.map((_, idx) => (
               <button
                 key={idx}
@@ -104,19 +91,11 @@ export default function BannerSlider({
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all duration-300 ${idx === active
                     ? 'w-8 h-2 bg-[#356DA4] rounded-full'
-                    : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
+                    : 'w-2 h-2 bg-white/70 hover:bg-white rounded-full'
                   }`}
               />
             ))}
           </div>
-
-          <button
-            onClick={next}
-            className="text-[#2C5C8F] text-2xl transition"
-            aria-label="Next slide"
-          >
-            →
-          </button>
         </div>
       </div>
       {/* End Desktop Banner */}
@@ -124,8 +103,8 @@ export default function BannerSlider({
       {/* ========================= */}
       {/* Mobile Banner */}
       {/* ========================= */}
-      <div className="w-full xl:w-[90%] mx-auto mt-20 px-4 block lg:hidden">
-        <div className="relative w-full h-[600px] rounded-[20px] overflow-hidden shadow-xl">
+      <div className="w-full h-full mx-auto pt-20 block lg:hidden">
+        <div className="relative w-full h-full overflow-hidden shadow-xl">
           {SLIDES.map((s, idx) => (
             <div
               key={s.id ?? idx}
@@ -168,19 +147,9 @@ export default function BannerSlider({
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-6 mt-1 lg:mt-4">
-          <button
-            onClick={prev}
-            className="text-[#2C5C8F] text-xl transition"
-            aria-label="Previous slide"
-          >
-            ←
-          </button>
-
-          <div className="flex items-center gap-3">
+          {/* Dot navigation (overlaid, bottom-center of image) */}
+          <div className="absolute bottom-4 inset-x-0 flex items-center justify-center gap-3 z-10">
             {SLIDES.map((_, idx) => (
               <button
                 key={idx}
@@ -188,19 +157,11 @@ export default function BannerSlider({
                 aria-label={`Go to slide ${idx + 1}`}
                 className={`transition-all duration-300 ${idx === active
                     ? 'w-8 h-2 bg-[#356DA4] rounded-full'
-                    : 'w-2 h-2 bg-[#cbd5e1] rounded-full'
+                    : 'w-2 h-2 bg-white/70 hover:bg-white rounded-full'
                   }`}
               />
             ))}
           </div>
-
-          <button
-            onClick={next}
-            className="text-[#2C5C8F] text-xl transition"
-            aria-label="Next slide"
-          >
-            →
-          </button>
         </div>
       </div>
       {/* End Mobile Banner */}
